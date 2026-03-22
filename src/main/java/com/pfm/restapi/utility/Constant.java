@@ -11,6 +11,6 @@ public class Constant {
     public static final String USER_NOT_FOUND_MSG = "User not found";
     public static final String SUCCESS = "Success";
     public static final String AUTH_TYPE = "Bearer";
-    public static Date EXPIRES_IN_DATE = new Date(System.currentTimeMillis() + 1000 * 60 * 60);
+    public static Date EXPIRES_IN_DATE = new Date(System.currentTimeMillis() + 1000 * 60 * 15); // 15 mins
     public static String EXPIRES_IN = String.valueOf(EXPIRES_IN_DATE);
 }
