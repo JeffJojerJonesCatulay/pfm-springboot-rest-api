@@ -25,12 +25,5 @@ import java.util.List;
 @RequestMapping("${api.url.mapping}")
 public class PFMController  {
 
-    @Autowired
-    private AllocationMappingService allocationMappingService;
 
-    @GetMapping
-    public ResponseEntity<Object> getAllocationMapping(){
-        List<AllocationMapping> data = allocationMappingService.getAllocationMapping();
-        return Response.generateResponse("Success", HttpStatus.OK, data);
-    }
 }

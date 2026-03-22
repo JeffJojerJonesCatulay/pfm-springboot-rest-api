@@ -30,7 +30,7 @@ public class UserController {
 
         try{
             UserEntity response = userService.createUser(authRequest);
-            return Response.generateResponse("Success", HttpStatus.OK, response);
+            return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, response);
         } catch (BadCredentialsException | DataIntegrityViolationException e){
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
