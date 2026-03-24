@@ -53,7 +53,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\" : \"Alpha\",\r\n    \"password\" : \"Alpha123\"\r\n}",
+              "raw": "{\r\n    \"username\" : \"Alpha1\",\r\n    \"password\" : \"Alpha123\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -84,14 +84,14 @@
       "name": "AllocationMapping",
       "item": [
         {
-          "name": "/get/allocation.mapping/",
+          "name": "/get/allocation.mapping",
           "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzU5MzU0LCJleHAiOjE3NzQzNjAyNDd9.ANBqoNr9LefDFzmuR2jMN0bWWJ-RyiZW5wdVzjfJACE",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
                   "type": "string"
                 }
               ]
@@ -124,7 +124,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYwMjYxLCJleHAiOjE3NzQzNjA5MzF9.RltNW42pUMaEPcAwhvHhIagxaa05nMxauhtEGPbINhA",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
                   "type": "string"
                 }
               ]
@@ -171,7 +171,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbHBoYSIsImlhdCI6MTc3NDIyNTc0NSwiZXhwIjoxNzc0MjI2NjM1fQ.CC9mV3XDBf3b-P-B3AEB9yl72FfzaC_HjvZcZ0qOpfo",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
                   "type": "string"
                 }
               ]
@@ -179,7 +179,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping/allocId/7",
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping/allocId/1",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -192,7 +192,7 @@
                 "get",
                 "allocation.mapping",
                 "allocId",
-                "7"
+                "1"
               ]
             }
           },
@@ -206,7 +206,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MjI2NDU3LCJleHAiOjE3NzQyMjY4NjF9.hVUeajZGLJt_mi6ZUovCcyWzCUe8OtB5dEslqluA-s8",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
                   "type": "string"
                 }
               ]
@@ -215,7 +215,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"allocation\": \"Housing Fund\",\r\n  \"type\": \"Expense\",\r\n  \"description\": \"Monthly rent payment for apartment\",\r\n  \"status\": \"Active\",\r\n  \"addedBy\": \"Jeff\"\r\n}\r\n",
+              "raw": "{\r\n  \"allocation\": \"Housing Fund ZZZ\",\r\n  \"type\": \"Expense\",\r\n  \"description\": \"Monthly rent payment for apartment\",\r\n  \"status\": \"Active\",\r\n  \"addedBy\": \"Jeff\"\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
@@ -249,7 +249,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MjI2NDU3LCJleHAiOjE3NzQyMjY4NjF9.hVUeajZGLJt_mi6ZUovCcyWzCUe8OtB5dEslqluA-s8",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
                   "type": "string"
                 }
               ]
@@ -266,7 +266,7 @@
               }
             },
             "url": {
-              "raw": "http://localhost:9010/api/v1.0.0/pfm/allocation.mapping/update/8",
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/allocation.mapping/update/9",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -278,7 +278,7 @@
                 "pfm",
                 "allocation.mapping",
                 "update",
-                "8"
+                "9"
               ]
             }
           },
@@ -292,7 +292,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MjI2NDU3LCJleHAiOjE3NzQyMjY4NjF9.hVUeajZGLJt_mi6ZUovCcyWzCUe8OtB5dEslqluA-s8",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
                   "type": "string"
                 }
               ]
@@ -300,7 +300,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://localhost:9010/api/v1.0.0/pfm/allocation.mapping/delete/7",
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/allocation.mapping/delete/9",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -312,7 +312,7 @@
                 "pfm",
                 "allocation.mapping",
                 "delete",
-                "7"
+                "9"
               ]
             }
           },
