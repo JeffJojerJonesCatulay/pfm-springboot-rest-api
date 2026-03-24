@@ -3,6 +3,8 @@ logging:
     # ON
     root: DEBUG
     com.pfm: DEBUG
+    com.pfm.tps: INFO
     # OFF
 #    root: OFF
 #    com.pfm: OFF
+#    com.pfm.tps: OFF

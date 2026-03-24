@@ -6,9 +6,12 @@ import com.pfm.restapi.security.AuthResponse;
 import com.pfm.restapi.security.JwtService;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
 import com.pfm.restapi.utility.Constant;
+import com.pfm.restapi.utility.TpsMonitor;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("${api.url.mapping}")
 public class SecurityController {
     private static final Logger log = LoggerFactory.getLogger(SecurityController.class);
+    private final TpsMonitor tps = new TpsMonitor();
+    @Value("${api.url.mapping}")
+    private String URL;
 
     @Autowired
     private JwtService jwtService;
@@ -34,7 +40,8 @@ public class SecurityController {
     InputSanitation inputSanitation = new InputSanitation();
 
     @PostMapping("/authenticate")
-    public ResponseEntity<Object> login(@RequestBody AuthRequest request){
+    public ResponseEntity<Object> login(@RequestBody AuthRequest request, HttpServletRequest httpServletRequest){
+        tps.start(httpServletRequest.getServerName() + URL + "/authenticate", request.getUsername());
         log.debug("authenticate");
         if (request.getUsername() == null || request.getPassword() == null) {
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
@@ -60,6 +67,8 @@ public class SecurityController {
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+        } finally {
+            tps.end( httpServletRequest.getServerName() + URL + "/authenticate", request.getUsername());
         }
     }
 }
