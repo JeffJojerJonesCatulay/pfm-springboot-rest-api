@@ -3,6 +3,7 @@ package com.pfm.restapi.controller;
 import com.pfm.restapi.entity.UserEntity;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.AuthRequest;
+import com.pfm.restapi.security.inputSanitation.InputSanitation;
 import com.pfm.restapi.service.UserService;
 import com.pfm.restapi.utility.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    InputSanitation inputSanitation = new InputSanitation();
+
     @PostMapping("/authenticate/create")
     public ResponseEntity<Object> createUser(@RequestBody AuthRequest authRequest){
         if (authRequest.getUsername() == null || authRequest.getPassword() == null) {
@@ -29,6 +32,8 @@ public class UserController {
         }
 
         try{
+            inputSanitation.sanitizeInput(authRequest.getUsername());
+
             UserEntity response = userService.createUser(authRequest);
             return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, response);
         } catch (BadCredentialsException | DataIntegrityViolationException e){

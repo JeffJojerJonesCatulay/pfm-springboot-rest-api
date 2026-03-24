@@ -13,4 +13,5 @@ public class Constant {
     public static final String AUTH_TYPE = "Bearer";
     public static Date EXPIRES_IN_DATE = new Date(System.currentTimeMillis() + 1000 * 60 * 15); // 15 mins
     public static String EXPIRES_IN = String.valueOf(EXPIRES_IN_DATE);
+    public static Integer MAX_SIZE_ALLOWED = 300;
 }

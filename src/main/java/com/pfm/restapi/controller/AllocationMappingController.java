@@ -2,6 +2,7 @@ package com.pfm.restapi.controller;
 
 import com.pfm.restapi.entity.AllocationMapping;
 import com.pfm.restapi.responseHandler.Response;
+import com.pfm.restapi.security.inputSanitation.InputSanitation;
 import com.pfm.restapi.service.AllocationMappingService;
 import com.pfm.restapi.utility.Constant;
 import io.jsonwebtoken.JwtException;
@@ -25,15 +26,23 @@ public class AllocationMappingController {
     @Autowired
     private AllocationMappingService allocationMappingService;
 
+    InputSanitation inputSanitation = new InputSanitation();
+
     @GetMapping("/get/allocation.mapping")
-    public ResponseEntity<Object> getAllocationMapping( @RequestParam(defaultValue = "0") int page,
-                                                        @RequestParam(defaultValue = "5") int size,
-                                                        @RequestParam(defaultValue = "allocId") String sortBy){
-        try{
+    public ResponseEntity<Object> getAllocationMapping(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "allocId") String sortBy){
+        try {
+            inputSanitation.validateSortBy(sortBy);
+            inputSanitation.sanitizeInput(sortBy);
+            inputSanitation.validateSize(page);
+            inputSanitation.validateSize(size);
+
             Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
             Page<AllocationMapping> data = allocationMappingService.getAllocationMapping(pageable);
             return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
-        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
@@ -43,6 +52,8 @@ public class AllocationMappingController {
     @GetMapping("/get/allocation.mapping/allocId/{id}")
     public ResponseEntity<Object> getAllocationMappingById(@PathVariable Long id){
         try{
+            inputSanitation.validateNumeric(String.valueOf(id));
+
             List<AllocationMapping> data = allocationMappingService.getAllocationMappingById(id);
             return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
         } catch (BadCredentialsException | DataIntegrityViolationException | JwtException e){
@@ -55,6 +66,13 @@ public class AllocationMappingController {
     @PostMapping("/allocation.mapping/create/")
     public ResponseEntity<Object> createAllocation(@RequestBody AllocationMapping allocationMapping){
         try{
+            inputSanitation.sanitizeInput(allocationMapping.getAllocation());
+            inputSanitation.sanitizeInput(allocationMapping.getType());
+            inputSanitation.sanitizeInput(allocationMapping.getDescription());
+            inputSanitation.sanitizeInput(allocationMapping.getStatus());
+            inputSanitation.sanitizeInput(allocationMapping.getAddedBy());
+            inputSanitation.sanitizeInput(allocationMapping.getUpdateBy());
+
             AllocationMapping response = allocationMappingService.createAllocation(allocationMapping);
             return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, response);
         } catch (BadCredentialsException | DataIntegrityViolationException e){
@@ -67,6 +85,8 @@ public class AllocationMappingController {
     @PutMapping("/allocation.mapping/update/{id}")
     public ResponseEntity<Object> updateAllocation(@PathVariable Long id, @RequestBody AllocationMapping allocationMapping){
         try{
+            inputSanitation.validateNumeric(String.valueOf(id));
+
             Optional<AllocationMapping> existingAlloc = allocationMappingService.findById(id);
             if (existingAlloc.isEmpty()) {
                 return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
@@ -84,6 +104,8 @@ public class AllocationMappingController {
     @DeleteMapping("/allocation.mapping/delete/{id}")
     public ResponseEntity<Object> updateAllocation(@PathVariable Long id){
         try{
+            inputSanitation.validateNumeric(String.valueOf(id));
+
             Optional<AllocationMapping> existingAlloc = allocationMappingService.findById(id);
             if (existingAlloc.isEmpty()) {
                 return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);

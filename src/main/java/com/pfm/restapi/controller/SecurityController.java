@@ -4,6 +4,7 @@ import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.AuthRequest;
 import com.pfm.restapi.security.AuthResponse;
 import com.pfm.restapi.security.JwtService;
+import com.pfm.restapi.security.inputSanitation.InputSanitation;
 import com.pfm.restapi.utility.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +28,17 @@ public class SecurityController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    InputSanitation inputSanitation = new InputSanitation();
+
     @PostMapping("/authenticate")
     public ResponseEntity<Object> login(@RequestBody AuthRequest request){
         if (request.getUsername() == null || request.getPassword() == null) {
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         }
+
         try {
+            inputSanitation.sanitizeInput(request.getUsername());
+
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.getUsername(),
@@ -46,7 +52,7 @@ public class SecurityController {
             } else {
                 return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.UNAUTHORIZED, null);
             }
-        } catch (BadCredentialsException e){
+        } catch (BadCredentialsException | IllegalArgumentException e){
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
