@@ -7,6 +7,10 @@ import com.pfm.restapi.utility.Constant;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,10 +25,13 @@ public class AllocationMappingController {
     @Autowired
     private AllocationMappingService allocationMappingService;
 
-    @GetMapping("/get/allocation.mapping/")
-    public ResponseEntity<Object> getAllocationMapping(){
+    @GetMapping("/get/allocation.mapping")
+    public ResponseEntity<Object> getAllocationMapping( @RequestParam(defaultValue = "0") int page,
+                                                        @RequestParam(defaultValue = "5") int size,
+                                                        @RequestParam(defaultValue = "allocId") String sortBy){
         try{
-            List<AllocationMapping> data = allocationMappingService.getAllocationMapping();
+            Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+            Page<AllocationMapping> data = allocationMappingService.getAllocationMapping(pageable);
             return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
         } catch (BadCredentialsException | DataIntegrityViolationException | JwtException e){
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);

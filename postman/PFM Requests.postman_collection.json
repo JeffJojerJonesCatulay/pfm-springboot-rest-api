@@ -36,7 +36,8 @@
                 "pfm",
                 "authenticate"
               ]
-            }
+            },
+            "description": "### POST `/pfm/authenticate`\n\nAuthenticates a PFM user with a username/password and returns an authentication result (typically used to obtain/verify a session or token for subsequent PFM API calls).\n\n**Method:** `POST`  \n**URL:** `http://localhost:9010/api/v1.0.0/pfm/authenticate`\n\n---\n\n#### Authentication\n\nNo explicit Postman auth is configured on this request.  \nThis endpoint is expected to be called **without** an `Authorization` header, using credentials in the request body.\n\n---\n\n#### Request Body (JSON)\n\n**Content-Type:** `application/json`\n\nRequired fields:\n\n- `username` (string) – user identifier/login name\n    \n- `password` (string) – user password\n    \n\nExample:\n\n\\`\\`\\`json  \n{  \n\"username\": \"jeff\",  \n\"password\": \"jeff123\"  \n}"
           },
           "response": []
         }
@@ -90,7 +91,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbHBoYSIsImlhdCI6MTc3NDIyNDc4OSwiZXhwIjoxNzc0MjI1NTU1fQ.QEwkh9EC9nVSgWnNNMcRJVqKyBzmyZN9M-jak81RRfY",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzU5MzU0LCJleHAiOjE3NzQzNjAyNDd9.ANBqoNr9LefDFzmuR2jMN0bWWJ-RyiZW5wdVzjfJACE",
                   "type": "string"
                 }
               ]
@@ -98,7 +99,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping/",
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -109,8 +110,54 @@
                 "v1.0.0",
                 "pfm",
                 "get",
-                "allocation.mapping",
-                ""
+                "allocation.mapping"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/allocation.mapping?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYwMjYxLCJleHAiOjE3NzQzNjA5MzF9.RltNW42pUMaEPcAwhvHhIagxaa05nMxauhtEGPbINhA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping?page=2&size=2&sortBy=allocId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "allocation.mapping"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "allocId"
+                }
               ]
             }
           },
