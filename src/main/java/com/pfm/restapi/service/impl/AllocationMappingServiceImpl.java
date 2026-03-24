@@ -4,6 +4,8 @@ import com.pfm.restapi.repository.AllocationMappingRepo;
 import com.pfm.restapi.service.AllocationMappingService;
 import com.pfm.restapi.entity.AllocationMapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,8 +19,8 @@ public class AllocationMappingServiceImpl implements AllocationMappingService {
     private AllocationMappingRepo allocationMappingRepo;
 
     @Override
-    public List<AllocationMapping> getAllocationMapping(){
-        return allocationMappingRepo.getAllocationMapping();
+    public Page<AllocationMapping> getAllocationMapping(Pageable pageable){
+        return allocationMappingRepo.getAllocationMapping(pageable);
     }
 
     @Override
