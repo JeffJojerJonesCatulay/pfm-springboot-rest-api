@@ -1,0 +1,8 @@
+logging:
+  level:
+    # ON
+    root: DEBUG
+    com.pfm: DEBUG
+    # OFF
+#    root: OFF
+#    com.pfm: OFF
