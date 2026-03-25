@@ -68,7 +68,7 @@ public class UserController {
             log.error(e.getMessage());
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " POST METHOD | " + authRequest.getUsername() + " | HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            tps.end( endPoint, " POST METHOD | " + authRequest.getUsername(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
             log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", authRequest.getUsername(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }

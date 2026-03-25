@@ -72,7 +72,7 @@ public class AllocationMappingController {
             log.error(e.getMessage());
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " GET METHOD | HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
             log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
@@ -102,7 +102,7 @@ public class AllocationMappingController {
             log.error(e.getMessage());
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " GET METHOD | HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            tps.end( endPoint, " GET METHOD","HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
             log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
@@ -137,7 +137,7 @@ public class AllocationMappingController {
             log.error(e.getMessage());
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " POST METHOD | " + allocationMapping.getAllocation() + " | HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            tps.end( endPoint, " POST METHOD | " + allocationMapping.getAllocation(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
             log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", allocationMapping.getAllocation(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
@@ -174,7 +174,7 @@ public class AllocationMappingController {
             log.error(e.getMessage());
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " PUT METHOD | " + id + " | HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            tps.end( endPoint, " PUT METHOD | " + id,"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
             log.debug("PUT METHOD | {} | HTTP STATUS: {} | STATUS : {}", id, httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
@@ -211,7 +211,7 @@ public class AllocationMappingController {
             log.error(e.getMessage());
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR);
         } finally {
-            tps.end( endPoint, " DELETE METHOD | " + id + " | HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            tps.end( endPoint, " DELETE METHOD | " + id, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
             log.debug("DELETE METHOD | {} | HTTP STATUS: {} | STATUS : {}", id, httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }

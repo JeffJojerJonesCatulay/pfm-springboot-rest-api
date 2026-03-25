@@ -86,7 +86,7 @@ public class SecurityController {
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " POST METHOD | " + request.getUsername() + " | HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            tps.end( endPoint, " POST METHOD | " + request.getUsername(),"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
             log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", request.getUsername(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }

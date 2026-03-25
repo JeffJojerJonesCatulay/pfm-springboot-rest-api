@@ -26,13 +26,13 @@ public class TpsMonitor {
      * @param apiName name of the API endpoint
      * @param input   input parameters (or a summary string)
      */
-    public void end(String apiName, String input) {
+    public void end(String apiName, String input, String returnStatus) {
         String key = buildKey(apiName, input);
         Long start = startTimes.remove(key);
 
         if (start != null) {
             long elapsed = System.currentTimeMillis() - start;
-            log.info("API [{}] | input [{}] executed in {} ms", apiName, input, elapsed);
+            log.info("API [{}] | input [{}] return [{}] executed in {} ms", apiName, input, returnStatus, elapsed);
         } else {
             log.warn("End called without matching start for API [{}] | input [{}]", apiName, input);
         }
