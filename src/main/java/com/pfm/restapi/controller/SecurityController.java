@@ -38,18 +38,26 @@ public class SecurityController {
     private AuthenticationManager authenticationManager;
 
     InputSanitation inputSanitation = new InputSanitation();
+    String httpStatusReturn = "";
+    String httpStatusMsgReturn = "";
 
     @PostMapping("/authenticate")
     public ResponseEntity<Object> login(@RequestBody AuthRequest request, HttpServletRequest httpServletRequest){
-        tps.start(httpServletRequest.getServerName() + URL + "/authenticate", request.getUsername());
-        log.debug("authenticate");
+        String endPoint = httpServletRequest.getServerName() + URL + "/authenticate";
+        tps.start(endPoint, " POST METHOD | " + request.getUsername());
+        log.debug("{} API - Start", endPoint);
         if (request.getUsername() == null || request.getPassword() == null) {
+            log.debug("Inputs: request.getUsername() or request.getPassword() is null");
+            httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         }
 
         try {
+            log.debug("Inputs: request.getUsername(): {}", request.getUsername());
             inputSanitation.sanitizeInput(request.getUsername());
 
+            log.debug("Calling authenticationManager.authenticate method");
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.getUsername(),
@@ -59,16 +67,28 @@ public class SecurityController {
             String token = jwtService.generateToken(request.getUsername());
             if (authentication.isAuthenticated()) {
                 AuthResponse authResponse = new AuthResponse(token, Constant.EXPIRES_IN, Constant.AUTH_TYPE);
+                httpStatusReturn = String.valueOf(HttpStatus.OK);
+                httpStatusMsgReturn = Constant.SUCCESS;
                 return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, authResponse);
             } else {
+                httpStatusReturn = String.valueOf(HttpStatus.UNAUTHORIZED);
+                httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.UNAUTHORIZED, null);
             }
         } catch (BadCredentialsException | IllegalArgumentException e){
+            log.error(e.getMessage());
+            httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
+            log.error(e.getMessage());
+            httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( httpServletRequest.getServerName() + URL + "/authenticate", request.getUsername());
+            tps.end( endPoint, " POST METHOD | " + request.getUsername() + " | HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", request.getUsername(), httpStatusReturn, httpStatusMsgReturn);
+            log.debug("{} API - End", endPoint);
         }
     }
 }
