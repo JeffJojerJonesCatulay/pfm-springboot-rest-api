@@ -1,9 +1,11 @@
 package com.pfm.restapi.controller;
 
 import com.pfm.restapi.entity.AllocationMapping;
+import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
 import com.pfm.restapi.service.AllocationMappingService;
+import com.pfm.restapi.service.RequestLogsService;
 import com.pfm.restapi.utility.Constant;
 import com.pfm.restapi.utility.TpsMonitor;
 import io.jsonwebtoken.JwtException;
@@ -23,6 +25,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -39,6 +43,11 @@ public class AllocationMappingController {
     String httpStatusMsgReturn = "";
 
     InputSanitation inputSanitation = new InputSanitation();
+
+    ResponseEntity<Object> response;
+
+    @Autowired
+    private RequestLogsService requestLogsService;
 
     @GetMapping("/get/allocation.mapping")
     public ResponseEntity<Object> getAllocationMapping(
@@ -60,22 +69,40 @@ public class AllocationMappingController {
             Page<AllocationMapping> data = allocationMappingService.getAllocationMapping(pageable);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
-            return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
+            response =  Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
         } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("GET");
+            requestLogs.setRequestMethod("ResponseEntity<Object> getAllocationMapping");
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails("");
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
             log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
+
+        return response;
     }
 
     @GetMapping("/get/allocation.mapping/allocId/{id}")
@@ -90,22 +117,40 @@ public class AllocationMappingController {
             List<AllocationMapping> data = allocationMappingService.getAllocationMappingById(id);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
-            return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
+            response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
         } catch (BadCredentialsException | DataIntegrityViolationException | JwtException e){
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " GET METHOD","HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " GET METHOD","HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("GET");
+            requestLogs.setRequestMethod("ResponseEntity<Object> getAllocationMappingById");
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails("");
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
             log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
+
+        return response;
     }
 
     @PostMapping("/allocation.mapping/create/")
@@ -122,25 +167,43 @@ public class AllocationMappingController {
             inputSanitation.sanitizeInput(allocationMapping.getAddedBy());
             inputSanitation.sanitizeInput(allocationMapping.getUpdateBy());
 
-            AllocationMapping response = allocationMappingService.createAllocation(allocationMapping);
+            AllocationMapping responses = allocationMappingService.createAllocation(allocationMapping);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
-            return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, response);
+            response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
         } catch (BadCredentialsException | DataIntegrityViolationException e){
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " POST METHOD | " + allocationMapping.getAllocation(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " POST METHOD | " + allocationMapping.getAllocation(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("POST");
+            requestLogs.setRequestMethod("ResponseEntity<Object> createAllocation");
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails(allocationMapping.toString());
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
             log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", allocationMapping.getAllocation(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
+
+        return response;
     }
 
     @PutMapping("/allocation.mapping/update/{id}")
@@ -156,28 +219,46 @@ public class AllocationMappingController {
             if (existingAlloc.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
-                return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+                response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
             } else {
-                AllocationMapping response = allocationMappingService.updateAllocation(allocationMapping, id);
+                AllocationMapping responses = allocationMappingService.updateAllocation(allocationMapping, id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
-                return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, response);
+                response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
             }
         } catch (BadCredentialsException | DataIntegrityViolationException e){
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " PUT METHOD | " + id,"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " PUT METHOD | " + id,"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("PUT");
+            requestLogs.setRequestMethod("ResponseEntity<Object> updateAllocation");
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails(allocationMapping.toString() + " PathVariable id: " + id);
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
             log.debug("PUT METHOD | {} | HTTP STATUS: {} | STATUS : {}", id, httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
+
+        return response;
     }
 
     @DeleteMapping("/allocation.mapping/delete/{id}")
@@ -193,27 +274,45 @@ public class AllocationMappingController {
             if (existingAlloc.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
-                return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
+                response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
             } else {
                 allocationMappingService.deleteAllocation(id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
-                return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK);
+                response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK);
             }
         } catch (BadCredentialsException | DataIntegrityViolationException e){
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
         } catch (Exception e){
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR);
         } finally {
-            tps.end( endPoint, " DELETE METHOD | " + id, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime =tps.end( endPoint, " DELETE METHOD | " + id, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("DELETE");
+            requestLogs.setRequestMethod("ResponseEntity<Object> updateAllocation");
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails("id: " + id);
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
             log.debug("DELETE METHOD | {} | HTTP STATUS: {} | STATUS : {}", id, httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
+
+        return response;
     }
 }

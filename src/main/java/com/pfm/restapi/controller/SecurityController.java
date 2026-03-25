@@ -1,10 +1,12 @@
 package com.pfm.restapi.controller;
 
+import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.AuthRequest;
 import com.pfm.restapi.security.AuthResponse;
 import com.pfm.restapi.security.JwtService;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
+import com.pfm.restapi.service.RequestLogsService;
 import com.pfm.restapi.utility.Constant;
 import com.pfm.restapi.utility.TpsMonitor;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+import java.util.Objects;
+
 @RestController
 @RequestMapping("${api.url.mapping}")
 public class SecurityController {
@@ -37,9 +42,14 @@ public class SecurityController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private RequestLogsService requestLogsService;
+
     InputSanitation inputSanitation = new InputSanitation();
     String httpStatusReturn = "";
     String httpStatusMsgReturn = "";
+
+    ResponseEntity<Object> response;
 
     @PostMapping("/authenticate")
     public ResponseEntity<Object> login(@RequestBody AuthRequest request, HttpServletRequest httpServletRequest){
@@ -50,7 +60,7 @@ public class SecurityController {
             log.debug("Inputs: request.getUsername() or request.getPassword() is null");
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         }
 
         try {
@@ -69,26 +79,44 @@ public class SecurityController {
                 AuthResponse authResponse = new AuthResponse(token, Constant.EXPIRES_IN, Constant.AUTH_TYPE);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
-                return Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, authResponse);
+                response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, authResponse);
             } else {
                 httpStatusReturn = String.valueOf(HttpStatus.UNAUTHORIZED);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
-                return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.UNAUTHORIZED, null);
+                response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.UNAUTHORIZED, null);
             }
         } catch (BadCredentialsException | IllegalArgumentException e){
             log.error(e.getMessage());
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
         } catch (Exception e){
             log.error(e.getMessage());
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
-            return Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            tps.end( endPoint, " POST METHOD | " + request.getUsername(),"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " POST METHOD | " + request.getUsername(),"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("POST");
+            requestLogs.setRequestMethod("ResponseEntity<Object> login");
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails(request.getUsername());
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
             log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", request.getUsername(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
+
+        return response;
     }
 }

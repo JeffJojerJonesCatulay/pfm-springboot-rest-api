@@ -100,16 +100,17 @@ public class AllocationMapping {
 
     @Override
     public String toString() {
-        return "AllocationMapping{" +
-                "allocId=" + allocId +
-                ", allocation='" + allocation + '\'' +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
-                ", dateAdded='" + dateAdded + '\'' +
-                ", addedBy='" + addedBy + '\'' +
-                ", updateDate='" + updateDate + '\'' +
-                ", updateBy='" + updateBy + '\'' +
-                '}';
+        return "{" +
+                "\"allocId\":" + allocId + "," +
+                "\"allocation\":\"" + allocation + "\"," +
+                "\"type\":\"" + type + "\"," +
+                "\"description\":\"" + description + "\"," +
+                "\"status\":\"" + status + "\"," +
+                "\"dateAdded\":\"" + dateAdded + "\"," +
+                "\"addedBy\":\"" + addedBy + "\"," +
+                "\"updateDate\":\"" + updateDate + "\"," +
+                "\"updateBy\":\"" + updateBy + "\"" +
+                "}";
     }
+
 }
