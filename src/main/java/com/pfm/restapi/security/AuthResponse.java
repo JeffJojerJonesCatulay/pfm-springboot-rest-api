@@ -30,4 +30,13 @@ public class AuthResponse {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "AuthResponse{" +
+                "token='" + token + '\'' +
+                ", expiresIn='" + expiresIn + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

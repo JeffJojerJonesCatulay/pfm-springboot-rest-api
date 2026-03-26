@@ -97,4 +97,20 @@ public class AllocationMapping {
     public void setAllocId(long allocId) {
         this.allocId = allocId;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"allocId\":" + allocId + "," +
+                "\"allocation\":\"" + allocation + "\"," +
+                "\"type\":\"" + type + "\"," +
+                "\"description\":\"" + description + "\"," +
+                "\"status\":\"" + status + "\"," +
+                "\"dateAdded\":\"" + dateAdded + "\"," +
+                "\"addedBy\":\"" + addedBy + "\"," +
+                "\"updateDate\":\"" + updateDate + "\"," +
+                "\"updateBy\":\"" + updateBy + "\"" +
+                "}";
+    }
+
 }

@@ -53,7 +53,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"username\" : \"Alpha1\",\r\n    \"password\" : \"Alpha123\"\r\n}",
+              "raw": "{\r\n    \"username\" : \"Alpha1qq\",\r\n    \"password\" : \"Alpha123\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -91,7 +91,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NDI4MjQwLCJleHAiOjE3NzQ0MjkxMTV9.nN8fnlNOArJDO7unyMrVLLnNFvA5ZibG0xzewltPI3U",
                   "type": "string"
                 }
               ]
@@ -206,7 +206,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NDM0MDgwLCJleHAiOjE3NzQ0MzQ5NzF9.91GqK7QPGG7cUeAS332ZmIhwHuiD39osK5-HGy7j0lM",
                   "type": "string"
                 }
               ]
@@ -215,7 +215,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"allocation\": \"Housing Fund ZZZ\",\r\n  \"type\": \"Expense\",\r\n  \"description\": \"Monthly rent payment for apartment\",\r\n  \"status\": \"Active\",\r\n  \"addedBy\": \"Jeff\"\r\n}\r\n",
+              "raw": "{\r\n  \"allocation\": \"Housing Fund ZZZZZZ\",\r\n  \"type\": \"Expense\",\r\n  \"description\": \"Monthly rent payment for apartment\",\r\n  \"status\": \"Active\",\r\n  \"addedBy\": \"Jeff\"\r\n}\r\n",
               "options": {
                 "raw": {
                   "language": "json"
