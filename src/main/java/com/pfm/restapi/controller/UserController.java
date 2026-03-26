@@ -84,7 +84,7 @@ public class UserController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("POST");
-            requestLogs.setRequestMethod("/authenticate/create");
+            requestLogs.setRequestMethod("ResponseEntity<Object> createUser");
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails(authRequest.getUsername());
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());

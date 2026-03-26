@@ -55,7 +55,7 @@ public class AllocationMappingController {
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "allocId") String sortBy,
             HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/authenticate/create";
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping";
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -262,10 +262,10 @@ public class AllocationMappingController {
     }
 
     @DeleteMapping("/allocation.mapping/delete/{id}")
-    public ResponseEntity<Object> updateAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
+    public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
         String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/delete/{id}";
         try{
-            tps.start(endPoint, " PUT METHOD | " + id);
+            tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
@@ -298,7 +298,7 @@ public class AllocationMappingController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("DELETE");
-            requestLogs.setRequestMethod("ResponseEntity<Object> updateAllocation");
+            requestLogs.setRequestMethod("ResponseEntity<Object> deleteAllocation");
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails("id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
