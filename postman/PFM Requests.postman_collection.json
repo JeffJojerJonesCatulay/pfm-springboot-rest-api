@@ -799,6 +799,246 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "CCRecordTracker",
+      "item": [
+        {
+          "name": "/get/cc.recordTracker",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI3MDIwLCJleHAiOjE3NzQ2Mjc4OTF9.6Vep6HukKqAUdvsMeWJ3_YJFh3sirys2zM9hzW4F1ZI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.recordTracker",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.recordTracker"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.recordTracker?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI3MDIwLCJleHAiOjE3NzQ2Mjc4OTF9.6Vep6HukKqAUdvsMeWJ3_YJFh3sirys2zM9hzW4F1ZI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.recordTracker?page=2&size=2&sortBy=ccRecId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.recordTracker"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccRecId"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.connectedApp/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp/id/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp",
+                "id",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.recordTracker/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI2NjA2LCJleHAiOjE3NzQ2Mjc0OTF9.fJDCK_tBgmFunzjmDQ7QozdcSTB5mdc3-hYNaH8j0NU",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ccId\": 2,\r\n  \"dateFrom\": \"2026-03-27\",\r\n  \"dateTo\": \"2026-03-27\",\r\n  \"dueDate\": \"2026-03-27\",\r\n  \"status\": \"Active\",\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.recordTracker",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.recordTracker/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI3MDIwLCJleHAiOjE3NzQ2Mjc4OTF9.6Vep6HukKqAUdvsMeWJ3_YJFh3sirys2zM9hzW4F1ZI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"Not\",\r\n  \"updatedBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.recordTracker",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.recordTracker/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI3MDIwLCJleHAiOjE3NzQ2Mjc4OTF9.6Vep6HukKqAUdvsMeWJ3_YJFh3sirys2zM9hzW4F1ZI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.recordTracker",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }

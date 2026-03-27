@@ -1,11 +1,11 @@
 package com.pfm.restapi.controller;
 
 import com.pfm.restapi.entity.AllocationMapping;
-import com.pfm.restapi.entity.CCConnectedApp;
+import com.pfm.restapi.entity.CCRecordTracker;
 import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
-import com.pfm.restapi.service.CCConnectedAppService;
+import com.pfm.restapi.service.CCRecordTrackerService;
 import com.pfm.restapi.service.RequestLogsService;
 import com.pfm.restapi.utility.Constant;
 import com.pfm.restapi.utility.TpsMonitor;
@@ -32,33 +32,30 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("${api.url.mapping}")
-public class CCConnectedAppController {
+public class CCRecordTrackerController {
 
     @Autowired
-    private CCConnectedAppService service;
+    private CCRecordTrackerService service;
 
     @Value("${api.url.mapping}")
     private String URL;
     private final TpsMonitor tps = new TpsMonitor();
-    private static final Logger log = LoggerFactory.getLogger(CCConnectedAppController.class);
+    private static final Logger log = LoggerFactory.getLogger(CCRecordTrackerController.class);
     String httpStatusReturn = "";
     String httpStatusMsgReturn = "";
-
     InputSanitation inputSanitation = new InputSanitation();
-
     ResponseEntity<Object> response;
 
     @Autowired
     private RequestLogsService requestLogsService;
 
-    @GetMapping("/get/cc.connectedApp")
-    public ResponseEntity<Object> getCCConnectedApp(
+    @GetMapping("/get/cc.recordTracker")
+    public ResponseEntity<Object> getCCRecordTracker(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
-            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "ccRecId") String sortBy,
             HttpServletRequest httpServletRequest){
-
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.connectedApp";
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.recordTracker";
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -69,7 +66,7 @@ public class CCConnectedAppController {
             inputSanitation.validateSize(size);
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
-            Page<CCConnectedApp> data = service.getCCConnectedApp(pageable);
+            Page<CCRecordTracker> data = service.getCCRecordTracker(pageable);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response =  Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
@@ -108,16 +105,16 @@ public class CCConnectedAppController {
         return response;
     }
 
-    @GetMapping("/get/cc.connectedApp/id/{id}")
-    public ResponseEntity<Object> getCCConnectedAppById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.connectedApp/id/{id}";
+    @GetMapping("/get/cc.recordTracker/ccRecId/{id}")
+    public ResponseEntity<Object> getCCRecordTrackerById(@PathVariable Long id, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.recordTracker/ccRecId/{id}";
         try{
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
 
-            List<CCConnectedApp> data = service.getCCConnectedAppById(id);
+            List<CCRecordTracker> data = service.getCCRecordTrackerById(id);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
@@ -140,7 +137,7 @@ public class CCConnectedAppController {
             requestLogs.setApiMethod("GET");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails("id: " + id);
+            requestLogs.setRequestDetails("ccRecId: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -156,22 +153,21 @@ public class CCConnectedAppController {
         return response;
     }
 
-    @PostMapping("/cc.connectedApp/create/")
-    public ResponseEntity<Object> createConnectedApp(@RequestBody CCConnectedApp ccConnectedApp, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/create/";
-        try {
-            tps.start(endPoint, " POST METHOD | " + ccConnectedApp.getConnectedApp());
+    @PostMapping("/cc.recordTracker/create/")
+    public ResponseEntity<Object> createCCRecordTracker(@RequestBody CCRecordTracker ccRecordTracker, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.recordTracker/create/";
+        try{
+            tps.start(endPoint, " POST METHOD | " + ccRecordTracker.getCcId());
             log.debug("{} API - Start", endPoint);
 
-            inputSanitation.sanitizeInput(ccConnectedApp.getConnectedApp());
-            inputSanitation.sanitizeInput(ccConnectedApp.getSubscription());
-            inputSanitation.sanitizeInput(ccConnectedApp.getAutoDebit());
-            inputSanitation.sanitizeInput(ccConnectedApp.getAmount());
-            inputSanitation.sanitizeInput(ccConnectedApp.getRemarks());
-            inputSanitation.sanitizeInput(ccConnectedApp.getAddedBy());
-            inputSanitation.sanitizeInput(ccConnectedApp.getUpdateBy());
+            inputSanitation.sanitizeInput(ccRecordTracker.getDateFrom());
+            inputSanitation.sanitizeInput(ccRecordTracker.getDateTo());
+            inputSanitation.sanitizeInput(ccRecordTracker.getDueDate());
+            inputSanitation.sanitizeInput(ccRecordTracker.getStatus());
+            inputSanitation.sanitizeInput(ccRecordTracker.getAddedBy());
+            inputSanitation.sanitizeInput(ccRecordTracker.getUpdatedBy());
 
-            CCConnectedApp responses = service.createConnectedApp(ccConnectedApp);
+            CCRecordTracker responses = service.createCCRecordTracker(ccRecordTracker);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
@@ -186,7 +182,7 @@ public class CCConnectedAppController {
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " POST METHOD | " + ccConnectedApp.getConnectedApp(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " POST METHOD | " + ccRecordTracker.getCcId(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -194,7 +190,7 @@ public class CCConnectedAppController {
             requestLogs.setApiMethod("POST");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(ccConnectedApp.toString());
+            requestLogs.setRequestDetails(ccRecordTracker.toString());
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -203,36 +199,35 @@ public class CCConnectedAppController {
             requestLogsService.inputLogs(requestLogs);
             log.debug("Done saving request to API Request Table");
 
-            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", ccConnectedApp.getConnectedApp(), httpStatusReturn, httpStatusMsgReturn);
+            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", ccRecordTracker.getCcId(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
 
         return response;
     }
 
-    @PutMapping("/cc.connectedApp/update/{id}")
-    public ResponseEntity<Object> updateConnectedApp(@PathVariable Long id, @RequestBody CCConnectedApp ccConnectedApp, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/update/{id}";
+    @PutMapping("/cc.recordTracker/update/{id}")
+    public ResponseEntity<Object> updateCCRecordTracker(@PathVariable Long id, @RequestBody CCRecordTracker ccRecordTracker, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.recordTracker/update/{id}";
         try{
             tps.start(endPoint, " PUT METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
-            inputSanitation.sanitizeInput(ccConnectedApp.getConnectedApp());
-            inputSanitation.sanitizeInput(ccConnectedApp.getSubscription());
-            inputSanitation.sanitizeInput(ccConnectedApp.getAutoDebit());
-            inputSanitation.sanitizeInput(ccConnectedApp.getAmount());
-            inputSanitation.sanitizeInput(ccConnectedApp.getRemarks());
-            inputSanitation.sanitizeInput(ccConnectedApp.getAddedBy());
-            inputSanitation.sanitizeInput(ccConnectedApp.getUpdateBy());
+            inputSanitation.sanitizeInput(ccRecordTracker.getDateFrom());
+            inputSanitation.sanitizeInput(ccRecordTracker.getDateTo());
+            inputSanitation.sanitizeInput(ccRecordTracker.getDueDate());
+            inputSanitation.sanitizeInput(ccRecordTracker.getStatus());
+            inputSanitation.sanitizeInput(ccRecordTracker.getAddedBy());
+            inputSanitation.sanitizeInput(ccRecordTracker.getUpdatedBy());
 
-            Optional<CCConnectedApp> existingConnected = service.findById(id);
-            if (existingConnected.isEmpty()) {
+            Optional<CCRecordTracker> existingRecord = service.findById(id);
+            if (existingRecord.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
             } else {
-                CCConnectedApp responses = service.updateConnectedApp(ccConnectedApp, id);
+                CCRecordTracker responses = service.updateCCRecordTracker(ccRecordTracker, id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
@@ -256,7 +251,7 @@ public class CCConnectedAppController {
             requestLogs.setApiMethod("PUT");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(ccConnectedApp.toString() + " PathVariable id: " + id);
+            requestLogs.setRequestDetails(ccRecordTracker.toString() + " PathVariable id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -272,22 +267,22 @@ public class CCConnectedAppController {
         return response;
     }
 
-    @DeleteMapping("/cc.connectedApp/delete/{id}")
+    @DeleteMapping("/cc.recordTracker/delete/{id}")
     public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/delete/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.recordTracker/delete/{id}";
         try{
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
 
-            Optional<CCConnectedApp> existingConnected = service.findById(id);
-            if (existingConnected.isEmpty()) {
+            Optional<CCRecordTracker> existingRecord = service.findById(id);
+            if (existingRecord.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
             } else {
-                service.deleteAllocation(id);
+                service.deleteCCRecordTracker(id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK);

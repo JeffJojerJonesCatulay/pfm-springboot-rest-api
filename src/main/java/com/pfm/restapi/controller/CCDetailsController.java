@@ -39,7 +39,7 @@ public class CCDetailsController {
     @Value("${api.url.mapping}")
     private String URL;
     private final TpsMonitor tps = new TpsMonitor();
-    private static final Logger log = LoggerFactory.getLogger(AllocationMappingController.class);
+    private static final Logger log = LoggerFactory.getLogger(CCDetailsController.class);
     String httpStatusReturn = "";
     String httpStatusMsgReturn = "";
     InputSanitation inputSanitation = new InputSanitation();
