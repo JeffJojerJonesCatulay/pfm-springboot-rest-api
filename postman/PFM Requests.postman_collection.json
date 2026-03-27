@@ -319,6 +319,51 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "CCDetails",
+      "item": [
+        {
+          "name": "/get/cc.details",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.details/ccId/{id}",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.details/create/",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.details/update/{id}",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.details/delete/{id}",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
