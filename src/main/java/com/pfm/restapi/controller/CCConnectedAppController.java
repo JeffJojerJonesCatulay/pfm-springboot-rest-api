@@ -1,10 +1,11 @@
 package com.pfm.restapi.controller;
 
-import com.pfm.restapi.entity.CCDetails;
+import com.pfm.restapi.entity.AllocationMapping;
+import com.pfm.restapi.entity.CCConnectedApp;
 import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
-import com.pfm.restapi.service.CCDetailsService;
+import com.pfm.restapi.service.CCConnectedAppService;
 import com.pfm.restapi.service.RequestLogsService;
 import com.pfm.restapi.utility.Constant;
 import com.pfm.restapi.utility.TpsMonitor;
@@ -31,10 +32,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("${api.url.mapping}")
-public class CCDetailsController {
+public class CCConnectedAppController {
 
     @Autowired
-    private CCDetailsService ccDetailsService;
+    private CCConnectedAppService service;
 
     @Value("${api.url.mapping}")
     private String URL;
@@ -42,19 +43,22 @@ public class CCDetailsController {
     private static final Logger log = LoggerFactory.getLogger(AllocationMappingController.class);
     String httpStatusReturn = "";
     String httpStatusMsgReturn = "";
+
     InputSanitation inputSanitation = new InputSanitation();
+
     ResponseEntity<Object> response;
 
     @Autowired
     private RequestLogsService requestLogsService;
 
-    @GetMapping("/get/cc.details")
-    public ResponseEntity<Object> getCCDetails(
+    @GetMapping("/get/cc.connectedApp")
+    public ResponseEntity<Object> getCCConnectedApp(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
-            @RequestParam(defaultValue = "ccId") String sortBy,
+            @RequestParam(defaultValue = "id") String sortBy,
             HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.details";
+
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.connectedApp";
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -65,11 +69,10 @@ public class CCDetailsController {
             inputSanitation.validateSize(size);
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
-            Page<CCDetails> data = ccDetailsService.getCCDetails(pageable);
+            Page<CCConnectedApp> data = service.getCCConnectedApp(pageable);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response =  Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
-
         } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
@@ -101,19 +104,20 @@ public class CCDetailsController {
             log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
+
         return response;
     }
 
-    @GetMapping("/get/cc.details/ccId/{id}")
-    public ResponseEntity<Object> getCCDetailsById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.details/ccId/{id}";
-        try {
+    @GetMapping("/get/cc.connectedApp/id/{id}")
+    public ResponseEntity<Object> getCCConnectedAppById(@PathVariable Long id, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.connectedApp/id/{id}";
+        try{
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
 
-            List<CCDetails> data = ccDetailsService.getCCDetailsById(id);
+            List<CCConnectedApp> data = service.getCCConnectedAppById(id);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
@@ -128,7 +132,7 @@ public class CCDetailsController {
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " GET METHOD","HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -136,7 +140,7 @@ public class CCDetailsController {
             requestLogs.setApiMethod("GET");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails("ccId: " + id);
+            requestLogs.setRequestDetails("id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -152,24 +156,25 @@ public class CCDetailsController {
         return response;
     }
 
-    @PostMapping("/cc.details/create/")
-    public ResponseEntity<Object> createCCDetails (@RequestBody CCDetails ccDetails, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/create/";
+    @PostMapping("/cc.connectedApp/create/")
+    public ResponseEntity<Object> createConnectedApp(@RequestBody CCConnectedApp ccConnectedApp, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/create/";
         try {
-            tps.start(endPoint, " POST METHOD | " + ccDetails.getCcName());
+            tps.start(endPoint, " POST METHOD | " + ccConnectedApp.getConnectedApp());
             log.debug("{} API - Start", endPoint);
 
-            inputSanitation.sanitizeInput(ccDetails.getCcName());
-            inputSanitation.sanitizeInput(ccDetails.getCcLastDigit());
-            inputSanitation.sanitizeInput(ccDetails.getCcAcronym());
-            inputSanitation.sanitizeInput(ccDetails.getAddedBy());
-            inputSanitation.sanitizeInput(ccDetails.getUpdateBy());
+            inputSanitation.sanitizeInput(ccConnectedApp.getConnectedApp());
+            inputSanitation.sanitizeInput(ccConnectedApp.getSubscription());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAutoDebit());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAmount());
+            inputSanitation.sanitizeInput(ccConnectedApp.getRemarks());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAddedBy());
+            inputSanitation.sanitizeInput(ccConnectedApp.getUpdateBy());
 
-            CCDetails responses = ccDetailsService.createCCDetails(ccDetails);
+            CCConnectedApp responses = service.createConnectedApp(ccConnectedApp);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
-
         } catch (BadCredentialsException | DataIntegrityViolationException e){
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
@@ -181,7 +186,7 @@ public class CCDetailsController {
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " POST METHOD | " + ccDetails.getCcName(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " POST METHOD | " + ccConnectedApp.getConnectedApp(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -189,7 +194,7 @@ public class CCDetailsController {
             requestLogs.setApiMethod("POST");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(ccDetails.toString());
+            requestLogs.setRequestDetails(ccConnectedApp.toString());
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -198,35 +203,36 @@ public class CCDetailsController {
             requestLogsService.inputLogs(requestLogs);
             log.debug("Done saving request to API Request Table");
 
-            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", ccDetails.getCcName(), httpStatusReturn, httpStatusMsgReturn);
+            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", ccConnectedApp.getConnectedApp(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
 
         return response;
     }
 
-    @PutMapping("/cc.details/update/{id}")
-    public ResponseEntity<Object> updateCCDetails(@PathVariable Long id, @RequestBody CCDetails ccDetails, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/update/{id}";
-
-        try {
+    @PutMapping("/cc.connectedApp/update/{id}")
+    public ResponseEntity<Object> updateConnectedApp(@PathVariable Long id, @RequestBody CCConnectedApp ccConnectedApp, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/update/{id}";
+        try{
             tps.start(endPoint, " PUT METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
-            inputSanitation.sanitizeInput(ccDetails.getCcName());
-            inputSanitation.sanitizeInput(ccDetails.getCcLastDigit());
-            inputSanitation.sanitizeInput(ccDetails.getCcAcronym());
-            inputSanitation.sanitizeInput(ccDetails.getAddedBy());
-            inputSanitation.sanitizeInput(ccDetails.getUpdateBy());
+            inputSanitation.sanitizeInput(ccConnectedApp.getConnectedApp());
+            inputSanitation.sanitizeInput(ccConnectedApp.getSubscription());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAutoDebit());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAmount());
+            inputSanitation.sanitizeInput(ccConnectedApp.getRemarks());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAddedBy());
+            inputSanitation.sanitizeInput(ccConnectedApp.getUpdateBy());
 
-            Optional<CCDetails> existingCCId = ccDetailsService.findById(id);
-            if (existingCCId.isEmpty()) {
+            Optional<CCConnectedApp> existingConnected = service.findById(id);
+            if (existingConnected.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
             } else {
-                CCDetails responses = ccDetailsService.updateCCDetails(ccDetails, id);
+                CCConnectedApp responses = service.updateConnectedApp(ccConnectedApp, id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
@@ -241,8 +247,7 @@ public class CCDetailsController {
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
-        finally {
+        } finally {
             String elapsedTime = tps.end( endPoint, " PUT METHOD | " + id,"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
@@ -251,7 +256,7 @@ public class CCDetailsController {
             requestLogs.setApiMethod("PUT");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(ccDetails.toString() + " PathVariable id: " + id);
+            requestLogs.setRequestDetails(ccConnectedApp.toString() + " PathVariable id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -267,21 +272,22 @@ public class CCDetailsController {
         return response;
     }
 
-    @DeleteMapping("/cc.details/delete/{id}")
-    public ResponseEntity<Object> deleteCCDetails(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/delete/{id}";
-        try {
+    @DeleteMapping("/cc.connectedApp/delete/{id}")
+    public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/delete/{id}";
+        try{
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
-            Optional<CCDetails> existingCCDetails = ccDetailsService.findById(id);
-            if (existingCCDetails.isEmpty()) {
+
+            Optional<CCConnectedApp> existingConnected = service.findById(id);
+            if (existingConnected.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
             } else {
-                ccDetailsService.deleteCCDetails(id);
+                service.deleteAllocation(id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK);

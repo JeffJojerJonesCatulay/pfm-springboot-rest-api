@@ -326,40 +326,475 @@
         {
           "name": "/get/cc.details",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.details?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details?page=2&size=2&sortBy=ccId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccId"
+                }
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "/get/cc.details/ccId/{id}",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMDQ5LCJleHAiOjE3NzQ2MjMyMjV9.yTlPwCptw3cfGrnPAmsEGQTbQVF6x26S4zMSuWZNddc",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details/ccId/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details",
+                "ccId",
+                "2"
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "/cc.details/create/",
           "request": {
-            "method": "GET",
-            "header": []
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMDQ5LCJleHAiOjE3NzQ2MjMyMjV9.yTlPwCptw3cfGrnPAmsEGQTbQVF6x26S4zMSuWZNddc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ccName\" : \"CC\",\r\n    \"ccLastDigit\" : \"1234\",\r\n    \"ccAcronym\" : \"AA\",\r\n    \"addedBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "create",
+                ""
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "/cc.details/update/{id}",
           "request": {
-            "method": "GET",
-            "header": []
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMzkwLCJleHAiOjE3NzQ2MjQyODV9.g-Eh_a0BxamIJZMVdxusyAK3tmax3Be2h3lFxz4fIYo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ccAcronym\" : \"AB\",\r\n    \"updateBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/update/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "update",
+                "3"
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "/cc.details/delete/{id}",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMzkwLCJleHAiOjE3NzQ2MjQyODV9.g-Eh_a0BxamIJZMVdxusyAK3tmax3Be2h3lFxz4fIYo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/delete/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "delete",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CCConnectedApps",
+      "item": [
+        {
+          "name": "/get/cc.connectedApp",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.connectedApp?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp?page=2&size=2&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.connectedApp/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp/id/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp",
+                "id",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.connectedApp/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ccId\": 2,\r\n  \"connectedApp\": \"PayPal\",\r\n  \"subscription\": \"Premium Plan\",\r\n  \"autoDebit\": \"Enabled\",\r\n  \"amount\": \"499.99\",\r\n  \"date\": \"2026-03-27\",\r\n  \"remarks\": \"Monthly subscription auto-debited successfully\",\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.connectedApp/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"connectedApp\": \"PayPalSSS\",\r\n    \"subscription\": \"Premium Plan\",\r\n    \"autoDebit\": \"Enabled\",\r\n    \"amount\": \"499.99\",\r\n    \"date\": \"2026-03-27\",\r\n    \"remarks\": \"Monthly subscription auto-debited successfully\",\r\n    \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/update/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "update",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.connectedApp/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/delete/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "delete",
+                "5"
+              ]
+            }
           },
           "response": []
         }

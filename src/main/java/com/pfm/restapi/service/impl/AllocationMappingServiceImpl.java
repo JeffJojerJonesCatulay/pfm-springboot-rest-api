@@ -38,16 +38,10 @@ public class AllocationMappingServiceImpl implements AllocationMappingService {
     @Override
     public AllocationMapping createAllocation(AllocationMapping allocationMapping) {
         log.debug("Inside createAllocation");
-        AllocationMapping data = new AllocationMapping();
-        data.setAllocation(allocationMapping.getAllocation());
-        data.setType(allocationMapping.getType());
-        data.setDescription(allocationMapping.getDescription());
-        data.setStatus(allocationMapping.getStatus());
-        data.setAddedBy(allocationMapping.getAddedBy());
-        data.setDateAdded(String.valueOf(LocalDateTime.now()));
-        log.debug("data: {}", data.toString());
+        allocationMapping.setDateAdded(String.valueOf(LocalDateTime.now()));
+        log.debug("data: {}", allocationMapping.toString());
 
-        return allocationMappingRepo.save(data);
+        return allocationMappingRepo.save(allocationMapping);
     }
 
     @Override

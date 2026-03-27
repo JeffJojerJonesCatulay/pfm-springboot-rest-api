@@ -87,7 +87,7 @@ public class AllocationMappingController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("GET");
-            requestLogs.setRequestMethod("ResponseEntity<Object> getAllocationMapping");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails("");
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
@@ -135,7 +135,7 @@ public class AllocationMappingController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("GET");
-            requestLogs.setRequestMethod("ResponseEntity<Object> getAllocationMappingById");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails("allocId: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
@@ -188,7 +188,7 @@ public class AllocationMappingController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("POST");
-            requestLogs.setRequestMethod("ResponseEntity<Object> createAllocation");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails(allocationMapping.toString());
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
@@ -249,7 +249,7 @@ public class AllocationMappingController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("PUT");
-            requestLogs.setRequestMethod("ResponseEntity<Object> updateAllocation");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails(allocationMapping.toString() + " PathVariable id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
@@ -304,7 +304,7 @@ public class AllocationMappingController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("DELETE");
-            requestLogs.setRequestMethod("ResponseEntity<Object> deleteAllocation");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails("id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
