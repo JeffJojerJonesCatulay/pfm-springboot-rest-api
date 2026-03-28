@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "730a493b-fe8b-445c-9cd3-56955c7f6dbb",
+    "_postman_id": "052bec0f-0388-4ab0-b946-0b69146b1fb5",
     "name": "PFM Requests",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "30170318"
@@ -41,7 +41,8 @@
           },
           "response": []
         }
-      ]
+      ],
+      "description": "Handles authentication and authorization for the PFM API. This folder contains the request responsible for securing access to the application, such as login or token generation. All protected endpoints in the API depend on successful authentication through this flow."
     },
     {
       "name": "User",
@@ -78,7 +79,8 @@
           },
           "response": []
         }
-      ]
+      ],
+      "description": "Manages user account operations within the PFM API. This folder contains the request for creating or retrieving a user profile, which serves as the foundation for all other personal finance data in the application. User identity is central to associating financial records across all other domains."
     },
     {
       "name": "AllocationMapping",
@@ -318,7 +320,1695 @@
           },
           "response": []
         }
-      ]
+      ],
+      "description": "Contains CRUD operations for managing allocation mappings in the PFM API. Allocation mappings define how a user's income or budget is distributed across different financial categories or goals. Use these endpoints to create, read, update, and delete allocation rules at `localhost:9010/api/v1.0.0/pfm/`."
+    },
+    {
+      "name": "InvestmentsAndSavingsDay",
+      "item": [
+        {
+          "name": "/get/investmentsandsavingsday",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "investmentsandsavingsday"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/investmentsandsavingsday?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "investmentsandsavingsday"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/investmentsandsavingsday/allocId/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday/allocId/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "investmentsandsavingsday",
+                "allocId",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/investmentsandsavingsday/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"allocId\": 1,\r\n  \"date\": \"2026-03-28\",\r\n  \"valueAdded\": 100,\r\n  \"marketValue\": 5000,\r\n  \"addedBy\": \"jeff\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "investmentsandsavingsday",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/investmentsandsavingsday/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"marketValue\": 5100,\r\n  \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "investmentsandsavingsday",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/investmentsandsavingsday/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "investmentsandsavingsday",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for managing daily investments and savings data in the PFM API. This folder tracks day-level records of investment activity and savings contributions, enabling granular financial monitoring. Use these endpoints to create, read, update, and delete investment and savings day entries."
+    },
+    {
+      "name": "MonthlyGrowth",
+      "item": [
+        {
+          "name": "/get/monthlygrowth",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "monthlygrowth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/monthlygrowth?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "monthlygrowth"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/monthlygrowth/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzMDE3LCJleHAiOjE3NzQ3MDM4OTh9.CI22SBcdjg8PAR6idfVg7YW7m-PEwRPOq_ii4EDVWY8",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth/id/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "monthlygrowth",
+                "id",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/monthlygrowth/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"allocId\": 1,\r\n  \"month\": \"March\",\r\n  \"year\": 2026,\r\n  \"contribution\": 500,\r\n  \"totalContribution\": 1500,\r\n  \"currentValue\": 12000,\r\n  \"growthRate\": 5,\r\n  \"previousContrib\": 400,\r\n  \"addedBy\": \"jeff\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/monthlygrowth/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"currentValue\": 12500,\r\n  \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/monthlygrowth/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for tracking monthly financial growth in the PFM API. This folder records and manages month-over-month changes in a user's financial position, including growth in savings, investments, or net worth. Use these endpoints to create, read, update, and delete monthly growth entries."
+    },
+    {
+      "name": "NetWorth",
+      "item": [
+        {
+          "name": "/get/networth",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/networth",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "networth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/networth?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/networth?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "networth"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/networth/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/networth/id/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "networth",
+                "id",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/networth/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"allocId\": 1,\r\n  \"month\": \"March\",\r\n  \"year\": 2026,\r\n  \"value\": 50000,\r\n  \"addedBy\": \"jeff\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/networth/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "networth",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/networth/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"value\": 52000,\r\n  \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/networth/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "networth",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/networth/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/networth/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "networth",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for managing net worth calculations in the PFM API. This folder tracks a user's total net worth by aggregating assets and liabilities over time, providing a high-level view of overall financial health. Use these endpoints to create, read, update, and delete net worth records."
+    },
+    {
+      "name": "SalaryTracker",
+      "item": [
+        {
+          "name": "/get/salarytracker",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salarytracker",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salarytracker"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/salarytracker?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salarytracker?page=0&size=5&sortBy=salaryId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salarytracker"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "salaryId"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/salarytracker/id/{salaryId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salarytracker/id/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salarytracker",
+                "id",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/salarytracker/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"date\": \"2026-03-28\",\r\n  \"salary\": 75000,\r\n  \"status\": \"Active\",\r\n  \"addedBy\": \"jeff\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/salarytracker/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salarytracker",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/salarytracker/update/{salaryId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"salary\": 78000,\r\n  \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/salarytracker/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salarytracker",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/salarytracker/delete/{salaryId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/salarytracker/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salarytracker",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for tracking salary records in the PFM API. This folder manages income entries, allowing users to log and maintain a history of salary payments received over time. Use these endpoints to create, read, update, and delete salary records."
+    },
+    {
+      "name": "SalaryExpenseTracker",
+      "item": [
+        {
+          "name": "/get/salaryexpensetracker",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salaryexpensetracker",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salaryexpensetracker"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/salaryexpensetracker?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salaryexpensetracker?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salaryexpensetracker"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/salaryexpensetracker/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salaryexpensetracker/id/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salaryexpensetracker",
+                "id",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/salaryexpensetracker/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"salaryId\": 1,\r\n  \"date\": \"2026-03-28\",\r\n  \"expenseDescription\": \"Office supplies\",\r\n  \"expenseValue\": 150,\r\n  \"expenseType\": \"Variable\",\r\n  \"addedBy\": \"jeff\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/salaryexpensetracker/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salaryexpensetracker",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/salaryexpensetracker/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"expenseValue\": 175,\r\n  \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/salaryexpensetracker/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salaryexpensetracker",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/salaryexpensetracker/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/salaryexpensetracker/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salaryexpensetracker",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for tracking expenses associated with salary income in the PFM API. This folder links specific expense records to salary entries, providing a clear picture of how earned income is being spent. Use these endpoints to create, read, update, and delete salary-related expense records."
+    },
+    {
+      "name": "WantList",
+      "item": [
+        {
+          "name": "/get/wantlist",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/wantlist",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "wantlist"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/wantlist?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/wantlist?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "wantlist"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/wantlist/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/wantlist/id/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "wantlist",
+                "id",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/wantlist/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"dateWanted\": \"2026-06-01\",\r\n  \"item\": \"New laptop\",\r\n  \"estimatedPrice\": 2500,\r\n  \"afford\": \"Save monthly\",\r\n  \"remarks\": \"Prefer 16GB RAM\",\r\n  \"status\": \"Planned\",\r\n  \"addedBy\": \"jeff\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/wantlist/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "wantlist",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/wantlist/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"estimatedPrice\": 2300,\r\n  \"status\": \"Watching price\",\r\n  \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/wantlist/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "wantlist",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/wantlist/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/wantlist/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "wantlist",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for managing a user's want list in the PFM API. This folder allows users to log desired purchases or financial goals they are saving toward, helping prioritize spending decisions. Use these endpoints to create, read, update, and delete want list items."
+    },
+    {
+      "name": "Yearly Growth",
+      "item": [
+        {
+          "name": "/get/yearlygrowth",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/yearlygrowth?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/yearlygrowth/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth/id/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth",
+                "id",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/yearlygrowth/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"allocId\": 1,\r\n  \"year\": 2026,\r\n  \"totalContribution\": 50000,\r\n  \"averageContribution\": 4166,\r\n  \"averageCurrentValue\": 52000,\r\n  \"averageGrowthRate\": 4,\r\n  \"addedBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/yearlygrowth/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"year\": 2000,\r\n  \"updateBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/yearlygrowth/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/delete/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "delete",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for tracking yearly financial growth in the PFM API. This folder manages annual snapshots of a user's financial progress, allowing the application to record, retrieve, update, and delete year-over-year growth data. Use these endpoints to monitor long-term financial trends and evaluate overall progress toward financial goals across yearly periods."
     },
     {
       "name": "CCDetails",
@@ -326,44 +2016,963 @@
         {
           "name": "/get/cc.details",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.details?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details?page=2&size=2&sortBy=ccId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccId"
+                }
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "/get/cc.details/ccId/{id}",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMDQ5LCJleHAiOjE3NzQ2MjMyMjV9.yTlPwCptw3cfGrnPAmsEGQTbQVF6x26S4zMSuWZNddc",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details/ccId/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details",
+                "ccId",
+                "2"
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "/cc.details/create/",
           "request": {
-            "method": "GET",
-            "header": []
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMDQ5LCJleHAiOjE3NzQ2MjMyMjV9.yTlPwCptw3cfGrnPAmsEGQTbQVF6x26S4zMSuWZNddc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ccName\" : \"CC\",\r\n    \"ccLastDigit\" : \"1234\",\r\n    \"ccAcronym\" : \"AA\",\r\n    \"addedBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "create",
+                ""
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "/cc.details/update/{id}",
           "request": {
-            "method": "GET",
-            "header": []
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMzkwLCJleHAiOjE3NzQ2MjQyODV9.g-Eh_a0BxamIJZMVdxusyAK3tmax3Be2h3lFxz4fIYo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ccAcronym\" : \"AB\",\r\n    \"updateBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/update/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "update",
+                "3"
+              ]
+            }
           },
           "response": []
         },
         {
           "name": "/cc.details/delete/{id}",
           "request": {
-            "method": "GET",
-            "header": []
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMzkwLCJleHAiOjE3NzQ2MjQyODV9.g-Eh_a0BxamIJZMVdxusyAK3tmax3Be2h3lFxz4fIYo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/delete/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "delete",
+                "3"
+              ]
+            }
           },
           "response": []
         }
-      ]
+      ],
+      "description": "Contains CRUD operations for managing credit card details in the PFM API. This folder stores information about a user's credit cards, such as card name enabling the application to associate transactions and expenses with specific cards. Use these endpoints to create, read, update, and delete credit card records."
+    },
+    {
+      "name": "CCConnectedApps",
+      "item": [
+        {
+          "name": "/get/cc.connectedApp",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.connectedApp?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp?page=2&size=2&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.connectedApp/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp/id/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp",
+                "id",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.connectedApp/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ccId\": 2,\r\n  \"connectedApp\": \"PayPal\",\r\n  \"subscription\": \"Premium Plan\",\r\n  \"autoDebit\": \"Enabled\",\r\n  \"amount\": \"499.99\",\r\n  \"date\": \"2026-03-27\",\r\n  \"remarks\": \"Monthly subscription auto-debited successfully\",\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.connectedApp/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"connectedApp\": \"PayPalSSS\",\r\n    \"subscription\": \"Premium Plan\",\r\n    \"autoDebit\": \"Enabled\",\r\n    \"amount\": \"499.99\",\r\n    \"date\": \"2026-03-27\",\r\n    \"remarks\": \"Monthly subscription auto-debited successfully\",\r\n    \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/update/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "update",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.connectedApp/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/delete/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "delete",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for managing apps connected to a credit card in the PFM API. This folder tracks subscriptions and services that are billed to a specific credit card, helping users monitor recurring charges from connected applications. Use these endpoints to create, read, update, and delete credit card connected app entries."
+    },
+    {
+      "name": "CCRecordTracker",
+      "item": [
+        {
+          "name": "/get/cc.recordTracker",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI3MDIwLCJleHAiOjE3NzQ2Mjc4OTF9.6Vep6HukKqAUdvsMeWJ3_YJFh3sirys2zM9hzW4F1ZI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.recordTracker",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.recordTracker"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.recordTracker?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI3MDIwLCJleHAiOjE3NzQ2Mjc4OTF9.6Vep6HukKqAUdvsMeWJ3_YJFh3sirys2zM9hzW4F1ZI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.recordTracker?page=2&size=2&sortBy=ccRecId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.recordTracker"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccRecId"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.connectedApp/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp/id/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp",
+                "id",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.recordTracker/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Njg5MTY2LCJleHAiOjE3NzQ2ODk5Mjh9.OVE9jRml6LI38Oqzb06U37QrCXnt-nVEGQUJcVPxCc0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ccId\": 2,\r\n  \"dateFrom\": \"2026-03-27\",\r\n  \"dateTo\": \"2026-03-27\",\r\n  \"dueDate\": \"2026-03-27\",\r\n  \"status\": \"Active\",\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.recordTracker",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.recordTracker/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI3MDIwLCJleHAiOjE3NzQ2Mjc4OTF9.6Vep6HukKqAUdvsMeWJ3_YJFh3sirys2zM9hzW4F1ZI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"Not\",\r\n  \"updatedBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.recordTracker",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.recordTracker/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI3MDIwLCJleHAiOjE3NzQ2Mjc4OTF9.6Vep6HukKqAUdvsMeWJ3_YJFh3sirys2zM9hzW4F1ZI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.recordTracker",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for tracking credit card transaction records in the PFM API. This folder manages individual credit card charges and payments, providing a detailed ledger of credit card activity over time. Use these endpoints to create, read, update, and delete credit card transaction records."
+    },
+    {
+      "name": "CCRecordExpenseTracker",
+      "item": [
+        {
+          "name": "/get/cc.record.expense",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.record.expense"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.record.expense?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense?page=0&size=2&sortBy=ccRecId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.record.expense"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccRecId"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.record.expense/ccExpId/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense/ccExpId/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.record.expense",
+                "ccExpId",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.record.expense/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ccRecId\": 2,\r\n  \"date\": \"2026-03-27\",\r\n  \"expenseDescription\": \"description\",\r\n  \"expenseValue\": 2,\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.record.expense",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.record.expense/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"expenseValue\": 3,\r\n  \"updatedBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.record.expense",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.record.expense/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/delete/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.record.expense",
+                "delete",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Contains CRUD operations for tracking expenses within credit card records in the PFM API. This folder provides a breakdown of spending categories tied to specific credit card transactions, enabling detailed expense analysis per card record. Use these endpoints to create, read, update, and delete credit card record expense entries."
     }
   ]
 }

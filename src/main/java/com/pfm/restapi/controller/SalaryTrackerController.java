@@ -1,11 +1,11 @@
 package com.pfm.restapi.controller;
 
-import com.pfm.restapi.entity.AllocationMapping;
 import com.pfm.restapi.entity.RequestLogs;
+import com.pfm.restapi.entity.SalaryTracker;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
-import com.pfm.restapi.service.AllocationMappingService;
 import com.pfm.restapi.service.RequestLogsService;
+import com.pfm.restapi.service.SalaryTrackerService;
 import com.pfm.restapi.utility.Constant;
 import com.pfm.restapi.utility.TpsMonitor;
 import io.jsonwebtoken.JwtException;
@@ -31,14 +31,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("${api.url.mapping}")
-public class AllocationMappingController {
+public class SalaryTrackerController {
     @Autowired
-    private AllocationMappingService allocationMappingService;
+    private SalaryTrackerService salaryTrackerService;
 
     @Value("${api.url.mapping}")
     private String URL;
     private final TpsMonitor tps = new TpsMonitor();
-    private static final Logger log = LoggerFactory.getLogger(AllocationMappingController.class);
+    private static final Logger log = LoggerFactory.getLogger(SalaryTrackerController.class);
     String httpStatusReturn = "";
     String httpStatusMsgReturn = "";
 
@@ -49,13 +49,13 @@ public class AllocationMappingController {
     @Autowired
     private RequestLogsService requestLogsService;
 
-    @GetMapping("/get/allocation.mapping")
-    public ResponseEntity<Object> getAllocationMapping(
+    @GetMapping("/get/salarytracker")
+    public ResponseEntity<Object> getSalaryTracker(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
-            @RequestParam(defaultValue = "allocId") String sortBy,
-            HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping";
+            @RequestParam(defaultValue = "salaryId") String sortBy,
+            HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/salarytracker";
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -66,22 +66,22 @@ public class AllocationMappingController {
             inputSanitation.validateSize(size);
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
-            Page<AllocationMapping> data = allocationMappingService.getAllocationMapping(pageable);
+            Page<SalaryTracker> data = salaryTrackerService.getSalaryTracker(pageable);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
-            response =  Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
-        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
+            response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
-        } catch (Exception e){
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -105,31 +105,31 @@ public class AllocationMappingController {
         return response;
     }
 
-    @GetMapping("/get/allocation.mapping/allocId/{id}")
-    public ResponseEntity<Object> getAllocationMappingById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping/allocId/" + id;
-        try{
+    @GetMapping("/get/salarytracker/id/{salaryId}")
+    public ResponseEntity<Object> getSalaryTrackerBySalaryId(@PathVariable Long salaryId, HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/salarytracker/id/" + salaryId;
+        try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
 
-            inputSanitation.validateNumeric(String.valueOf(id));
+            inputSanitation.validateNumeric(String.valueOf(salaryId));
 
-            List<AllocationMapping> data = allocationMappingService.getAllocationMappingById(id);
+            List<SalaryTracker> data = salaryTrackerService.getSalaryTrackerBySalaryId(salaryId);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
-        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
-        } catch (Exception e){
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " GET METHOD","HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -137,7 +137,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("GET");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails("allocId: " + id);
+            requestLogs.setRequestDetails("salaryId: " + salaryId);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -153,36 +153,34 @@ public class AllocationMappingController {
         return response;
     }
 
-    @PostMapping("/allocation.mapping/create/")
-    public ResponseEntity<Object> createAllocation(@RequestBody AllocationMapping allocationMapping, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/create/";
-        try{
-            tps.start(endPoint, " POST METHOD | " + allocationMapping.getAllocation());
+    @PostMapping("/salarytracker/create/")
+    public ResponseEntity<Object> createSalaryTracker(@RequestBody SalaryTracker salaryTracker, HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/salarytracker/create/";
+        try {
+            tps.start(endPoint, " POST METHOD | " + salaryTracker.getStatus());
             log.debug("{} API - Start", endPoint);
 
-            inputSanitation.sanitizeInput(allocationMapping.getAllocation());
-            inputSanitation.sanitizeInput(allocationMapping.getType());
-            inputSanitation.sanitizeInput(allocationMapping.getDescription());
-            inputSanitation.sanitizeInput(allocationMapping.getStatus());
-            inputSanitation.sanitizeInput(allocationMapping.getAddedBy());
-            inputSanitation.sanitizeInput(allocationMapping.getUpdateBy());
+            inputSanitation.sanitizeInput(salaryTracker.getDate());
+            inputSanitation.sanitizeInput(salaryTracker.getStatus());
+            inputSanitation.sanitizeInput(salaryTracker.getAddedBy());
+            inputSanitation.sanitizeInput(salaryTracker.getUpdateBy());
 
-            AllocationMapping responses = allocationMappingService.createAllocation(allocationMapping);
+            SalaryTracker responses = salaryTrackerService.createSalaryTracker(salaryTracker);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
-        } catch (BadCredentialsException | DataIntegrityViolationException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
-        } catch (Exception e){
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " POST METHOD | " + allocationMapping.getAllocation(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " POST METHOD | " + salaryTracker.getStatus(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -190,7 +188,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("POST");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(allocationMapping.toString());
+            requestLogs.setRequestDetails(salaryTracker.toString());
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -199,51 +197,49 @@ public class AllocationMappingController {
             requestLogsService.inputLogs(requestLogs);
             log.debug("Done saving request to API Request Table");
 
-            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", allocationMapping.getAllocation(), httpStatusReturn, httpStatusMsgReturn);
+            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", salaryTracker.getStatus(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
 
         return response;
     }
 
-    @PutMapping("/allocation.mapping/update/{id}")
-    public ResponseEntity<Object> updateAllocation(@PathVariable Long id, @RequestBody AllocationMapping allocationMapping, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/update/" + id;
-        try{
-            tps.start(endPoint, " PUT METHOD | " + id);
+    @PutMapping("/salarytracker/update/{salaryId}")
+    public ResponseEntity<Object> updateSalaryTracker(@PathVariable Long salaryId, @RequestBody SalaryTracker salaryTracker, HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/salarytracker/update/" + salaryId;
+        try {
+            tps.start(endPoint, " PUT METHOD | " + salaryId);
             log.debug("{} API - Start", endPoint);
 
-            inputSanitation.validateNumeric(String.valueOf(id));
-            inputSanitation.sanitizeInput(allocationMapping.getAllocation());
-            inputSanitation.sanitizeInput(allocationMapping.getType());
-            inputSanitation.sanitizeInput(allocationMapping.getDescription());
-            inputSanitation.sanitizeInput(allocationMapping.getStatus());
-            inputSanitation.sanitizeInput(allocationMapping.getAddedBy());
-            inputSanitation.sanitizeInput(allocationMapping.getUpdateBy());
+            inputSanitation.validateNumeric(String.valueOf(salaryId));
+            inputSanitation.sanitizeInput(salaryTracker.getDate());
+            inputSanitation.sanitizeInput(salaryTracker.getStatus());
+            inputSanitation.sanitizeInput(salaryTracker.getAddedBy());
+            inputSanitation.sanitizeInput(salaryTracker.getUpdateBy());
 
-            Optional<AllocationMapping> existingAlloc = allocationMappingService.findById(id);
-            if (existingAlloc.isEmpty()) {
+            Optional<SalaryTracker> existing = salaryTrackerService.findById(salaryId);
+            if (existing.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
             } else {
-                AllocationMapping responses = allocationMappingService.updateAllocation(allocationMapping, id);
+                SalaryTracker responses = salaryTrackerService.updateSalaryTracker(salaryTracker, salaryId);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
             }
-        } catch (BadCredentialsException | DataIntegrityViolationException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
-        } catch (Exception e){
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " PUT METHOD | " + id,"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " PUT METHOD | " + salaryId, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -251,7 +247,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("PUT");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(allocationMapping.toString() + " PathVariable id: " + id);
+            requestLogs.setRequestDetails(salaryTracker.toString() + " PathVariable salaryId: " + salaryId);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -260,45 +256,45 @@ public class AllocationMappingController {
             requestLogsService.inputLogs(requestLogs);
             log.debug("Done saving request to API Request Table");
 
-            log.debug("PUT METHOD | {} | HTTP STATUS: {} | STATUS : {}", id, httpStatusReturn, httpStatusMsgReturn);
+            log.debug("PUT METHOD | {} | HTTP STATUS: {} | STATUS : {}", salaryId, httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
 
         return response;
     }
 
-    @DeleteMapping("/allocation.mapping/delete/{id}")
-    public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/delete/" + id;
-        try{
-            tps.start(endPoint, " DELETE METHOD | " + id);
+    @DeleteMapping("/salarytracker/delete/{salaryId}")
+    public ResponseEntity<Object> deleteSalaryTracker(@PathVariable Long salaryId, HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/salarytracker/delete/" + salaryId;
+        try {
+            tps.start(endPoint, " DELETE METHOD | " + salaryId);
             log.debug("{} API - Start", endPoint);
 
-            inputSanitation.validateNumeric(String.valueOf(id));
+            inputSanitation.validateNumeric(String.valueOf(salaryId));
 
-            Optional<AllocationMapping> existingAlloc = allocationMappingService.findById(id);
-            if (existingAlloc.isEmpty()) {
+            Optional<SalaryTracker> existing = salaryTrackerService.findById(salaryId);
+            if (existing.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
             } else {
-                allocationMappingService.deleteAllocation(id);
+                salaryTrackerService.deleteSalaryTracker(salaryId);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK);
             }
-        } catch (BadCredentialsException | DataIntegrityViolationException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
-        } catch (Exception e){
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR);
         } finally {
-            String elapsedTime =tps.end( endPoint, " DELETE METHOD | " + id, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " DELETE METHOD | " + salaryId, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -306,7 +302,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("DELETE");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails("id: " + id);
+            requestLogs.setRequestDetails("salaryId: " + salaryId);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -315,7 +311,7 @@ public class AllocationMappingController {
             requestLogsService.inputLogs(requestLogs);
             log.debug("Done saving request to API Request Table");
 
-            log.debug("DELETE METHOD | {} | HTTP STATUS: {} | STATUS : {}", id, httpStatusReturn, httpStatusMsgReturn);
+            log.debug("DELETE METHOD | {} | HTTP STATUS: {} | STATUS : {}", salaryId, httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
 

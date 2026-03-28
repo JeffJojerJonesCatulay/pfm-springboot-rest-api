@@ -1,8 +1,8 @@
 logging:
   level:
     # ON
-    root: DEBUG
-    com.pfm: DEBUG
+    root: ERROR
+    com.pfm: ERROR
     com.pfm.tps: INFO
     # OFF
 #    root: OFF

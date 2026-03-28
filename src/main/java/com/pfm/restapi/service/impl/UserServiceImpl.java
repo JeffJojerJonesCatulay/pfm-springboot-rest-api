@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         log.debug("Inside createUser");
         UserEntity user = new UserEntity();
         user.setUsername(request.getUsername());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        request.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setAddedBy(request.getUsername());
         user.setDateAdded(String.valueOf(LocalDateTime.now()));
         return userAuthRepo.save(user);

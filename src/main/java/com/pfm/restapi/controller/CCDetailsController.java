@@ -39,7 +39,7 @@ public class CCDetailsController {
     @Value("${api.url.mapping}")
     private String URL;
     private final TpsMonitor tps = new TpsMonitor();
-    private static final Logger log = LoggerFactory.getLogger(AllocationMappingController.class);
+    private static final Logger log = LoggerFactory.getLogger(CCDetailsController.class);
     String httpStatusReturn = "";
     String httpStatusMsgReturn = "";
     InputSanitation inputSanitation = new InputSanitation();
@@ -87,7 +87,7 @@ public class CCDetailsController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("GET");
-            requestLogs.setRequestMethod("ResponseEntity<Object> getCCDetails");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails("");
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
@@ -106,7 +106,7 @@ public class CCDetailsController {
 
     @GetMapping("/get/cc.details/ccId/{id}")
     public ResponseEntity<Object> getCCDetailsById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.details/ccId/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.details/ccId/" + id;
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -134,7 +134,7 @@ public class CCDetailsController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("GET");
-            requestLogs.setRequestMethod("ResponseEntity<Object> getCCDetailsById");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails("ccId: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
@@ -187,7 +187,7 @@ public class CCDetailsController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("POST");
-            requestLogs.setRequestMethod("ResponseEntity<Object> createCCDetails");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails(ccDetails.toString());
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
@@ -207,7 +207,7 @@ public class CCDetailsController {
 
     @PutMapping("/cc.details/update/{id}")
     public ResponseEntity<Object> updateCCDetails(@PathVariable Long id, @RequestBody CCDetails ccDetails, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/update/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/update/" + id;
 
         try {
             tps.start(endPoint, " PUT METHOD | " + id);
@@ -249,7 +249,7 @@ public class CCDetailsController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("PUT");
-            requestLogs.setRequestMethod("ResponseEntity<Object> updateCCDetails");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails(ccDetails.toString() + " PathVariable id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
@@ -269,7 +269,7 @@ public class CCDetailsController {
 
     @DeleteMapping("/cc.details/delete/{id}")
     public ResponseEntity<Object> deleteCCDetails(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/delete/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/delete/" + id;
         try {
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);
@@ -303,7 +303,7 @@ public class CCDetailsController {
             RequestLogs requestLogs = new RequestLogs();
             Map<String, Object> body = (Map<String, Object>) response.getBody();
             requestLogs.setApiMethod("DELETE");
-            requestLogs.setRequestMethod("ResponseEntity<Object> deleteCCDetails");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails("id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());

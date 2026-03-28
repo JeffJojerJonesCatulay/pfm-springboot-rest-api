@@ -1,10 +1,11 @@
 package com.pfm.restapi.controller;
 
 import com.pfm.restapi.entity.AllocationMapping;
+import com.pfm.restapi.entity.CCConnectedApp;
 import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
-import com.pfm.restapi.service.AllocationMappingService;
+import com.pfm.restapi.service.CCConnectedAppService;
 import com.pfm.restapi.service.RequestLogsService;
 import com.pfm.restapi.utility.Constant;
 import com.pfm.restapi.utility.TpsMonitor;
@@ -31,14 +32,15 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("${api.url.mapping}")
-public class AllocationMappingController {
+public class CCConnectedAppController {
+
     @Autowired
-    private AllocationMappingService allocationMappingService;
+    private CCConnectedAppService service;
 
     @Value("${api.url.mapping}")
     private String URL;
     private final TpsMonitor tps = new TpsMonitor();
-    private static final Logger log = LoggerFactory.getLogger(AllocationMappingController.class);
+    private static final Logger log = LoggerFactory.getLogger(CCConnectedAppController.class);
     String httpStatusReturn = "";
     String httpStatusMsgReturn = "";
 
@@ -49,13 +51,14 @@ public class AllocationMappingController {
     @Autowired
     private RequestLogsService requestLogsService;
 
-    @GetMapping("/get/allocation.mapping")
-    public ResponseEntity<Object> getAllocationMapping(
+    @GetMapping("/get/cc.connectedApp")
+    public ResponseEntity<Object> getCCConnectedApp(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
-            @RequestParam(defaultValue = "allocId") String sortBy,
+            @RequestParam(defaultValue = "id") String sortBy,
             HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping";
+
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.connectedApp";
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -66,7 +69,7 @@ public class AllocationMappingController {
             inputSanitation.validateSize(size);
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
-            Page<AllocationMapping> data = allocationMappingService.getAllocationMapping(pageable);
+            Page<CCConnectedApp> data = service.getCCConnectedApp(pageable);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response =  Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
@@ -105,16 +108,16 @@ public class AllocationMappingController {
         return response;
     }
 
-    @GetMapping("/get/allocation.mapping/allocId/{id}")
-    public ResponseEntity<Object> getAllocationMappingById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping/allocId/" + id;
+    @GetMapping("/get/cc.connectedApp/id/{id}")
+    public ResponseEntity<Object> getCCConnectedAppById(@PathVariable Long id, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.connectedApp/id/" + id;
         try{
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
 
-            List<AllocationMapping> data = allocationMappingService.getAllocationMappingById(id);
+            List<CCConnectedApp> data = service.getCCConnectedAppById(id);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
@@ -137,7 +140,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("GET");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails("allocId: " + id);
+            requestLogs.setRequestDetails("id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -153,21 +156,22 @@ public class AllocationMappingController {
         return response;
     }
 
-    @PostMapping("/allocation.mapping/create/")
-    public ResponseEntity<Object> createAllocation(@RequestBody AllocationMapping allocationMapping, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/create/";
-        try{
-            tps.start(endPoint, " POST METHOD | " + allocationMapping.getAllocation());
+    @PostMapping("/cc.connectedApp/create/")
+    public ResponseEntity<Object> createConnectedApp(@RequestBody CCConnectedApp ccConnectedApp, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/create/";
+        try {
+            tps.start(endPoint, " POST METHOD | " + ccConnectedApp.getConnectedApp());
             log.debug("{} API - Start", endPoint);
 
-            inputSanitation.sanitizeInput(allocationMapping.getAllocation());
-            inputSanitation.sanitizeInput(allocationMapping.getType());
-            inputSanitation.sanitizeInput(allocationMapping.getDescription());
-            inputSanitation.sanitizeInput(allocationMapping.getStatus());
-            inputSanitation.sanitizeInput(allocationMapping.getAddedBy());
-            inputSanitation.sanitizeInput(allocationMapping.getUpdateBy());
+            inputSanitation.sanitizeInput(ccConnectedApp.getConnectedApp());
+            inputSanitation.sanitizeInput(ccConnectedApp.getSubscription());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAutoDebit());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAmount());
+            inputSanitation.sanitizeInput(ccConnectedApp.getRemarks());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAddedBy());
+            inputSanitation.sanitizeInput(ccConnectedApp.getUpdateBy());
 
-            AllocationMapping responses = allocationMappingService.createAllocation(allocationMapping);
+            CCConnectedApp responses = service.createConnectedApp(ccConnectedApp);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
@@ -182,7 +186,7 @@ public class AllocationMappingController {
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " POST METHOD | " + allocationMapping.getAllocation(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end( endPoint, " POST METHOD | " + ccConnectedApp.getConnectedApp(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -190,7 +194,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("POST");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(allocationMapping.toString());
+            requestLogs.setRequestDetails(ccConnectedApp.toString());
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -199,35 +203,36 @@ public class AllocationMappingController {
             requestLogsService.inputLogs(requestLogs);
             log.debug("Done saving request to API Request Table");
 
-            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", allocationMapping.getAllocation(), httpStatusReturn, httpStatusMsgReturn);
+            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", ccConnectedApp.getConnectedApp(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
 
         return response;
     }
 
-    @PutMapping("/allocation.mapping/update/{id}")
-    public ResponseEntity<Object> updateAllocation(@PathVariable Long id, @RequestBody AllocationMapping allocationMapping, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/update/" + id;
+    @PutMapping("/cc.connectedApp/update/{id}")
+    public ResponseEntity<Object> updateConnectedApp(@PathVariable Long id, @RequestBody CCConnectedApp ccConnectedApp, HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/update/" + id;
         try{
             tps.start(endPoint, " PUT METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
-            inputSanitation.sanitizeInput(allocationMapping.getAllocation());
-            inputSanitation.sanitizeInput(allocationMapping.getType());
-            inputSanitation.sanitizeInput(allocationMapping.getDescription());
-            inputSanitation.sanitizeInput(allocationMapping.getStatus());
-            inputSanitation.sanitizeInput(allocationMapping.getAddedBy());
-            inputSanitation.sanitizeInput(allocationMapping.getUpdateBy());
+            inputSanitation.sanitizeInput(ccConnectedApp.getConnectedApp());
+            inputSanitation.sanitizeInput(ccConnectedApp.getSubscription());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAutoDebit());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAmount());
+            inputSanitation.sanitizeInput(ccConnectedApp.getRemarks());
+            inputSanitation.sanitizeInput(ccConnectedApp.getAddedBy());
+            inputSanitation.sanitizeInput(ccConnectedApp.getUpdateBy());
 
-            Optional<AllocationMapping> existingAlloc = allocationMappingService.findById(id);
-            if (existingAlloc.isEmpty()) {
+            Optional<CCConnectedApp> existingConnected = service.findById(id);
+            if (existingConnected.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
             } else {
-                AllocationMapping responses = allocationMappingService.updateAllocation(allocationMapping, id);
+                CCConnectedApp responses = service.updateConnectedApp(ccConnectedApp, id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
@@ -251,7 +256,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("PUT");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(allocationMapping.toString() + " PathVariable id: " + id);
+            requestLogs.setRequestDetails(ccConnectedApp.toString() + " PathVariable id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -267,22 +272,22 @@ public class AllocationMappingController {
         return response;
     }
 
-    @DeleteMapping("/allocation.mapping/delete/{id}")
+    @DeleteMapping("/cc.connectedApp/delete/{id}")
     public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/delete/" + id;
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/delete/" + id;
         try{
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
 
-            Optional<AllocationMapping> existingAlloc = allocationMappingService.findById(id);
-            if (existingAlloc.isEmpty()) {
+            Optional<CCConnectedApp> existingConnected = service.findById(id);
+            if (existingConnected.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
             } else {
-                allocationMappingService.deleteAllocation(id);
+                service.deleteAllocation(id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK);
