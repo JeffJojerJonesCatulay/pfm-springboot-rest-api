@@ -14,7 +14,8 @@ public class InputSanitation {
             "date", "valueAdded", "marketValue", "updateDate", "updateBy", "addedBy",
             "month", "year", "contribution", "totalContribution", "currentValue", "growthRate", "previousContrib",
             "value",
-            "salaryId", "salary");
+            "salaryId", "salary",
+            "expenseDescription", "expenseValue", "expenseType");
 
     public void validateSortBy(String sortBy) {
         log.debug("validateSortBy - Start");
