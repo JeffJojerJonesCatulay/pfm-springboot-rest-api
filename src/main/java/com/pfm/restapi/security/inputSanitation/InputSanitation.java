@@ -12,7 +12,8 @@ public class InputSanitation {
     private static final Set<String> ALLOWED_SORT_FIELDS = Set.of(
             "allocId", "allocation", "type", "status", "dateAdded", "ccId", "id", "ccRecId", "ccExpId",
             "date", "valueAdded", "marketValue", "updateDate", "updateBy", "addedBy",
-            "month", "year", "contribution", "totalContribution", "currentValue", "growthRate", "previousContrib");
+            "month", "year", "contribution", "totalContribution", "currentValue", "growthRate", "previousContrib",
+            "value");
 
     public void validateSortBy(String sortBy) {
         log.debug("validateSortBy - Start");
