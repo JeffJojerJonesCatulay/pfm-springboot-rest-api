@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class InputSanitation {
     private static final Logger log = LoggerFactory.getLogger(InputSanitation.class);
-    private static final Set<String> ALLOWED_SORT_FIELDS = Set.of("allocId", "allocation", "type", "status", "dateAdded", "ccId", "id", "ccRecId");
+    private static final Set<String> ALLOWED_SORT_FIELDS = Set.of("allocId", "allocation", "type", "status", "dateAdded", "ccId", "id", "ccRecId", "ccExpId");
 
     public void validateSortBy(String sortBy) {
         log.debug("validateSortBy - Start");

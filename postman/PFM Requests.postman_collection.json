@@ -926,7 +926,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjI2NjA2LCJleHAiOjE3NzQ2Mjc0OTF9.fJDCK_tBgmFunzjmDQ7QozdcSTB5mdc3-hYNaH8j0NU",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Njg5MTY2LCJleHAiOjE3NzQ2ODk5Mjh9.OVE9jRml6LI38Oqzb06U37QrCXnt-nVEGQUJcVPxCc0",
                   "type": "string"
                 }
               ]
@@ -1033,6 +1033,246 @@
                 "cc.recordTracker",
                 "delete",
                 "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CCRecordExpenseTracker",
+      "item": [
+        {
+          "name": "/get/cc.record.expense",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.record.expense"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.record.expense?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense?page=0&size=2&sortBy=ccRecId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.record.expense"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccRecId"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/cc.record.expense/ccExpId/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense/ccExpId/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.record.expense",
+                "ccExpId",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.record.expense/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"ccRecId\": 2,\r\n  \"date\": \"2026-03-27\",\r\n  \"expenseDescription\": \"description\",\r\n  \"expenseValue\": 2,\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.record.expense",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.record.expense/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"expenseValue\": 3,\r\n  \"updatedBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.record.expense",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/cc.record.expense/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/delete/5",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.record.expense",
+                "delete",
+                "5"
               ]
             }
           },
