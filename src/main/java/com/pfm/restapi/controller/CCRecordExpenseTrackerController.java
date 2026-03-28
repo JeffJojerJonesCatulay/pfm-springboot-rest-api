@@ -1,6 +1,5 @@
 package com.pfm.restapi.controller;
 
-import com.pfm.restapi.entity.CCDetails;
 import com.pfm.restapi.entity.CCRecordExpenseTracker;
 import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
@@ -106,7 +105,7 @@ public class CCRecordExpenseTrackerController {
 
     @GetMapping("/get/cc.record.expense/ccExpId/{id}")
     public ResponseEntity<Object> getCCRecordExpenseById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.record.expense/ccExpId/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.record.expense/ccExpId/" + id;
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -204,7 +203,7 @@ public class CCRecordExpenseTrackerController {
 
     @PutMapping("/cc.record.expense/update/{id}")
     public ResponseEntity<Object> updateCCExpenseRecord(@PathVariable Long id, @RequestBody CCRecordExpenseTracker ccRecordExpenseTracker, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.record.expense/update/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.record.expense/update/" + id;
 
         try {
             tps.start(endPoint, " PUT METHOD | " + id);
@@ -263,7 +262,7 @@ public class CCRecordExpenseTrackerController {
 
     @DeleteMapping("/cc.record.expense/delete/{id}")
     public ResponseEntity<Object> deleteCCExpenseRecord(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/delete/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/delete/" + id;
         try {
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);

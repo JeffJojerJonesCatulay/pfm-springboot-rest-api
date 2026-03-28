@@ -110,7 +110,7 @@ public class CCConnectedAppController {
 
     @GetMapping("/get/cc.connectedApp/id/{id}")
     public ResponseEntity<Object> getCCConnectedAppById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.connectedApp/id/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.connectedApp/id/" + id;
         try{
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -212,7 +212,7 @@ public class CCConnectedAppController {
 
     @PutMapping("/cc.connectedApp/update/{id}")
     public ResponseEntity<Object> updateConnectedApp(@PathVariable Long id, @RequestBody CCConnectedApp ccConnectedApp, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/update/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/update/" + id;
         try{
             tps.start(endPoint, " PUT METHOD | " + id);
             log.debug("{} API - Start", endPoint);
@@ -274,7 +274,7 @@ public class CCConnectedAppController {
 
     @DeleteMapping("/cc.connectedApp/delete/{id}")
     public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/delete/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.connectedApp/delete/" + id;
         try{
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);

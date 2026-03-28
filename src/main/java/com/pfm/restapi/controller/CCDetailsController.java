@@ -106,7 +106,7 @@ public class CCDetailsController {
 
     @GetMapping("/get/cc.details/ccId/{id}")
     public ResponseEntity<Object> getCCDetailsById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.details/ccId/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.details/ccId/" + id;
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -207,7 +207,7 @@ public class CCDetailsController {
 
     @PutMapping("/cc.details/update/{id}")
     public ResponseEntity<Object> updateCCDetails(@PathVariable Long id, @RequestBody CCDetails ccDetails, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/update/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/update/" + id;
 
         try {
             tps.start(endPoint, " PUT METHOD | " + id);
@@ -269,7 +269,7 @@ public class CCDetailsController {
 
     @DeleteMapping("/cc.details/delete/{id}")
     public ResponseEntity<Object> deleteCCDetails(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/delete/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.details/delete/" + id;
         try {
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);

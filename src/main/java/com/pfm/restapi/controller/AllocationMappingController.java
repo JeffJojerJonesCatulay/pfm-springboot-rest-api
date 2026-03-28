@@ -107,7 +107,7 @@ public class AllocationMappingController {
 
     @GetMapping("/get/allocation.mapping/allocId/{id}")
     public ResponseEntity<Object> getAllocationMappingById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping/allocId/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping/allocId/" + id;
         try{
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -208,7 +208,7 @@ public class AllocationMappingController {
 
     @PutMapping("/allocation.mapping/update/{id}")
     public ResponseEntity<Object> updateAllocation(@PathVariable Long id, @RequestBody AllocationMapping allocationMapping, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/update/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/update/" + id;
         try{
             tps.start(endPoint, " PUT METHOD | " + id);
             log.debug("{} API - Start", endPoint);
@@ -269,7 +269,7 @@ public class AllocationMappingController {
 
     @DeleteMapping("/allocation.mapping/delete/{id}")
     public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/delete/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/delete/" + id;
         try{
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);

@@ -1,6 +1,5 @@
 package com.pfm.restapi.controller;
 
-import com.pfm.restapi.entity.AllocationMapping;
 import com.pfm.restapi.entity.CCRecordTracker;
 import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
@@ -107,7 +106,7 @@ public class CCRecordTrackerController {
 
     @GetMapping("/get/cc.recordTracker/ccRecId/{id}")
     public ResponseEntity<Object> getCCRecordTrackerById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.recordTracker/ccRecId/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/cc.recordTracker/ccRecId/" + id;
         try{
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -208,7 +207,7 @@ public class CCRecordTrackerController {
 
     @PutMapping("/cc.recordTracker/update/{id}")
     public ResponseEntity<Object> updateCCRecordTracker(@PathVariable Long id, @RequestBody CCRecordTracker ccRecordTracker, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.recordTracker/update/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.recordTracker/update/" + id;
         try{
             tps.start(endPoint, " PUT METHOD | " + id);
             log.debug("{} API - Start", endPoint);
@@ -269,7 +268,7 @@ public class CCRecordTrackerController {
 
     @DeleteMapping("/cc.recordTracker/delete/{id}")
     public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/cc.recordTracker/delete/{id}";
+        String endPoint = httpServletRequest.getServerName() + URL + "/cc.recordTracker/delete/" + id;
         try{
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);
