@@ -1,10 +1,10 @@
 package com.pfm.restapi.controller;
 
-import com.pfm.restapi.entity.AllocationMapping;
+import com.pfm.restapi.entity.MonthlyGrowth;
 import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
-import com.pfm.restapi.service.AllocationMappingService;
+import com.pfm.restapi.service.MonthlyGrowthService;
 import com.pfm.restapi.service.RequestLogsService;
 import com.pfm.restapi.utility.Constant;
 import com.pfm.restapi.utility.TpsMonitor;
@@ -31,14 +31,14 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("${api.url.mapping}")
-public class AllocationMappingController {
+public class MonthlyGrowthController {
     @Autowired
-    private AllocationMappingService allocationMappingService;
+    private MonthlyGrowthService monthlyGrowthService;
 
     @Value("${api.url.mapping}")
     private String URL;
     private final TpsMonitor tps = new TpsMonitor();
-    private static final Logger log = LoggerFactory.getLogger(AllocationMappingController.class);
+    private static final Logger log = LoggerFactory.getLogger(MonthlyGrowthController.class);
     String httpStatusReturn = "";
     String httpStatusMsgReturn = "";
 
@@ -49,13 +49,13 @@ public class AllocationMappingController {
     @Autowired
     private RequestLogsService requestLogsService;
 
-    @GetMapping("/get/allocation.mapping")
-    public ResponseEntity<Object> getAllocationMapping(
+    @GetMapping("/get/monthlygrowth")
+    public ResponseEntity<Object> getMonthlyGrowth(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
-            @RequestParam(defaultValue = "allocId") String sortBy,
-            HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping";
+            @RequestParam(defaultValue = "id") String sortBy,
+            HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/monthlygrowth";
         try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
@@ -66,22 +66,22 @@ public class AllocationMappingController {
             inputSanitation.validateSize(size);
 
             Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
-            Page<AllocationMapping> data = allocationMappingService.getAllocationMapping(pageable);
+            Page<MonthlyGrowth> data = monthlyGrowthService.getMonthlyGrowth(pageable);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
-            response =  Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
-        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
+            response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
-        } catch (Exception e){
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
-            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -105,31 +105,31 @@ public class AllocationMappingController {
         return response;
     }
 
-    @GetMapping("/get/allocation.mapping/allocId/{id}")
-    public ResponseEntity<Object> getAllocationMappingById(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/get/allocation.mapping/allocId/" + id;
-        try{
+    @GetMapping("/get/monthlygrowth/id/{id}")
+    public ResponseEntity<Object> getMonthlyGrowthByAllocId(@PathVariable Long id, HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/get/monthlygrowth/id/" + id;
+        try {
             tps.start(endPoint, " GET METHOD");
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
 
-            List<AllocationMapping> data = allocationMappingService.getAllocationMappingById(id);
+            List<MonthlyGrowth> data = monthlyGrowthService.getMonthlyGrowthByAllocId(id);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
-        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
-        } catch (Exception e){
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " GET METHOD","HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -153,36 +153,33 @@ public class AllocationMappingController {
         return response;
     }
 
-    @PostMapping("/allocation.mapping/create/")
-    public ResponseEntity<Object> createAllocation(@RequestBody AllocationMapping allocationMapping, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/create/";
-        try{
-            tps.start(endPoint, " POST METHOD | " + allocationMapping.getAllocation());
+    @PostMapping("/monthlygrowth/create/")
+    public ResponseEntity<Object> createMonthlyGrowth(@RequestBody MonthlyGrowth monthlyGrowth, HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/monthlygrowth/create/";
+        try {
+            tps.start(endPoint, " POST METHOD | " + monthlyGrowth.getAllocId());
             log.debug("{} API - Start", endPoint);
 
-            inputSanitation.sanitizeInput(allocationMapping.getAllocation());
-            inputSanitation.sanitizeInput(allocationMapping.getType());
-            inputSanitation.sanitizeInput(allocationMapping.getDescription());
-            inputSanitation.sanitizeInput(allocationMapping.getStatus());
-            inputSanitation.sanitizeInput(allocationMapping.getAddedBy());
-            inputSanitation.sanitizeInput(allocationMapping.getUpdateBy());
+            inputSanitation.sanitizeInput(monthlyGrowth.getMonth());
+            inputSanitation.sanitizeInput(monthlyGrowth.getAddedBy());
+            inputSanitation.sanitizeInput(monthlyGrowth.getUpdateBy());
 
-            AllocationMapping responses = allocationMappingService.createAllocation(allocationMapping);
+            MonthlyGrowth responses = monthlyGrowthService.createMonthlyGrowth(monthlyGrowth);
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
-        } catch (BadCredentialsException | DataIntegrityViolationException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
-        } catch (Exception e){
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " POST METHOD | " + allocationMapping.getAllocation(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " POST METHOD | " + monthlyGrowth.getAllocId(), "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -190,7 +187,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("POST");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(allocationMapping.toString());
+            requestLogs.setRequestDetails(monthlyGrowth.toString());
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -199,51 +196,48 @@ public class AllocationMappingController {
             requestLogsService.inputLogs(requestLogs);
             log.debug("Done saving request to API Request Table");
 
-            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", allocationMapping.getAllocation(), httpStatusReturn, httpStatusMsgReturn);
+            log.debug("POST METHOD | {} | HTTP STATUS: {} | STATUS : {}", monthlyGrowth.getAllocId(), httpStatusReturn, httpStatusMsgReturn);
             log.debug("{} API - End", endPoint);
         }
 
         return response;
     }
 
-    @PutMapping("/allocation.mapping/update/{id}")
-    public ResponseEntity<Object> updateAllocation(@PathVariable Long id, @RequestBody AllocationMapping allocationMapping, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/update/" + id;
-        try{
+    @PutMapping("/monthlygrowth/update/{id}")
+    public ResponseEntity<Object> updateMonthlyGrowth(@PathVariable Long id, @RequestBody MonthlyGrowth monthlyGrowth, HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/monthlygrowth/update/" + id;
+        try {
             tps.start(endPoint, " PUT METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
-            inputSanitation.sanitizeInput(allocationMapping.getAllocation());
-            inputSanitation.sanitizeInput(allocationMapping.getType());
-            inputSanitation.sanitizeInput(allocationMapping.getDescription());
-            inputSanitation.sanitizeInput(allocationMapping.getStatus());
-            inputSanitation.sanitizeInput(allocationMapping.getAddedBy());
-            inputSanitation.sanitizeInput(allocationMapping.getUpdateBy());
+            inputSanitation.sanitizeInput(monthlyGrowth.getMonth());
+            inputSanitation.sanitizeInput(monthlyGrowth.getAddedBy());
+            inputSanitation.sanitizeInput(monthlyGrowth.getUpdateBy());
 
-            Optional<AllocationMapping> existingAlloc = allocationMappingService.findById(id);
-            if (existingAlloc.isEmpty()) {
+            Optional<MonthlyGrowth> existing = monthlyGrowthService.findById(id);
+            if (existing.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
             } else {
-                AllocationMapping responses = allocationMappingService.updateAllocation(allocationMapping, id);
+                MonthlyGrowth responses = monthlyGrowthService.updateMonthlyGrowth(monthlyGrowth, id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
             }
-        } catch (BadCredentialsException | DataIntegrityViolationException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
-        } catch (Exception e){
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
         } finally {
-            String elapsedTime = tps.end( endPoint, " PUT METHOD | " + id,"HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " PUT METHOD | " + id, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();
@@ -251,7 +245,7 @@ public class AllocationMappingController {
             requestLogs.setApiMethod("PUT");
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
-            requestLogs.setRequestDetails(allocationMapping.toString() + " PathVariable id: " + id);
+            requestLogs.setRequestDetails(monthlyGrowth.toString() + " PathVariable id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);
@@ -267,38 +261,38 @@ public class AllocationMappingController {
         return response;
     }
 
-    @DeleteMapping("/allocation.mapping/delete/{id}")
-    public ResponseEntity<Object> deleteAllocation(@PathVariable Long id, HttpServletRequest httpServletRequest){
-        String endPoint = httpServletRequest.getServerName() + URL + "/allocation.mapping/delete/" + id;
-        try{
+    @DeleteMapping("/monthlygrowth/delete/{id}")
+    public ResponseEntity<Object> deleteMonthlyGrowth(@PathVariable Long id, HttpServletRequest httpServletRequest) {
+        String endPoint = httpServletRequest.getServerName() + URL + "/monthlygrowth/delete/" + id;
+        try {
             tps.start(endPoint, " DELETE METHOD | " + id);
             log.debug("{} API - Start", endPoint);
 
             inputSanitation.validateNumeric(String.valueOf(id));
 
-            Optional<AllocationMapping> existingAlloc = allocationMappingService.findById(id);
-            if (existingAlloc.isEmpty()) {
+            Optional<MonthlyGrowth> existing = monthlyGrowthService.findById(id);
+            if (existing.isEmpty()) {
                 httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
                 httpStatusMsgReturn = Constant.GEN_ERR_MSG;
                 response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
             } else {
-                allocationMappingService.deleteAllocation(id);
+                monthlyGrowthService.deleteMonthlyGrowth(id);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK);
             }
-        } catch (BadCredentialsException | DataIntegrityViolationException e){
+        } catch (BadCredentialsException | DataIntegrityViolationException e) {
             httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST);
-        } catch (Exception e){
+        } catch (Exception e) {
             httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
             httpStatusMsgReturn = Constant.GEN_ERR_MSG;
             log.error(e.getMessage());
             response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR);
         } finally {
-            String elapsedTime =tps.end( endPoint, " DELETE METHOD | " + id, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+            String elapsedTime = tps.end(endPoint, " DELETE METHOD | " + id, "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
 
             log.debug("Starting saving request to API Request Table");
             RequestLogs requestLogs = new RequestLogs();

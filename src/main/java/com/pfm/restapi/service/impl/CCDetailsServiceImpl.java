@@ -37,13 +37,9 @@ public class CCDetailsServiceImpl implements CCDetailsService {
     @Override
     public CCDetails createCCDetails(CCDetails ccDetails) {
         log.debug("Inside createCCDetails");
-        CCDetails data = new CCDetails();
-        data.setCcName(ccDetails.getCcName());
-        data.setCcLastDigit(ccDetails.getCcLastDigit());
-        data.setCcAcronym(ccDetails.getCcAcronym());
-        data.setAddedBy(ccDetails.getAddedBy());
-        data.setDateAdded(String.valueOf(LocalDateTime.now()));
-        return ccDetailsRepo.save(data);
+        ccDetails.setDateAdded(String.valueOf(LocalDateTime.now()));
+        log.debug("data: {}", ccDetails.toString());
+        return ccDetailsRepo.save(ccDetails);
     }
 
     @Override
