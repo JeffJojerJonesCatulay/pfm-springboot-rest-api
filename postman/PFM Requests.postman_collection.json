@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "0ad93c96-ba5f-43ed-b7ab-ed8071bb24e8",
+    "_postman_id": "052bec0f-0388-4ab0-b946-0b69146b1fb5",
     "name": "PFM Requests",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "30170318"
@@ -1753,6 +1753,246 @@
                 "wantlist",
                 "delete",
                 "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Yearly Growth",
+      "item": [
+        {
+          "name": "/get/yearlygrowth",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/yearlygrowth?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/yearlygrowth/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth/id/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth",
+                "id",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/yearlygrowth/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"allocId\": 1,\r\n  \"year\": 2026,\r\n  \"totalContribution\": 50000,\r\n  \"averageContribution\": 4166,\r\n  \"averageCurrentValue\": 52000,\r\n  \"averageGrowthRate\": 4,\r\n  \"addedBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/yearlygrowth/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"year\": 2000,\r\n  \"updateBy\" : \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/yearlygrowth/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzA2NzUwLCJleHAiOjE3NzQ3MDc2NDN9.XUwMBVX7aRufuSR_bRbIRLim6qa_Hg8g_vbXMA8eh2s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/delete/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "delete",
+                "3"
               ]
             }
           },
