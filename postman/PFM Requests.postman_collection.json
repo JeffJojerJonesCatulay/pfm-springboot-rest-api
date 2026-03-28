@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "730a493b-fe8b-445c-9cd3-56955c7f6dbb",
+    "_postman_id": "1b25e9ca-2c1a-4fed-9261-ee67c27d8092",
     "name": "PFM Requests",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "30170318"
@@ -551,6 +551,246 @@
                 "v1.0.0",
                 "pfm",
                 "investmentsandsavingsday",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "MonthlyGrowth",
+      "item": [
+        {
+          "name": "/get/monthlygrowth",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "monthlygrowth"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/monthlygrowth?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "monthlygrowth"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/monthlygrowth/id/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzMDE3LCJleHAiOjE3NzQ3MDM4OTh9.CI22SBcdjg8PAR6idfVg7YW7m-PEwRPOq_ii4EDVWY8",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth/id/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "monthlygrowth",
+                "id",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/monthlygrowth/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"allocId\": 1,\r\n  \"month\": \"March\",\r\n  \"year\": 2026,\r\n  \"contribution\": 500,\r\n  \"totalContribution\": 1500,\r\n  \"currentValue\": 12000,\r\n  \"growthRate\": 5,\r\n  \"previousContrib\": 400,\r\n  \"addedBy\": \"jeff\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/monthlygrowth/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"currentValue\": 12500,\r\n  \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/monthlygrowth/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAyNjkxLCJleHAiOjE3NzQ3MDM1MzB9.Y3DTbtX7j4XcXVY_tZE69sCCbmlKcORDXZwVIkcwywY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
                 "delete",
                 "1"
               ]
