@@ -321,6 +321,246 @@
       ]
     },
     {
+      "name": "InvestmentsAndSavingsDay",
+      "item": [
+        {
+          "name": "/get/investmentsandsavingsday",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "investmentsandsavingsday"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/investmentsandsavingsday?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "investmentsandsavingsday"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/get/investmentsandsavingsday/allocId/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday/allocId/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "investmentsandsavingsday",
+                "allocId",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/investmentsandsavingsday/create/",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"allocId\": 1,\r\n  \"date\": \"2026-03-28\",\r\n  \"valueAdded\": 100,\r\n  \"marketValue\": 5000,\r\n  \"addedBy\": \"jeff\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/create/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "investmentsandsavingsday",
+                "create",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/investmentsandsavingsday/update/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"marketValue\": 5100,\r\n  \"updateBy\": \"jeff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/update/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "investmentsandsavingsday",
+                "update",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/investmentsandsavingsday/delete/{id}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/delete/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "investmentsandsavingsday",
+                "delete",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "CCDetails",
       "item": [
         {
