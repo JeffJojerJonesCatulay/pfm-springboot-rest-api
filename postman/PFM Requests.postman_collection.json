@@ -940,6 +940,49 @@
           "response": []
         },
         {
+          "name": "/get/networth.monthYear?month={string}&year={int}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzg5NDA5LCJleHAiOjE3NzQ3OTAyNjZ9.RTFiPePK3LHvQ7RzXlYBg5FuJ5SXVUQv5-7vD9I0O-0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/networth.monthYear?month=April&year=2026",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "networth.monthYear"
+              ],
+              "query": [
+                {
+                  "key": "month",
+                  "value": "April"
+                },
+                {
+                  "key": "year",
+                  "value": "2026"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/networth/id/{id}",
           "request": {
             "auth": {

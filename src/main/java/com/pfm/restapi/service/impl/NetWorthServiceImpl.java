@@ -68,6 +68,12 @@ public class NetWorthServiceImpl implements NetWorthService {
     }
 
     @Override
+    public List<NetWorth> getNetWorthByMonthYear(String month, Long year) {
+        log.debug("Inside getNetWorthByMonthYear Month: {} Year: {}", month, year);
+        return netWorthRepo.getNetWorthByMonthYear(month, year);
+    }
+
+    @Override
     public Optional<NetWorth> findById(Long id) {
         log.debug("Inside findById {}", id);
         return netWorthRepo.findById(id);
