@@ -126,7 +126,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzc4NjMwLCJleHAiOjE3NzQ3Nzk0NzZ9.Z-3YLdM0tN5KbGbWCZaF0F5iJxoF4LCnAUOi2zefekY",
                   "type": "string"
                 }
               ]
@@ -134,7 +134,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping?page=2&size=2&sortBy=allocId",
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping?page=0&size=3&sortBy=allocId",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -150,15 +150,66 @@
               "query": [
                 {
                   "key": "page",
-                  "value": "2"
+                  "value": "0"
                 },
                 {
                   "key": "size",
-                  "value": "2"
+                  "value": "3"
                 },
                 {
                   "key": "sortBy",
                   "value": "allocId"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/allocation.mapping?page={int}&size={int}&sortBy={string}&{column}={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzc5MzQzLCJleHAiOjE3NzQ3ODAyMzZ9._mM8tcfTIxhxxWN5A45CJ6rzkWxpwpUhlXWT09WKnoA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/allocation.mapping?page=0&size=10&sortBy=allocId&description=description1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "allocation.mapping"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "allocId"
+                },
+                {
+                  "key": "description",
+                  "value": "description1"
                 }
               ]
             }

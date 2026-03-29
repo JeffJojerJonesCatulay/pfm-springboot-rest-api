@@ -16,4 +16,5 @@ public interface AllocationMappingService {
     AllocationMapping updateAllocation(AllocationMapping allocationMapping, Long id);
     Optional<AllocationMapping> findById(Long id);
     void deleteAllocation(Long id);
+    Page<AllocationMapping> findByCustomSearch(Pageable pageable, AllocationMapping allocationMapping);
 }
