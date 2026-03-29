@@ -6,6 +6,8 @@ import com.pfm.restapi.service.CCDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -71,6 +73,21 @@ public class CCDetailsServiceImpl implements CCDetailsService {
     public Optional<CCDetails> findById(Long id) {
         log.debug("Inside findById " + id);
         return ccDetailsRepo.findById(id);
+    }
+
+    @Override
+    public Page<CCDetails> findByCustomSearch(Pageable pageable, CCDetails ccDetails) {
+        log.debug("Inside findByCustomSearch");
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnorePaths("ccId", "dateAdded", "addedBy", "updateDate", "updateBy")
+                .withMatcher("ccName", match -> match.contains().ignoreCase())
+                .withMatcher("ccLastDigit", match -> match.contains().ignoreCase())
+                .withMatcher("ccAcronym", match -> match.contains().ignoreCase());
+
+        Example<CCDetails> example = Example.of(ccDetails, matcher);
+
+        return ccDetailsRepo.findAll(example, pageable);
     }
 
 }

@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "052bec0f-0388-4ab0-b946-0b69146b1fb5",
+    "_postman_id": "127e094f-a5d7-435f-942e-81724bc64d11",
     "name": "PFM Requests",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "30170318"
@@ -2145,6 +2145,57 @@
           "response": []
         },
         {
+          "name": "/search/cc.details?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzgzNDkxLCJleHAiOjE3NzQ3ODQzMzZ9.MmW6-SIbVAh4SUjcVG6UqI_TZw61lYd-hnqAOSf2McE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.details?page=0&size=10&sortBy=ccId&ccAcronym=AA",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.details"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccId"
+                },
+                {
+                  "key": "ccAcronym",
+                  "value": "AA"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/cc.details/ccId/{id}",
           "request": {
             "auth": {
@@ -2187,7 +2238,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMDQ5LCJleHAiOjE3NzQ2MjMyMjV9.yTlPwCptw3cfGrnPAmsEGQTbQVF6x26S4zMSuWZNddc",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzgzNDkxLCJleHAiOjE3NzQ3ODQzMzZ9.MmW6-SIbVAh4SUjcVG6UqI_TZw61lYd-hnqAOSf2McE",
                   "type": "string"
                 }
               ]
@@ -2196,7 +2247,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"ccName\" : \"CC\",\r\n    \"ccLastDigit\" : \"1234\",\r\n    \"ccAcronym\" : \"AA\",\r\n    \"addedBy\" : \"jeff\"\r\n}",
+              "raw": "{\r\n    \"ccName\" : \"CC\",\r\n    \"ccLastDigit\" : \"1111\",\r\n    \"ccAcronym\" : \"AA\",\r\n    \"addedBy\" : \"jeff\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
