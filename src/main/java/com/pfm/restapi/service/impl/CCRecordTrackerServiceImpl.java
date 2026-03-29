@@ -6,6 +6,8 @@ import com.pfm.restapi.service.CCRecordTrackerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -74,4 +76,18 @@ public class CCRecordTrackerServiceImpl implements CCRecordTrackerService {
         log.debug("Inside findById " + id);
         return repo.findById(id);
     }
+
+    @Override
+    public Page<CCRecordTracker> findByCustomSearch(Pageable pageable, CCRecordTracker ccRecordTracker) {
+        log.debug("Inside findByCustomSearch");
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnorePaths("ccRecId", "ccId", "dateAdded", "addedBy", "updateDate", "updatedBy", "dateFrom", "dateTo", "dueDate")
+                .withMatcher("status", match -> match.contains().ignoreCase());
+
+        Example<CCRecordTracker> example = Example.of(ccRecordTracker, matcher);
+
+        return repo.findAll(example, pageable);
+    }
+
 }
