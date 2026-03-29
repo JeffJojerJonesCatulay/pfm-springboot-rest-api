@@ -21,4 +21,6 @@ public interface SalaryExpenseTrackerService {
     Optional<SalaryExpenseTracker> findById(Long id);
 
     void deleteSalaryExpenseTracker(Long id);
+
+    Page<SalaryExpenseTracker> findByCustomSearch(Pageable pageable, SalaryExpenseTracker salaryExpenseTracker);
 }
