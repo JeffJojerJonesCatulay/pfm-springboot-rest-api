@@ -14,6 +14,8 @@ public interface SalaryExpenseTrackerService {
 
     List<SalaryExpenseTracker> getSalaryExpenseTrackerById(Long id);
 
+    List<SalaryExpenseTracker> getSalaryExpenseTrackerBySalaryId(Long salaryId);
+
     SalaryExpenseTracker createSalaryExpenseTracker(SalaryExpenseTracker salaryExpenseTracker);
 
     SalaryExpenseTracker updateSalaryExpenseTracker(SalaryExpenseTracker salaryExpenseTracker, Long id);
