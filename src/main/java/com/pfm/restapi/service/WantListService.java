@@ -21,4 +21,6 @@ public interface WantListService {
     Optional<WantList> findById(Long id);
 
     void deleteWantList(Long id);
+
+    Page<WantList> findByCustomSearch(Pageable pageable, WantList wantList);
 }

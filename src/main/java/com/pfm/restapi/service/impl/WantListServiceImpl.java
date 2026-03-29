@@ -6,6 +6,8 @@ import com.pfm.restapi.service.WantListService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -74,4 +76,21 @@ public class WantListServiceImpl implements WantListService {
         log.debug("Inside findById {}", id);
         return wantListRepo.findById(id);
     }
+
+    @Override
+    public Page<WantList> findByCustomSearch(Pageable pageable, WantList wantList) {
+        log.debug("Inside findByCustomSearch");
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnorePaths("id", "dateWanted", "estimatedPrice", "dateAdded", "addedBy", "updateDate", "updateBy")
+                .withMatcher("item", match -> match.contains().ignoreCase())
+                .withMatcher("afford", match -> match.contains().ignoreCase())
+                .withMatcher("remarks", match -> match.contains().ignoreCase())
+                .withMatcher("status", match -> match.contains().ignoreCase());
+
+        Example<WantList> example = Example.of(wantList, matcher);
+
+        return wantListRepo.findAll(example, pageable);
+    }
+
 }

@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "127e094f-a5d7-435f-942e-81724bc64d11",
+    "_postman_id": "34188f67-8286-43ca-9b26-e7141dd08a02",
     "name": "PFM Requests",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "30170318"
@@ -26,9 +26,16 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/authenticate",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "authenticate"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "authenticate"
+              ]
             },
             "description": "### POST `/pfm/authenticate`\n\nAuthenticates a PFM user with a username/password and returns an authentication result (typically used to obtain/verify a session or token for subsequent PFM API calls).\n\n**Method:** `POST`  \n**URL:** `http://localhost:9010/api/v1.0.0/pfm/authenticate`\n\n---\n\n#### Authentication\n\nNo explicit Postman auth is configured on this request.  \nThis endpoint is expected to be called **without** an `Authorization` header, using credentials in the request body.\n\n---\n\n#### Request Body (JSON)\n\n**Content-Type:** `application/json`\n\nRequired fields:\n\n- `username` (string) – user identifier/login name\n    \n- `password` (string) – user password\n    \n\nExample:\n\n\\`\\`\\`json  \n{  \n\"username\": \"jeff\",  \n\"password\": \"jeff123\"  \n}"
           },
@@ -57,9 +64,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/authenticate/create",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "authenticate", "create"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "authenticate",
+                "create"
+              ]
             }
           },
           "response": []
@@ -88,9 +103,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "allocation.mapping"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "allocation.mapping"
+              ]
             }
           },
           "response": []
@@ -113,9 +136,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping?page=0&size=3&sortBy=allocId",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "allocation.mapping"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "allocation.mapping"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -152,9 +183,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/search/allocation.mapping?page=0&size=10&sortBy=allocId&description=description1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "search", "allocation.mapping"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "allocation.mapping"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -195,7 +234,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping/allocId/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -237,7 +278,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/allocation.mapping/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -278,7 +321,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/allocation.mapping/update/9",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -310,7 +355,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/allocation.mapping/delete/9",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -348,7 +395,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -379,7 +428,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday?page=0&size=5&sortBy=id",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -424,7 +475,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/investmentsandsavingsday/allocId/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -466,7 +519,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -507,7 +562,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -539,7 +596,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/investmentsandsavingsday/delete/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -577,9 +636,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "monthlygrowth"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "monthlygrowth"
+              ]
             }
           },
           "response": []
@@ -602,9 +669,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth?page=0&size=5&sortBy=id",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "monthlygrowth"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "monthlygrowth"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -641,7 +716,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/monthlygrowth/id/2",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -683,9 +760,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "monthlygrowth", "create", ""]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -717,9 +803,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "monthlygrowth", "update", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
+                "update",
+                "1"
+              ]
             }
           },
           "response": []
@@ -742,9 +837,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/monthlygrowth/delete/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "monthlygrowth", "delete", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "monthlygrowth",
+                "delete",
+                "1"
+              ]
             }
           },
           "response": []
@@ -773,9 +877,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/networth",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "networth"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "networth"
+              ]
             }
           },
           "response": []
@@ -798,9 +910,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/networth?page=0&size=5&sortBy=id",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "networth"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "networth"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -837,9 +957,19 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/networth/id/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "networth", "id", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "networth",
+                "id",
+                "1"
+              ]
             }
           },
           "response": []
@@ -871,9 +1001,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/networth/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "networth", "create", ""]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "networth",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -905,9 +1044,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/networth/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "networth", "update", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "networth",
+                "update",
+                "1"
+              ]
             }
           },
           "response": []
@@ -930,9 +1078,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/networth/delete/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "networth", "delete", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "networth",
+                "delete",
+                "1"
+              ]
             }
           },
           "response": []
@@ -961,9 +1118,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salarytracker",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "salarytracker"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salarytracker"
+              ]
             }
           },
           "response": []
@@ -986,9 +1151,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salarytracker?page=0&size=5&sortBy=salaryId",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "salarytracker"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salarytracker"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -1025,9 +1198,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/search/salarytracker?page=0&size=10&sortBy=salaryId&status=Active",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "search", "salarytracker"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "salarytracker"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -1068,7 +1249,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salarytracker/id/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -1110,9 +1293,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/salarytracker/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "salarytracker", "create", ""]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salarytracker",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -1144,9 +1336,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/salarytracker/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "salarytracker", "update", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salarytracker",
+                "update",
+                "1"
+              ]
             }
           },
           "response": []
@@ -1169,9 +1370,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/salarytracker/delete/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "salarytracker", "delete", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "salarytracker",
+                "delete",
+                "1"
+              ]
             }
           },
           "response": []
@@ -1200,9 +1410,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salaryexpensetracker",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "salaryexpensetracker"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salaryexpensetracker"
+              ]
             }
           },
           "response": []
@@ -1225,9 +1443,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salaryexpensetracker?page=0&size=5&sortBy=id",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "salaryexpensetracker"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "salaryexpensetracker"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -1264,7 +1490,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/search/salaryexpensetracker?page=0&size=10&sortBy=id&expenseDescription=rent&expenseType=utilities",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -1317,7 +1545,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/salaryexpensetracker/id/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -1359,7 +1589,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/salaryexpensetracker/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -1400,7 +1632,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/salaryexpensetracker/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -1432,7 +1666,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/salaryexpensetracker/delete/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -1470,9 +1706,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/wantlist",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "wantlist"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "wantlist"
+              ]
             }
           },
           "response": []
@@ -1495,9 +1739,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/wantlist?page=0&size=5&sortBy=id",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "wantlist"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "wantlist"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -1510,6 +1762,57 @@
                 {
                   "key": "sortBy",
                   "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/wantlist?page={int}&size={int}&sortBy={string}&item={string}&afford={string}&remarks={string}&status={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzg3OTI1LCJleHAiOjE3NzQ3ODg4MTJ9.2gC_3XcDjSyKZqN_IUOK0mnev5Kfjx3AZcYoMq0voMk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/wantlist?page=0&size=5&sortBy=id&item=New+laptop",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "wantlist"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "item",
+                  "value": "New+laptop"
                 }
               ]
             }
@@ -1534,9 +1837,19 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/wantlist/id/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "wantlist", "id", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "wantlist",
+                "id",
+                "1"
+              ]
             }
           },
           "response": []
@@ -1568,9 +1881,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/wantlist/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "wantlist", "create", ""]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "wantlist",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -1602,9 +1924,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/wantlist/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "wantlist", "update", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "wantlist",
+                "update",
+                "1"
+              ]
             }
           },
           "response": []
@@ -1627,9 +1958,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/wantlist/delete/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "wantlist", "delete", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "wantlist",
+                "delete",
+                "1"
+              ]
             }
           },
           "response": []
@@ -1658,9 +1998,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "yearlygrowth"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth"
+              ]
             }
           },
           "response": []
@@ -1683,9 +2031,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth?page=0&size=5&sortBy=id",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "yearlygrowth"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -1722,9 +2078,19 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/yearlygrowth/id/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "yearlygrowth", "id", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "yearlygrowth",
+                "id",
+                "1"
+              ]
             }
           },
           "response": []
@@ -1756,9 +2122,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "yearlygrowth", "create", ""]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -1790,9 +2165,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "yearlygrowth", "update", "1"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "update",
+                "1"
+              ]
             }
           },
           "response": []
@@ -1815,9 +2199,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/yearlygrowth/delete/3",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "yearlygrowth", "delete", "3"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "yearlygrowth",
+                "delete",
+                "3"
+              ]
             }
           },
           "response": []
@@ -1846,9 +2239,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.details"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details"
+              ]
             }
           },
           "response": []
@@ -1871,9 +2272,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details?page=2&size=2&sortBy=ccId",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.details"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -1910,9 +2319,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.details?page=0&size=10&sortBy=ccId&ccAcronym=AA",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "search", "cc.details"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.details"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -1953,9 +2370,19 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.details/ccId/2",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.details", "ccId", "2"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.details",
+                "ccId",
+                "2"
+              ]
             }
           },
           "response": []
@@ -1987,9 +2414,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "cc.details", "create", ""]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -2021,9 +2457,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/update/3",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "cc.details", "update", "3"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "update",
+                "3"
+              ]
             }
           },
           "response": []
@@ -2046,9 +2491,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.details/delete/3",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "cc.details", "delete", "3"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.details",
+                "delete",
+                "3"
+              ]
             }
           },
           "response": []
@@ -2077,9 +2531,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.connectedApp"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp"
+              ]
             }
           },
           "response": []
@@ -2102,9 +2564,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp?page=2&size=2&sortBy=id",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.connectedApp"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.connectedApp"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -2141,9 +2611,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.connectedApp?page=0&size=10&sortBy=id&connectedApp=Maya",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "search", "cc.connectedApp"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.connectedApp"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -2184,7 +2662,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp/id/5",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -2226,9 +2706,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "cc.connectedApp", "create", ""]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -2260,9 +2749,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/update/5",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "cc.connectedApp", "update", "5"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "update",
+                "5"
+              ]
             }
           },
           "response": []
@@ -2285,9 +2783,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.connectedApp/delete/5",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "cc.connectedApp", "delete", "5"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.connectedApp",
+                "delete",
+                "5"
+              ]
             }
           },
           "response": []
@@ -2316,9 +2823,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.recordTracker",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.recordTracker"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.recordTracker"
+              ]
             }
           },
           "response": []
@@ -2341,9 +2856,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.recordTracker?page=2&size=2&sortBy=ccRecId",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.recordTracker"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.recordTracker"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -2380,9 +2903,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.record.tracker?page=0&size=10&sortBy=ccRecId&dateFrom=2026-03-01&dateTo=2026-03-31&dueDate=2026-03-27&status=Active",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "search", "cc.record.tracker"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.record.tracker"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -2435,7 +2966,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.connectedApp/id/5",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -2477,9 +3010,18 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "cc.recordTracker", "create", ""]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "cc.recordTracker",
+                "create",
+                ""
+              ]
             }
           },
           "response": []
@@ -2511,7 +3053,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -2543,7 +3087,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.recordTracker/delete/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -2581,9 +3127,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.record.expense"]
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.record.expense"
+              ]
             }
           },
           "response": []
@@ -2606,9 +3160,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense?page=0&size=2&sortBy=ccRecId",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "get", "cc.record.expense"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "get",
+                "cc.record.expense"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -2645,9 +3207,17 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.record.expense?page=0&size=10&sortBy=ccRecId&expenseDescription=QQQ",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
-              "path": ["api", "v1.0.0", "pfm", "search", "cc.record.expense"],
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.record.expense"
+              ],
               "query": [
                 {
                   "key": "page",
@@ -2688,7 +3258,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/get/cc.record.expense/ccExpId/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -2730,7 +3302,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/create/",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -2771,7 +3345,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/update/1",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
@@ -2803,7 +3379,9 @@
             "url": {
               "raw": "http://localhost:9010/api/v1.0.0/pfm/cc.record.expense/delete/5",
               "protocol": "http",
-              "host": ["localhost"],
+              "host": [
+                "localhost"
+              ],
               "port": "9010",
               "path": [
                 "api",
