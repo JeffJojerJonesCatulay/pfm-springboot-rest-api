@@ -16,4 +16,5 @@ public interface CCConnectedAppService {
     CCConnectedApp updateConnectedApp(CCConnectedApp ccConnectedApp, Long id);
     Optional<CCConnectedApp> findById(Long id);
     void deleteAllocation(Long id);
+    Page<CCConnectedApp> findByCustomSearch(Pageable pageable, CCConnectedApp ccConnectedApp);
 }

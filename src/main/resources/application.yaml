@@ -2,7 +2,7 @@ logging:
   level:
     # ON
     root: ERROR
-    com.pfm: ERROR
+    com.pfm: DEBUG
     com.pfm.tps: INFO
     # OFF
 #    root: OFF

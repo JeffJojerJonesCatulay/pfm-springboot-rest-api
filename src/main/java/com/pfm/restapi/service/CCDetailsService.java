@@ -16,4 +16,5 @@ public interface CCDetailsService {
     Optional<CCDetails> findById(Long id);
     CCDetails updateCCDetails(CCDetails ccDetails, Long id);
     void deleteCCDetails(Long id);
+    Page<CCDetails> findByCustomSearch(Pageable pageable, CCDetails ccDetails);
 }

@@ -321,4 +321,76 @@ public class AllocationMappingController {
 
         return response;
     }
+
+    @GetMapping("/search/allocation.mapping")
+    public ResponseEntity<Object> searchAllocationMapping(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "allocId") String sortBy,
+            @RequestParam(required = false) String allocation,
+            @RequestParam(required = false) String type,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) String status,
+            HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/search/allocation.mapping";
+        try {
+            tps.start(endPoint, " GET METHOD");
+            log.debug("{} API - Start", endPoint);
+
+            inputSanitation.validateSortBy(sortBy);
+            inputSanitation.sanitizeInput(sortBy);
+            inputSanitation.validateSize(page);
+            inputSanitation.validateSize(size);
+            inputSanitation.sanitizeInput(allocation);
+            inputSanitation.sanitizeInput(type);
+            inputSanitation.sanitizeInput(description);
+            inputSanitation.sanitizeInput(status);
+
+            AllocationMapping allocationMapping = new AllocationMapping();
+            allocationMapping.setAllocation(allocation);
+            allocationMapping.setType(type);
+            allocationMapping.setDescription(description);
+            allocationMapping.setStatus(status);
+
+            log.debug("AllocationMapping - Search Value: {} ", allocationMapping.toString());
+
+            Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+            Page<AllocationMapping> data = allocationMappingService.findByCustomSearch(pageable, allocationMapping);
+            httpStatusReturn = String.valueOf(HttpStatus.OK);
+            httpStatusMsgReturn = Constant.SUCCESS;
+            response =  Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
+            httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+            log.error(e.getMessage());
+            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e){
+            httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+            log.error(e.getMessage());
+            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+        } finally {
+            String elapsedTime = tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("GET");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails("");
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
+            log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
+            log.debug("{} API - End", endPoint);
+        }
+
+        return response;
+    }
 }

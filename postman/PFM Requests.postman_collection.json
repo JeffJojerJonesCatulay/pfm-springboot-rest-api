@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "052bec0f-0388-4ab0-b946-0b69146b1fb5",
+    "_postman_id": "34188f67-8286-43ca-9b26-e7141dd08a02",
     "name": "PFM Requests",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "30170318"
@@ -126,7 +126,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0MzYzMjA0LCJleHAiOjE3NzQzNjQwODB9.8g6h_5ZkFGucbOeJ9Vkshe7LuAyyb4eGcR7XWZF_JlE",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzc4NjMwLCJleHAiOjE3NzQ3Nzk0NzZ9.Z-3YLdM0tN5KbGbWCZaF0F5iJxoF4LCnAUOi2zefekY",
                   "type": "string"
                 }
               ]
@@ -134,7 +134,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping?page=2&size=2&sortBy=allocId",
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/get/allocation.mapping?page=0&size=3&sortBy=allocId",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -150,15 +150,66 @@
               "query": [
                 {
                   "key": "page",
-                  "value": "2"
+                  "value": "0"
                 },
                 {
                   "key": "size",
-                  "value": "2"
+                  "value": "3"
                 },
                 {
                   "key": "sortBy",
                   "value": "allocId"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/allocation.mapping?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzc5MzQzLCJleHAiOjE3NzQ3ODAyMzZ9._mM8tcfTIxhxxWN5A45CJ6rzkWxpwpUhlXWT09WKnoA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/allocation.mapping?page=0&size=10&sortBy=allocId&description=description1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "allocation.mapping"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "allocId"
+                },
+                {
+                  "key": "description",
+                  "value": "description1"
                 }
               ]
             }
@@ -1130,6 +1181,57 @@
           "response": []
         },
         {
+          "name": "/search/salarytracker?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/salarytracker?page=0&size=10&sortBy=salaryId&status=Active",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "salarytracker"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "salaryId"
+                },
+                {
+                  "key": "status",
+                  "value": "Active"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/salarytracker/id/{salaryId}",
           "request": {
             "auth": {
@@ -1371,6 +1473,61 @@
           "response": []
         },
         {
+          "name": "/search/salaryexpensetracker?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/salaryexpensetracker?page=0&size=10&sortBy=id&expenseDescription=rent&expenseType=utilities",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "salaryexpensetracker"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "expenseDescription",
+                  "value": "rent"
+                },
+                {
+                  "key": "expenseType",
+                  "value": "utilities"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/salaryexpensetracker/id/{id}",
           "request": {
             "auth": {
@@ -1605,6 +1762,57 @@
                 {
                   "key": "sortBy",
                   "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/wantlist?page={int}&size={int}&sortBy={string}&item={string}&afford={string}&remarks={string}&status={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzg3OTI1LCJleHAiOjE3NzQ3ODg4MTJ9.2gC_3XcDjSyKZqN_IUOK0mnev5Kfjx3AZcYoMq0voMk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/wantlist?page=0&size=5&sortBy=id&item=New+laptop",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "wantlist"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "item",
+                  "value": "New+laptop"
                 }
               ]
             }
@@ -2094,6 +2302,57 @@
           "response": []
         },
         {
+          "name": "/search/cc.details?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzgzNDkxLCJleHAiOjE3NzQ3ODQzMzZ9.MmW6-SIbVAh4SUjcVG6UqI_TZw61lYd-hnqAOSf2McE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.details?page=0&size=10&sortBy=ccId&ccAcronym=AA",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.details"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccId"
+                },
+                {
+                  "key": "ccAcronym",
+                  "value": "AA"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/cc.details/ccId/{id}",
           "request": {
             "auth": {
@@ -2136,7 +2395,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIzMDQ5LCJleHAiOjE3NzQ2MjMyMjV9.yTlPwCptw3cfGrnPAmsEGQTbQVF6x26S4zMSuWZNddc",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzgzNDkxLCJleHAiOjE3NzQ3ODQzMzZ9.MmW6-SIbVAh4SUjcVG6UqI_TZw61lYd-hnqAOSf2McE",
                   "type": "string"
                 }
               ]
@@ -2145,7 +2404,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"ccName\" : \"CC\",\r\n    \"ccLastDigit\" : \"1234\",\r\n    \"ccAcronym\" : \"AA\",\r\n    \"addedBy\" : \"jeff\"\r\n}",
+              "raw": "{\r\n    \"ccName\" : \"CC\",\r\n    \"ccLastDigit\" : \"1111\",\r\n    \"ccAcronym\" : \"AA\",\r\n    \"addedBy\" : \"jeff\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2335,6 +2594,57 @@
           "response": []
         },
         {
+          "name": "/search/cc.connectedApp?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzgxNDI1LCJleHAiOjE3NzQ3ODIxMTN9.W5c7jzIqopdnLlsMx7-Tm-OvciYL9oks-4l4AnwD3Pk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.connectedApp?page=0&size=10&sortBy=id&connectedApp=Maya",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.connectedApp"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "connectedApp",
+                  "value": "Maya"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/cc.connectedApp/id/{id}",
           "request": {
             "auth": {
@@ -2377,7 +2687,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzgxNDI1LCJleHAiOjE3NzQ3ODIxMTN9.W5c7jzIqopdnLlsMx7-Tm-OvciYL9oks-4l4AnwD3Pk",
                   "type": "string"
                 }
               ]
@@ -2386,7 +2696,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"ccId\": 2,\r\n  \"connectedApp\": \"PayPal\",\r\n  \"subscription\": \"Premium Plan\",\r\n  \"autoDebit\": \"Enabled\",\r\n  \"amount\": \"499.99\",\r\n  \"date\": \"2026-03-27\",\r\n  \"remarks\": \"Monthly subscription auto-debited successfully\",\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "raw": "{\r\n  \"ccId\": 2,\r\n  \"connectedApp\": \"Maya\",\r\n  \"subscription\": \"Premium Plan\",\r\n  \"autoDebit\": \"Enabled\",\r\n  \"amount\": \"499.99\",\r\n  \"date\": \"2026-03-27\",\r\n  \"remarks\": \"Monthly subscription auto-debited successfully\",\r\n  \"addedBy\": \"jeff\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2569,6 +2879,69 @@
                 {
                   "key": "sortBy",
                   "value": "ccRecId"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/cc.record.tracker?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.record.tracker?page=0&size=10&sortBy=ccRecId&dateFrom=2026-03-01&dateTo=2026-03-31&dueDate=2026-03-27&status=Active",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.record.tracker"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccRecId"
+                },
+                {
+                  "key": "dateFrom",
+                  "value": "2026-03-01"
+                },
+                {
+                  "key": "dateTo",
+                  "value": "2026-03-31"
+                },
+                {
+                  "key": "dueDate",
+                  "value": "2026-03-27"
+                },
+                {
+                  "key": "status",
+                  "value": "Active"
                 }
               ]
             }
@@ -2817,6 +3190,57 @@
           "response": []
         },
         {
+          "name": "/search/cc.record.expense?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzg1ODE1LCJleHAiOjE3NzQ3ODY3MDZ9.oay4cXDmWBsorPX3-SD_zn8d0JZ-xBSQKt-7nwW_Qkw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.record.expense?page=0&size=10&sortBy=ccRecId&expenseDescription=QQQ",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.record.expense"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccRecId"
+                },
+                {
+                  "key": "expenseDescription",
+                  "value": "QQQ"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/cc.record.expense/ccExpId/{id}",
           "request": {
             "auth": {
@@ -2859,7 +3283,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzg0NjE5LCJleHAiOjE3NzQ3ODU0Njh9.1pdPsvg3CvNrwLaII_0HFW9hj4jQeCLfB9V0va32kSk",
                   "type": "string"
                 }
               ]
@@ -2868,7 +3292,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"ccRecId\": 2,\r\n  \"date\": \"2026-03-27\",\r\n  \"expenseDescription\": \"description\",\r\n  \"expenseValue\": 2,\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "raw": "{\r\n  \"ccRecId\": 2,\r\n  \"date\": \"2026-03-27\",\r\n  \"expenseDescription\": \"QQQ\",\r\n  \"expenseValue\": 2,\r\n  \"addedBy\": \"jeff\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"

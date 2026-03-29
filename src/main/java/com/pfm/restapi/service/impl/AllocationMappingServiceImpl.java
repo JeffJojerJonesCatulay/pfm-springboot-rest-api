@@ -7,6 +7,8 @@ import com.pfm.restapi.entity.AllocationMapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -69,6 +71,22 @@ public class AllocationMappingServiceImpl implements AllocationMappingService {
     public void deleteAllocation(Long id) {
         log.debug("Inside deleteAllocation");
         allocationMappingRepo.deleteById(id);
+    }
+
+    @Override
+    public Page<AllocationMapping> findByCustomSearch(Pageable pageable, AllocationMapping allocationMapping) {
+        log.debug("Inside findByCustomSearch");
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnorePaths("allocId", "dateAdded", "addedBy", "updateDate", "updateBy")
+                .withMatcher("allocation", match -> match.contains().ignoreCase())
+                .withMatcher("type", match -> match.contains().ignoreCase())
+                .withMatcher("description", match -> match.contains().ignoreCase())
+                .withMatcher("status", match -> match.contains().ignoreCase());
+
+        Example<AllocationMapping> example = Example.of(allocationMapping, matcher);
+
+        return allocationMappingRepo.findAll(example, pageable);
     }
 
     @Override
