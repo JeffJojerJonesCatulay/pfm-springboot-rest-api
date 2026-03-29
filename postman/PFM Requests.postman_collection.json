@@ -1204,6 +1204,59 @@
           "response": []
         },
         {
+          "name": "/search/salaryexpensetracker?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzAzODM0LCJleHAiOjE3NzQ3MDQ3MTJ9.azqcXmefn-ab-n2f5qtzdk3_fe7ygsLAypgfRC9_O5Y",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/salaryexpensetracker?page=0&size=10&sortBy=id&expenseDescription=rent&expenseType=utilities",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "salaryexpensetracker"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "expenseDescription",
+                  "value": "rent"
+                },
+                {
+                  "key": "expenseType",
+                  "value": "utilities"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/salaryexpensetracker/id/{id}",
           "request": {
             "auth": {

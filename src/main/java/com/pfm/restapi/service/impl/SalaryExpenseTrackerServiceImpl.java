@@ -6,6 +6,8 @@ import com.pfm.restapi.service.SalaryExpenseTrackerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -73,4 +75,19 @@ public class SalaryExpenseTrackerServiceImpl implements SalaryExpenseTrackerServ
         log.debug("Inside findById {}", id);
         return salaryExpenseTrackerRepo.findById(id);
     }
+
+    @Override
+    public Page<SalaryExpenseTracker> findByCustomSearch(Pageable pageable, SalaryExpenseTracker salaryExpenseTracker) {
+        log.debug("Inside findByCustomSearch");
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnorePaths("id", "salaryId", "date", "expenseValue", "dateAdded", "addedBy", "updateDate", "updateBy")
+                .withMatcher("expenseDescription", match -> match.contains().ignoreCase())
+                .withMatcher("expenseType", match -> match.contains().ignoreCase());
+
+        Example<SalaryExpenseTracker> example = Example.of(salaryExpenseTracker, matcher);
+
+        return salaryExpenseTrackerRepo.findAll(example, pageable);
+    }
+
 }
