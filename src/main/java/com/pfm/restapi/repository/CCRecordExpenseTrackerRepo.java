@@ -16,4 +16,6 @@ public interface CCRecordExpenseTrackerRepo extends JpaRepository<CCRecordExpens
     Page<CCRecordExpenseTracker> getCCExpense(Pageable pageable);
     @Query(value = "SELECT * FROM ccrecordexpensetracker WHERE ccExpId = :id", nativeQuery = true)
     List<CCRecordExpenseTracker> getCCExpenseById(@Param("id") Long id);
+    @Query(value = "SELECT * FROM ccrecordexpensetracker WHERE ccRecId = :ccRecId", nativeQuery = true)
+    List<CCRecordExpenseTracker> getCCExpenseByccRecId(@Param("ccRecId") Long ccRecId);
 }

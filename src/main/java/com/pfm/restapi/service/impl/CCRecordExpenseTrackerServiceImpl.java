@@ -38,6 +38,12 @@ public class CCRecordExpenseTrackerServiceImpl implements CCRecordExpenseTracker
     }
 
     @Override
+    public List<CCRecordExpenseTracker> getCCExpenseByccRecId(Long ccRecId) {
+        log.debug("Inside getCCExpenseByccRecId");
+        return repo.getCCExpenseByccRecId(ccRecId);
+    }
+
+    @Override
     public CCRecordExpenseTracker createCCExpense(CCRecordExpenseTracker ccRecordExpenseTracker) {
         log.debug("Inside createCCDetails");
         ccRecordExpenseTracker.setDateAdded(String.valueOf(LocalDateTime.now()));

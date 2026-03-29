@@ -90,4 +90,10 @@ public class CCRecordTrackerServiceImpl implements CCRecordTrackerService {
         return repo.findAll(example, pageable);
     }
 
+    @Override
+    public List<CCRecordTracker> getCCRecordTrackerByCCId(Long id) {
+        log.debug("getCCRecordTrackerByCCId " + id);
+        return repo.getCCRecordTrackerByCCId(id);
+    }
+
 }

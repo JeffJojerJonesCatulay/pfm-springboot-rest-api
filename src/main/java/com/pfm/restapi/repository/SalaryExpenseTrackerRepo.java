@@ -17,4 +17,7 @@ public interface SalaryExpenseTrackerRepo extends JpaRepository<SalaryExpenseTra
 
     @Query(value = "SELECT * FROM salaryexpensetracker WHERE id = :id", nativeQuery = true)
     List<SalaryExpenseTracker> getSalaryExpenseTrackerById(@Param("id") Long id);
+
+    @Query(value = "SELECT * FROM salaryexpensetracker WHERE salaryId = :salaryId", nativeQuery = true)
+    List<SalaryExpenseTracker> getSalaryExpenseTrackerBySalaryId(@Param("salaryId") Long salaryId);
 }

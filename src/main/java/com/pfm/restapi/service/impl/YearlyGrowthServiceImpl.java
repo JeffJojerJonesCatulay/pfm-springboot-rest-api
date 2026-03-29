@@ -35,6 +35,12 @@ public class YearlyGrowthServiceImpl implements YearlyGrowthService {
     }
 
     @Override
+    public List<YearlyGrowth> getYearlyGrowthByAllocId(Long id) {
+        log.debug("Inside findById {}", id);
+        return repo.getYearlyGrowthAllocId(id);
+    }
+
+    @Override
     public YearlyGrowth createYearlyGrowth(YearlyGrowth yearlyGrowth) {
         log.debug("Inside createYearlyGrowth");
         yearlyGrowth.setDateAdded(String.valueOf(LocalDateTime.now()));

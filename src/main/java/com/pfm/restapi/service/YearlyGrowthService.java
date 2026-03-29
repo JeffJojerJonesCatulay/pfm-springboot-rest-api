@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface YearlyGrowthService {
     Page<YearlyGrowth> getYearlyGrowth(Pageable pageable);
     List<YearlyGrowth> getYearlyGrowthById(Long id);
+    List<YearlyGrowth> getYearlyGrowthByAllocId(Long id);
     YearlyGrowth createYearlyGrowth(YearlyGrowth yearlyGrowth);
     YearlyGrowth updateYearlyGrowth(YearlyGrowth yearlyGrowth, Long id);
     Optional<YearlyGrowth> findById(Long id);

@@ -15,7 +15,8 @@ import com.pfm.restapi.entity.InvestmentsAndSavingsDay;
 public interface InvestmentsAndSavingsDayRepo extends JpaRepository<InvestmentsAndSavingsDay, Long> {
     @Query(value = "SELECT * FROM investmentsandsavingsday", nativeQuery = true)
     Page<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDay(Pageable pageable);
-
     @Query(value = "SELECT * FROM investmentsandsavingsday WHERE id = :id", nativeQuery = true)
+    List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayById(@Param("id") Long id);
+    @Query(value = "SELECT * FROM investmentsandsavingsday WHERE allocId = :id", nativeQuery = true)
     List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayByAllocId(@Param("id") Long id);
 }

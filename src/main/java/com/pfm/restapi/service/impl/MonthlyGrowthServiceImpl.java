@@ -29,8 +29,14 @@ public class MonthlyGrowthServiceImpl implements MonthlyGrowthService {
     }
 
     @Override
-    public List<MonthlyGrowth> getMonthlyGrowthByAllocId(Long id) {
+    public List<MonthlyGrowth> getMonthlyGrowthById(Long id) {
         log.debug("Inside getMonthlyGrowthByAllocId");
+        return monthlyGrowthRepo.getMonthlyGrowthById(id);
+    }
+
+    @Override
+    public List<MonthlyGrowth> getMonthlyGrowthByAllocId(Long id) {
+        log.debug("Inside getMonthlyGrowthByAllocId {}", id);
         return monthlyGrowthRepo.getMonthlyGrowthByAllocId(id);
     }
 
@@ -45,7 +51,7 @@ public class MonthlyGrowthServiceImpl implements MonthlyGrowthService {
     @Override
     public MonthlyGrowth updateMonthlyGrowth(MonthlyGrowth monthlyGrowth, Long id) {
         log.debug("Inside updateMonthlyGrowth");
-        List<MonthlyGrowth> monthlyGrowthExisting = getMonthlyGrowthByAllocId(id);
+        List<MonthlyGrowth> monthlyGrowthExisting = getMonthlyGrowthById(id);
         log.debug("Existing monthlyGrowth: {}", monthlyGrowthExisting.toString());
         MonthlyGrowth data = new MonthlyGrowth();
         data.setId(id);

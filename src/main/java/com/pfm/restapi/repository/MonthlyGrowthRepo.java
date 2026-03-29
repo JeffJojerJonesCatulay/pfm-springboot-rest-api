@@ -15,7 +15,8 @@ import com.pfm.restapi.entity.MonthlyGrowth;
 public interface MonthlyGrowthRepo extends JpaRepository<MonthlyGrowth, Long> {
     @Query(value = "SELECT * FROM monthlygrowth", nativeQuery = true)
     Page<MonthlyGrowth> getMonthlyGrowth(Pageable pageable);
-
     @Query(value = "SELECT * FROM monthlygrowth WHERE id = :id", nativeQuery = true)
+    List<MonthlyGrowth> getMonthlyGrowthById(@Param("id") Long id);
+    @Query(value = "SELECT * FROM monthlygrowth WHERE allocId = :id", nativeQuery = true)
     List<MonthlyGrowth> getMonthlyGrowthByAllocId(@Param("id") Long id);
 }
