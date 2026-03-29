@@ -11,14 +11,10 @@ import java.util.Optional;
 @Service
 public interface MonthlyGrowthService {
     Page<MonthlyGrowth> getMonthlyGrowth(Pageable pageable);
-
+    List<MonthlyGrowth> getMonthlyGrowthById(Long id);
     List<MonthlyGrowth> getMonthlyGrowthByAllocId(Long id);
-
     MonthlyGrowth createMonthlyGrowth(MonthlyGrowth monthlyGrowth);
-
     MonthlyGrowth updateMonthlyGrowth(MonthlyGrowth monthlyGrowth, Long id);
-
     Optional<MonthlyGrowth> findById(Long id);
-
     void deleteMonthlyGrowth(Long id);
 }

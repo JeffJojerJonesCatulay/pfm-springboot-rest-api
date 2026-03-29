@@ -153,6 +153,82 @@ public class SalaryExpenseTrackerController {
         return response;
     }
 
+    @GetMapping("/search/salaryexpensetracker/salaryId/{salaryId}")
+    public ResponseEntity<Object> searchSalaryExpenseTrackerBySalaryId(
+            @PathVariable Long salaryId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(required = false) String expenseDescription,
+            @RequestParam(required = false) String expenseType,
+            HttpServletRequest httpServletRequest){
+
+        String endPoint = httpServletRequest.getServerName() + URL + "/search/salaryexpensetracker/salaryId/" + salaryId;
+        try {
+            tps.start(endPoint, " GET METHOD");
+            log.debug("{} API - Start", endPoint);
+
+            inputSanitation.validateNumeric(String.valueOf(salaryId));
+            inputSanitation.validateSortBy(sortBy);
+            inputSanitation.sanitizeInput(sortBy);
+            inputSanitation.validateSize(page);
+            inputSanitation.validateSize(size);
+            inputSanitation.sanitizeInput(expenseDescription);
+            inputSanitation.sanitizeInput(expenseType);
+
+            List<SalaryExpenseTracker> recordList = salaryExpenseTrackerService.getSalaryExpenseTrackerBySalaryId(salaryId);
+            if (recordList.isEmpty()) {
+                httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
+                httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+                response = Response.generateResponse("No record found with salaryId: " + salaryId, HttpStatus.BAD_REQUEST, null);
+            } else {
+                List<SalaryExpenseTracker> filteredList = recordList.stream()
+                    .filter(record -> expenseDescription == null || record.getExpenseDescription() != null && record.getExpenseDescription().toLowerCase().contains(expenseDescription.toLowerCase()))
+                    .filter(record -> expenseType == null || record.getExpenseType() != null && record.getExpenseType().toLowerCase().contains(expenseType.toLowerCase()))
+                    .collect(java.util.stream.Collectors.toList());
+
+                Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+                Page<SalaryExpenseTracker> dataPage = new org.springframework.data.domain.PageImpl<>(filteredList, pageable, filteredList.size());
+
+                httpStatusReturn = String.valueOf(HttpStatus.OK);
+                httpStatusMsgReturn = Constant.SUCCESS;
+                response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, dataPage);
+            }
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
+            httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+            log.error(e.getMessage());
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e){
+            httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+            log.error(e.getMessage());
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+        } finally {
+            String elapsedTime = tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("GET");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails("salaryId: " + salaryId);
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
+            log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
+            log.debug("{} API - End", endPoint);
+        }
+
+        return response;
+    }
+
     @PostMapping("/salaryexpensetracker/create/")
     public ResponseEntity<Object> createSalaryExpenseTracker(@RequestBody SalaryExpenseTracker salaryExpenseTracker, HttpServletRequest httpServletRequest) {
         String endPoint = httpServletRequest.getServerName() + URL + "/salaryexpensetracker/create/";

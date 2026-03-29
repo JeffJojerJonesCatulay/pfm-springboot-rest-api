@@ -93,6 +93,11 @@ public class CCConnectedAppServiceImpl implements CCConnectedAppService {
     }
 
     @Override
+    public List<CCConnectedApp> getCCConnectedAppByCCId(Long id) {
+        return repo.getCCConnectedAppByCCId(id);
+    }
+
+    @Override
     public Optional<CCConnectedApp> findById(Long id) {
         log.debug("Inside findById " + id);
         return repo.findById(id);

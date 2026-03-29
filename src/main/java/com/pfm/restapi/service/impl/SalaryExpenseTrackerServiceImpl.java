@@ -37,6 +37,12 @@ public class SalaryExpenseTrackerServiceImpl implements SalaryExpenseTrackerServ
     }
 
     @Override
+    public List<SalaryExpenseTracker> getSalaryExpenseTrackerBySalaryId(Long salaryId) {
+        log.debug("Inside getSalaryExpenseTrackerBySalaryId");
+        return salaryExpenseTrackerRepo.getSalaryExpenseTrackerBySalaryId(salaryId);
+    }
+
+    @Override
     public SalaryExpenseTracker createSalaryExpenseTracker(SalaryExpenseTracker salaryExpenseTracker) {
         log.debug("Inside createSalaryExpenseTracker");
         salaryExpenseTracker.setDateAdded(String.valueOf(LocalDateTime.now()));

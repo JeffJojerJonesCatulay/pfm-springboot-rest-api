@@ -16,4 +16,6 @@ public interface CCRecordTrackerRepo extends JpaRepository<CCRecordTracker, Long
     Page<CCRecordTracker> getCCRecord(Pageable pageable);
     @Query(value = "SELECT * FROM ccrecordtracker WHERE ccRecId = :id", nativeQuery = true)
     List<CCRecordTracker> getCCRecordById(@Param("id") Long id);
+    @Query(value = "SELECT * FROM ccrecordtracker WHERE ccId = :id", nativeQuery = true)
+    List<CCRecordTracker> getCCRecordTrackerByCCId(@Param("id") Long id);
 }
