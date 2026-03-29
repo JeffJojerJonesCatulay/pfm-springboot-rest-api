@@ -6,6 +6,8 @@ import com.pfm.restapi.service.SalaryTrackerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -71,4 +73,18 @@ public class SalaryTrackerServiceImpl implements SalaryTrackerService {
         log.debug("Inside findById {}", salaryId);
         return salaryTrackerRepo.findById(salaryId);
     }
+
+    @Override
+    public Page<SalaryTracker> findByCustomSearch(Pageable pageable, SalaryTracker salaryTracker) {
+        log.debug("Inside findByCustomSearch");
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnorePaths("salaryId", "date", "salary", "dateAdded", "addedBy", "updateDate", "updateBy")
+                .withMatcher("status", match -> match.contains().ignoreCase());
+
+        Example<SalaryTracker> example = Example.of(salaryTracker, matcher);
+
+        return salaryTrackerRepo.findAll(example, pageable);
+    }
+
 }
