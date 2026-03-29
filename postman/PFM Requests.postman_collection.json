@@ -166,7 +166,7 @@
           "response": []
         },
         {
-          "name": "/search/allocation.mapping?page={int}&size={int}&sortBy={string}&{column}={string}",
+          "name": "/search/allocation.mapping?page={int}&size={int}&sortBy={string}&{column}={value}",
           "request": {
             "auth": {
               "type": "bearer",
@@ -2386,6 +2386,57 @@
           "response": []
         },
         {
+          "name": "/search/cc.connectedApp?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzgxNDI1LCJleHAiOjE3NzQ3ODIxMTN9.W5c7jzIqopdnLlsMx7-Tm-OvciYL9oks-4l4AnwD3Pk",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.connectedApp?page=0&size=10&sortBy=id&connectedApp=Maya",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.connectedApp"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "connectedApp",
+                  "value": "Maya"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/cc.connectedApp/id/{id}",
           "request": {
             "auth": {
@@ -2428,7 +2479,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjIyMzk2LCJleHAiOjE3NzQ2MjMyMjV9.bQ19yuY7s2koOGc3c4EN-xl6wi7UJwrPm9GgxvLLEKg",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzgxNDI1LCJleHAiOjE3NzQ3ODIxMTN9.W5c7jzIqopdnLlsMx7-Tm-OvciYL9oks-4l4AnwD3Pk",
                   "type": "string"
                 }
               ]
@@ -2437,7 +2488,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"ccId\": 2,\r\n  \"connectedApp\": \"PayPal\",\r\n  \"subscription\": \"Premium Plan\",\r\n  \"autoDebit\": \"Enabled\",\r\n  \"amount\": \"499.99\",\r\n  \"date\": \"2026-03-27\",\r\n  \"remarks\": \"Monthly subscription auto-debited successfully\",\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "raw": "{\r\n  \"ccId\": 2,\r\n  \"connectedApp\": \"Maya\",\r\n  \"subscription\": \"Premium Plan\",\r\n  \"autoDebit\": \"Enabled\",\r\n  \"amount\": \"499.99\",\r\n  \"date\": \"2026-03-27\",\r\n  \"remarks\": \"Monthly subscription auto-debited successfully\",\r\n  \"addedBy\": \"jeff\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"

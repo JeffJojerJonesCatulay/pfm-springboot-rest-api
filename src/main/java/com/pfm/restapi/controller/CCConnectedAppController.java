@@ -326,4 +326,81 @@ public class CCConnectedAppController {
 
         return response;
     }
+
+    @GetMapping("/search/cc.connectedApp")
+    public ResponseEntity<Object> searchCCConnectedApp(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(required = false) String connectedApp,
+            @RequestParam(required = false) String subscription,
+            @RequestParam(required = false) String autoDebit,
+            @RequestParam(required = false) String amount,
+            @RequestParam(required = false) String date,
+            @RequestParam(required = false) String remarks,
+            HttpServletRequest httpServletRequest){
+
+        String endPoint = httpServletRequest.getServerName() + URL + "/search/cc.connectedApp";
+        try {
+            tps.start(endPoint, " GET METHOD");
+            log.debug("{} API - Start", endPoint);
+
+            inputSanitation.validateSortBy(sortBy);
+            inputSanitation.sanitizeInput(sortBy);
+            inputSanitation.validateSize(page);
+            inputSanitation.validateSize(size);
+            inputSanitation.sanitizeInput(connectedApp);
+            inputSanitation.sanitizeInput(subscription);
+            inputSanitation.sanitizeInput(autoDebit);
+            inputSanitation.sanitizeInput(amount);
+            inputSanitation.sanitizeInput(date);
+            inputSanitation.sanitizeInput(remarks);
+
+            CCConnectedApp ccConnectedApp = new CCConnectedApp();
+            ccConnectedApp.setConnectedApp(connectedApp);
+            ccConnectedApp.setSubscription(subscription);
+            ccConnectedApp.setAutoDebit(autoDebit);
+            ccConnectedApp.setAmount(amount);
+            ccConnectedApp.setDate(date);
+            ccConnectedApp.setRemarks(remarks);
+
+            Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+            Page<CCConnectedApp> data = service.findByCustomSearch(pageable, ccConnectedApp);
+            httpStatusReturn = String.valueOf(HttpStatus.OK);
+            httpStatusMsgReturn = Constant.SUCCESS;
+            response =  Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, data);
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
+            httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+            log.error(e.getMessage());
+            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e){
+            httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+            log.error(e.getMessage());
+            response =  Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+        } finally {
+            String elapsedTime = tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("GET");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails("");
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
+            log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
+            log.debug("{} API - End", endPoint);
+        }
+
+        return response;
+    }
 }

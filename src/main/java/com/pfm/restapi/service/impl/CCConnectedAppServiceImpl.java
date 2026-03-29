@@ -1,11 +1,14 @@
 package com.pfm.restapi.service.impl;
 
+import com.pfm.restapi.entity.AllocationMapping;
 import com.pfm.restapi.entity.CCConnectedApp;
 import com.pfm.restapi.repository.CCConnectedAppRepo;
 import com.pfm.restapi.service.CCConnectedAppService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -69,6 +72,24 @@ public class CCConnectedAppServiceImpl implements CCConnectedAppService {
     public void deleteAllocation(Long id) {
         log.debug("Inside deleteAllocation");
         repo.deleteById(id);
+    }
+
+    @Override
+    public Page<CCConnectedApp> findByCustomSearch(Pageable pageable, CCConnectedApp ccConnectedApp) {
+        log.debug("Inside findByCustomSearch");
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnorePaths("id", "ccId", "dateAdded", "addedBy", "updateDate", "updateBy")
+                .withMatcher("connectedApp", match -> match.contains().ignoreCase())
+                .withMatcher("subscription", match -> match.contains().ignoreCase())
+                .withMatcher("autoDebit", match -> match.contains().ignoreCase())
+                .withMatcher("amount", match -> match.contains().ignoreCase())
+                .withMatcher("date", match -> match.contains().ignoreCase())
+                .withMatcher("remarks", match -> match.contains().ignoreCase());
+
+        Example<CCConnectedApp> example = Example.of(ccConnectedApp, matcher);
+
+        return repo.findAll(example, pageable);
     }
 
     @Override
