@@ -16,4 +16,5 @@ public interface CCRecordExpenseTrackerService {
     Optional<CCRecordExpenseTracker> findById(Long id);
     CCRecordExpenseTracker updateCCExpense(CCRecordExpenseTracker ccRecordExpenseTracker, Long id);
     void deleteCCExpense(Long id);
+    Page<CCRecordExpenseTracker> findByCustomSearch(Pageable pageable, CCRecordExpenseTracker ccRecordExpenseTracker);
 }

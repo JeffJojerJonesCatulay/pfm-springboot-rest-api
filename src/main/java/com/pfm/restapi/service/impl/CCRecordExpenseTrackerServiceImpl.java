@@ -6,6 +6,8 @@ import com.pfm.restapi.service.CCRecordExpenseTrackerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -74,4 +76,20 @@ public class CCRecordExpenseTrackerServiceImpl implements CCRecordExpenseTracker
         log.debug("Inside findById " + id);
         return repo.findById(id);
     }
+
+    @Override
+    public Page<CCRecordExpenseTracker> findByCustomSearch(Pageable pageable, CCRecordExpenseTracker ccRecordExpenseTracker) {
+        log.debug("Inside findByCustomSearch");
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnorePaths("ccExpId", "ccRecId", "dateAdded", "addedBy", "updateDate", "updateBy", "expenseValue")
+                .withMatcher("expenseDescription", match -> match.contains().ignoreCase())
+                .withMatcher("date", match -> match.contains().ignoreCase());
+
+        Example<CCRecordExpenseTracker> example = Example.of(ccRecordExpenseTracker, matcher);
+
+        return repo.findAll(example, pageable);
+    }
+
 }

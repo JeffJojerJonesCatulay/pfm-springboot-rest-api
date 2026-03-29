@@ -2970,6 +2970,57 @@
           "response": []
         },
         {
+          "name": "/search/cc.record.expense?page={int}&size={int}&sortBy={string}&{column}={value}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzg1ODE1LCJleHAiOjE3NzQ3ODY3MDZ9.oay4cXDmWBsorPX3-SD_zn8d0JZ-xBSQKt-7nwW_Qkw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.record.expense?page=0&size=10&sortBy=ccRecId&expenseDescription=QQQ",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.record.expense"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccRecId"
+                },
+                {
+                  "key": "expenseDescription",
+                  "value": "QQQ"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/get/cc.record.expense/ccExpId/{id}",
           "request": {
             "auth": {
@@ -3012,7 +3063,7 @@
               "bearer": [
                 {
                   "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NjkyNzAzLCJleHAiOjE3NzQ2OTM1Nzd9.SZ8ZscQYJptMt5-u4h5V-d5QKdYXqXHcasoCCbB4Gew",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzg0NjE5LCJleHAiOjE3NzQ3ODU0Njh9.1pdPsvg3CvNrwLaII_0HFW9hj4jQeCLfB9V0va32kSk",
                   "type": "string"
                 }
               ]
@@ -3021,7 +3072,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"ccRecId\": 2,\r\n  \"date\": \"2026-03-27\",\r\n  \"expenseDescription\": \"description\",\r\n  \"expenseValue\": 2,\r\n  \"addedBy\": \"jeff\"\r\n}",
+              "raw": "{\r\n  \"ccRecId\": 2,\r\n  \"date\": \"2026-03-27\",\r\n  \"expenseDescription\": \"QQQ\",\r\n  \"expenseValue\": 2,\r\n  \"addedBy\": \"jeff\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
