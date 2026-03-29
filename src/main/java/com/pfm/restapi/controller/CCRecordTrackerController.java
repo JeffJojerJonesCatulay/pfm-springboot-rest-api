@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("${api.url.mapping}")
@@ -369,6 +371,78 @@ public class CCRecordTrackerController {
             requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
             requestLogs.setEndpoint(endPoint);
             requestLogs.setRequestDetails("");
+            requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
+            requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
+            requestLogs.setStatusResponse(httpStatusMsgReturn);
+            requestLogs.setTimestamp((String) body.get("timestamp"));
+            requestLogs.setTps(elapsedTime);
+            requestLogsService.inputLogs(requestLogs);
+            log.debug("Done saving request to API Request Table");
+
+            log.debug("GET METHOD | HTTP STATUS: {} | STATUS : {}", httpStatusReturn, httpStatusMsgReturn);
+            log.debug("{} API - End", endPoint);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/search/cc.record.tracker/ccId/{id}")
+    public ResponseEntity<Object> searchCCRecordTrackerById(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "ccRecId") String sortBy,
+            @RequestParam(required = false) String status,
+            HttpServletRequest httpServletRequest){
+        String endPoint = httpServletRequest.getServerName() + URL + "/search/cc.record.tracker/ccId/" + id;
+        try {
+            tps.start(endPoint, " GET METHOD");
+            log.debug("{} API - Start", endPoint);
+
+            inputSanitation.validateNumeric(String.valueOf(id));
+            inputSanitation.validateSortBy(sortBy);
+            inputSanitation.sanitizeInput(sortBy);
+            inputSanitation.validateSize(page);
+            inputSanitation.validateSize(size);
+            inputSanitation.sanitizeInput(status);
+
+            List<CCRecordTracker> recordList = service.getCCRecordTrackerByCCId(id);
+            if (recordList.isEmpty()) {
+                httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
+                httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+                response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+            } else {
+                List<CCRecordTracker> filteredList = recordList.stream()
+                    .filter(record -> status == null || record.getStatus() != null && record.getStatus().toLowerCase().contains(status.toLowerCase()))
+                    .collect(Collectors.toList());
+
+                Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+                Page<CCRecordTracker> dataPage = new PageImpl<>(filteredList, pageable, filteredList.size());
+                
+                httpStatusReturn = String.valueOf(HttpStatus.OK);
+                httpStatusMsgReturn = Constant.SUCCESS;
+                response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, dataPage);
+            }
+        } catch (BadCredentialsException | DataIntegrityViolationException | JwtException | IllegalArgumentException e){
+            httpStatusReturn = String.valueOf(HttpStatus.BAD_REQUEST);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+            log.error(e.getMessage());
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.BAD_REQUEST, null);
+        } catch (Exception e){
+            httpStatusReturn = String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR);
+            httpStatusMsgReturn = Constant.GEN_ERR_MSG;
+            log.error(e.getMessage());
+            response = Response.generateResponse(Constant.GEN_ERR_MSG, HttpStatus.INTERNAL_SERVER_ERROR, null);
+        } finally {
+            String elapsedTime = tps.end( endPoint, " GET METHOD", "HTTP STATUS: " + httpStatusReturn + " | STATUS : " + httpStatusMsgReturn);
+
+            log.debug("Starting saving request to API Request Table");
+            RequestLogs requestLogs = new RequestLogs();
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+            requestLogs.setApiMethod("GET");
+            requestLogs.setRequestMethod(new Exception().getStackTrace()[0].getMethodName());
+            requestLogs.setEndpoint(endPoint);
+            requestLogs.setRequestDetails("id: " + id);
             requestLogs.setRequestResponse(Objects.requireNonNull(body).toString());
             requestLogs.setStatusCode(Integer.parseInt(httpStatusReturn.replaceAll("\\D+", "")));
             requestLogs.setStatusResponse(httpStatusMsgReturn);

@@ -14,10 +14,10 @@ import java.util.List;
 public interface NetWorthRepo extends JpaRepository<NetWorth, Long> {
     @Query(value = "SELECT * FROM networth", nativeQuery = true)
     Page<NetWorth> getNetWorth(Pageable pageable);
-
     @Query(value = "SELECT * FROM networth WHERE id = :id", nativeQuery = true)
+    List<NetWorth> getNetWorthById(@Param("id") Long id);
+    @Query(value = "SELECT * FROM networth WHERE allocId = :id", nativeQuery = true)
     List<NetWorth> getNetWorthByAllocId(@Param("id") Long id);
-
     @Query(value = "SELECT * FROM networth WHERE month = :month and year = :year", nativeQuery = true)
     List<NetWorth> getNetWorthByMonthYear(@Param("month") String month, @Param("year") Long year);
 }

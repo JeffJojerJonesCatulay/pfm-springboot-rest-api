@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface CCRecordExpenseTrackerService {
     Page<CCRecordExpenseTracker> getCCExpense(Pageable pageable);
     List<CCRecordExpenseTracker> getCCExpenseById(Long id);
+    List<CCRecordExpenseTracker> getCCExpenseByccRecId(Long ccRecId);
     CCRecordExpenseTracker createCCExpense(CCRecordExpenseTracker ccRecordExpenseTracker);
     Optional<CCRecordExpenseTracker> findById(Long id);
     CCRecordExpenseTracker updateCCExpense(CCRecordExpenseTracker ccRecordExpenseTracker, Long id);

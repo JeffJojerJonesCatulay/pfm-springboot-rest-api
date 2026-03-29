@@ -17,4 +17,5 @@ public interface CCRecordTrackerService {
     CCRecordTracker updateCCRecordTracker(CCRecordTracker ccRecordTracker, Long id);
     void deleteCCRecordTracker(Long id);
     Page<CCRecordTracker> findByCustomSearch(Pageable pageable, CCRecordTracker ccRecordTracker);
+    List<CCRecordTracker> getCCRecordTrackerByCCId(Long id);
 }

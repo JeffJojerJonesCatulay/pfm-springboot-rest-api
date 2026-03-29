@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "34188f67-8286-43ca-9b26-e7141dd08a02",
+    "_postman_id": "c537024c-ee97-467d-8315-bb3069bef31e",
     "name": "PFM Requests",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "30170318"
@@ -493,6 +493,60 @@
           "response": []
         },
         {
+          "name": "/search/investmentsandsavingsday/allocId/{allocationId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzk2NzM5LCJleHAiOjE3NzQ3OTc2MzF9.Nrfkvkh-p5HtJBcfYuX4WtojN2tILFNW8OI5sP_UQH4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/investmentsandsavingsday/allocId/1?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "investmentsandsavingsday",
+                "allocId",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "date",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
           "name": "/investmentsandsavingsday/create/",
           "request": {
             "auth": {
@@ -728,6 +782,60 @@
                 "monthlygrowth",
                 "id",
                 "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/monthlygrowth/allocId/{allocationId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzk2NzM5LCJleHAiOjE3NzQ3OTc2MzF9.Nrfkvkh-p5HtJBcfYuX4WtojN2tILFNW8OI5sP_UQH4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/monthlygrowth/allocId/1?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "monthlygrowth",
+                "allocId",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "month",
+                  "value": "",
+                  "disabled": true
+                }
               ]
             }
           },
@@ -1012,6 +1120,60 @@
                 "networth",
                 "id",
                 "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/networth/allocId/{allocationId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzk2NzM5LCJleHAiOjE3NzQ3OTc2MzF9.Nrfkvkh-p5HtJBcfYuX4WtojN2tILFNW8OI5sP_UQH4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/networth/allocId/1?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "networth",
+                "allocId",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                },
+                {
+                  "key": "month",
+                  "value": "",
+                  "disabled": true
+                }
               ]
             }
           },
@@ -2021,7 +2183,7 @@
       "description": "Contains CRUD operations for managing a user's want list in the PFM API. This folder allows users to log desired purchases or financial goals they are saving toward, helping prioritize spending decisions. Use these endpoints to create, read, update, and delete want list items."
     },
     {
-      "name": "Yearly Growth",
+      "name": "YearlyGrowth",
       "item": [
         {
           "name": "/get/yearlygrowth",
@@ -2133,6 +2295,55 @@
                 "yearlygrowth",
                 "id",
                 "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/yearlygrowth/allocId/{allocationId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzk2NzM5LCJleHAiOjE3NzQ3OTc2MzF9.Nrfkvkh-p5HtJBcfYuX4WtojN2tILFNW8OI5sP_UQH4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/yearlygrowth/allocId/1?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "yearlygrowth",
+                "allocId",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
               ]
             }
           },
@@ -2841,6 +3052,55 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "/search/cc.connectedApp/ccId/{id}?page={int}&size={int}&sortBy={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzkzODA2LCJleHAiOjE3NzQ3OTQ2OTV9.3FhOoKTYCCIGUJ8ztKj6EQqb8P7IK73CAVDMiTL4utw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.connectedApp/ccId/2?page=0&size=5&sortBy=id",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.connectedApp",
+                "ccId",
+                "2"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "id"
+                }
+              ]
+            }
+          },
+          "response": []
         }
       ],
       "description": "Contains CRUD operations for managing apps connected to a credit card in the PFM API. This folder tracks subscriptions and services that are billed to a specific credit card, helping users monitor recurring charges from connected applications. Use these endpoints to create, read, update, and delete credit card connected app entries."
@@ -2981,6 +3241,59 @@
                 {
                   "key": "dueDate",
                   "value": "2026-03-27"
+                },
+                {
+                  "key": "status",
+                  "value": "Active"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/cc.record.tracker/ccId/{id}?page={int}&size={int}&sortBy={string}&status={string}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0NzkzODA2LCJleHAiOjE3NzQ3OTQ2OTV9.3FhOoKTYCCIGUJ8ztKj6EQqb8P7IK73CAVDMiTL4utw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.record.tracker/ccId/2?page=0&size=5&sortBy=ccRecId&status=Active",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.record.tracker",
+                "ccId",
+                "2"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccRecId"
                 },
                 {
                   "key": "status",
@@ -3277,6 +3590,65 @@
                 {
                   "key": "expenseDescription",
                   "value": "QQQ"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/search/cc.record.expense/ccRecId/{ccRecId}",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqZWZmIiwiaWF0IjoxNzc0Nzg1ODE1LCJleHAiOjE3NzQ3ODY3MDZ9.oay4cXDmWBsorPX3-SD_zn8d0JZ-xBSQKt-7nwW_Qkw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9010/api/v1.0.0/pfm/search/cc.record.expense/ccRecId/1?page=0&size=5&sortBy=ccExpId",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9010",
+              "path": [
+                "api",
+                "v1.0.0",
+                "pfm",
+                "search",
+                "cc.record.expense",
+                "ccRecId",
+                "1"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "5"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "ccExpId"
+                },
+                {
+                  "key": "date",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "expenseDescription",
+                  "value": "",
+                  "disabled": true
                 }
               ]
             }

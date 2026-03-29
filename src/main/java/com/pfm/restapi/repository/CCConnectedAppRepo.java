@@ -16,4 +16,6 @@ public interface CCConnectedAppRepo extends JpaRepository<CCConnectedApp, Long> 
     Page<CCConnectedApp> getConnectedApp(Pageable pageable);
     @Query(value = "SELECT * FROM ccconnectedapp WHERE id = :id", nativeQuery = true)
     List<CCConnectedApp> getConnectedAppById(@Param("id") Long id);
+    @Query(value = "SELECT * FROM ccconnectedapp WHERE ccId = :id", nativeQuery = true)
+    List<CCConnectedApp> getCCConnectedAppByCCId(@Param("id") Long id);
 }

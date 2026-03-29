@@ -11,14 +11,10 @@ import java.util.Optional;
 @Service
 public interface InvestmentsAndSavingsDayService {
     Page<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDay(Pageable pageable);
-
-    List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayByAllocId(Long id);
-
+    List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayById(Long id);
     InvestmentsAndSavingsDay createInvestmentsAndSavingsDay(InvestmentsAndSavingsDay investmentsAndSavingsDay);
-
     InvestmentsAndSavingsDay updateInvestmentsAndSavingsDay(InvestmentsAndSavingsDay investmentsAndSavingsDay, Long id);
-
     Optional<InvestmentsAndSavingsDay> findById(Long id);
-
     void deleteInvestmentsAndSavingsDay(Long id);
+    List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayByAllocId(Long id);
 }

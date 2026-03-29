@@ -14,7 +14,8 @@ import java.util.List;
 public interface YearlyGrowthRepo extends JpaRepository<YearlyGrowth, Long> {
     @Query(value = "SELECT * FROM yearlygrowth", nativeQuery = true)
     Page<YearlyGrowth> getYearlyGrowth(Pageable pageable);
-
     @Query(value = "SELECT * FROM yearlygrowth WHERE id = :id", nativeQuery = true)
     List<YearlyGrowth> getYearlyGrowthId(@Param("id") Long id);
+    @Query(value = "SELECT * FROM yearlygrowth WHERE allocId = :id", nativeQuery = true)
+    List<YearlyGrowth> getYearlyGrowthAllocId(@Param("id") Long id);
 }

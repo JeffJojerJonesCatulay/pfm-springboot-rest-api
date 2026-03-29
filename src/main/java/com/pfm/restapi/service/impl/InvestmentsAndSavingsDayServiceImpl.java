@@ -30,9 +30,9 @@ public class InvestmentsAndSavingsDayServiceImpl implements InvestmentsAndSaving
     }
 
     @Override
-    public List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayByAllocId(Long id) {
+    public List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayById(Long id) {
         log.debug("Inside getInvestmentsAndSavingsDayByAllocId");
-        return investmentsAndSavingsDayRepo.getInvestmentsAndSavingsDayByAllocId(id);
+        return investmentsAndSavingsDayRepo.getInvestmentsAndSavingsDayById(id);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class InvestmentsAndSavingsDayServiceImpl implements InvestmentsAndSaving
     @Override
     public InvestmentsAndSavingsDay updateInvestmentsAndSavingsDay(InvestmentsAndSavingsDay investmentsAndSavingsDay, Long id) {
         log.debug("Inside updateInvestmentsAndSavingsDay");
-        List<InvestmentsAndSavingsDay> ccRecordTrackersExisting = getInvestmentsAndSavingsDayByAllocId(id);
+        List<InvestmentsAndSavingsDay> ccRecordTrackersExisting = getInvestmentsAndSavingsDayById(id);
         log.debug("Existing ccRecordTrackers: {}", ccRecordTrackersExisting.toString());
         InvestmentsAndSavingsDay data = new InvestmentsAndSavingsDay();
         data.setId(id);
@@ -66,6 +66,12 @@ public class InvestmentsAndSavingsDayServiceImpl implements InvestmentsAndSaving
     public void deleteInvestmentsAndSavingsDay(Long id) {
         log.debug("Inside deleteInvestmentsAndSavingsDay");
         investmentsAndSavingsDayRepo.deleteById(id);
+    }
+
+    @Override
+    public List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayByAllocId(Long id) {
+        log.debug("Inside getInvestmentsAndSavingsDayByAllocId {}", id);
+        return investmentsAndSavingsDayRepo.getInvestmentsAndSavingsDayByAllocId(id);
     }
 
     @Override
