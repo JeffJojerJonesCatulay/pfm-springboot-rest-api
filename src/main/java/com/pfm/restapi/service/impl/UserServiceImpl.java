@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
         user.setUsername(request.getUsername());
         request.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setAddedBy(request.getUsername());
+        user.setPassword(request.getPassword());
         user.setDateAdded(String.valueOf(LocalDateTime.now()));
         return userAuthRepo.save(user);
     }

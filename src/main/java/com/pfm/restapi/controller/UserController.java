@@ -4,6 +4,7 @@ import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.entity.UserEntity;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.AuthRequest;
+import com.pfm.restapi.security.SecurityConfig;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
 import com.pfm.restapi.service.RequestLogsService;
 import com.pfm.restapi.service.UserService;
