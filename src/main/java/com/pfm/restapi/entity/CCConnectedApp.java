@@ -18,7 +18,7 @@ public class CCConnectedApp {
     @Column(name = "autoDebit")
     private String autoDebit;
     @Column(name = "amount")
-    private String amount;
+    private Long amount;
     @Column(name = "date")
     private String date;
     @Column(name = "remarks")
@@ -72,11 +72,11 @@ public class CCConnectedApp {
         this.autoDebit = autoDebit;
     }
 
-    public String getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
