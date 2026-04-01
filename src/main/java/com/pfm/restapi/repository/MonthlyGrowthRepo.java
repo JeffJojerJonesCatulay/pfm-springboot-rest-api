@@ -19,4 +19,6 @@ public interface MonthlyGrowthRepo extends JpaRepository<MonthlyGrowth, Long> {
     List<MonthlyGrowth> getMonthlyGrowthById(@Param("id") Long id);
     @Query(value = "SELECT * FROM monthlygrowth WHERE allocId = :id", nativeQuery = true)
     List<MonthlyGrowth> getMonthlyGrowthByAllocId(@Param("id") Long id);
+    @Query(value = "SELECT * FROM monthlygrowth WHERE id = :id, month = :month, year = :year", nativeQuery = true)
+    MonthlyGrowth getExistingId(@Param("id") Long id, @Param("month") String month, @Param("year") Long year);
 }

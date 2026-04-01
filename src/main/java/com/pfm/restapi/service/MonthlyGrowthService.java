@@ -17,4 +17,5 @@ public interface MonthlyGrowthService {
     MonthlyGrowth updateMonthlyGrowth(MonthlyGrowth monthlyGrowth, Long id);
     Optional<MonthlyGrowth> findById(Long id);
     void deleteMonthlyGrowth(Long id);
+    void updateMonthlyGrowthFromInvestmentsDay(Long id, String month, Long year);
 }

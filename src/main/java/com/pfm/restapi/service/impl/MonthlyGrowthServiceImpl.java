@@ -1,7 +1,9 @@
 package com.pfm.restapi.service.impl;
 
 import com.pfm.restapi.entity.MonthlyGrowth;
+import com.pfm.restapi.repository.InvestmentsAndSavingsDayRepo;
 import com.pfm.restapi.repository.MonthlyGrowthRepo;
+import com.pfm.restapi.service.InvestmentsAndSavingsDayService;
 import com.pfm.restapi.service.MonthlyGrowthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +24,9 @@ public class MonthlyGrowthServiceImpl implements MonthlyGrowthService {
 
     @Autowired
     private MonthlyGrowthRepo monthlyGrowthRepo;
+
+    @Autowired
+    private InvestmentsAndSavingsDayRepo investmentsAndSavingsDayRepo;
 
     @Override
     public Page<MonthlyGrowth> getMonthlyGrowth(Pageable pageable) {
@@ -81,5 +87,19 @@ public class MonthlyGrowthServiceImpl implements MonthlyGrowthService {
     public Optional<MonthlyGrowth> findById(Long id) {
         log.debug("Inside findById {}", id);
         return monthlyGrowthRepo.findById(id);
+    }
+
+    @Override
+    public void updateMonthlyGrowthFromInvestmentsDay(Long id, String month, Long year) {
+        log.debug("Inside updateMonthlyGrowthFromInvestmentsDay");
+        log.debug("id: {} month: {} year: {}", id, month, year);
+        MonthlyGrowth existingId = monthlyGrowthRepo.getExistingId(id, month, year);
+        if (existingId.getId() != 0){
+            // Existing
+            Double contributionCurrentMonth = investmentsAndSavingsDayRepo.sumValueAddedByMonthAndYear(month, year);
+
+        } else {
+
+        }
     }
 }
