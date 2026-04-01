@@ -105,7 +105,7 @@ public class InvestmentsAndSavingsDayController {
         return response;
     }
 
-    @GetMapping("/get/investmentsandsavingsday/allocId/{id}")
+    @GetMapping("/get/investmentsandsavingsday/Id/{id}")
     public ResponseEntity<Object> getInvestmentsAndSavingsDayByAllocId(@PathVariable Long id, HttpServletRequest httpServletRequest) {
         String endPoint = httpServletRequest.getServerName() + URL + "/get/investmentsandsavingsday/allocId/" + id;
         try {
