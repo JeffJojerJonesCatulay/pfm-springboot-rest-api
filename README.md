@@ -13,3 +13,9 @@ The REST API is designed to:
 - ⚙️ Support CRUD operations for financial records
 - 📡 Integrate with the frontend dashboard and analytics tools
 - 🔒 Ensure secure and consistent data handling
+
+## API Endpoints
+
+Refer to the Postman collection published below:
+Collection: [Link](https://documenter.getpostman.com/view/30170318/2sBXiomAEZ)
+![postman](./images/postman.png)
