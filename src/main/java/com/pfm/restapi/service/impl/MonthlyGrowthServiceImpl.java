@@ -97,23 +97,36 @@ public class MonthlyGrowthServiceImpl implements MonthlyGrowthService {
         log.debug("id: {} month: {} year: {}", id, month, year);
         MonthlyGrowth existingId = monthlyGrowthRepo.getExistingId(id, month, year);
         MonthlyGrowth monthlyGrowth = new MonthlyGrowth();
-        double contributionCurrentMonth = investmentsAndSavingsDayRepo.sumValueAddedByMonthAndYear(month, year);
-        double contributionCurrentYear = investmentsAndSavingsDayRepo.sumValueAddedByYear(year);
-        double contributionPreviousYear = investmentsAndSavingsDayRepo.sumValueAddedByPreviousYear(year);
-        double currentMarketValue = investmentsAndSavingsDayRepo.getCurrentMarketValue(month, year, (long) investmentsAndSavingsDay.getAllocId());
+        Double contributionCurrentMonthTemp = investmentsAndSavingsDayRepo.sumValueAddedByMonthAndYear(month, year, (long) investmentsAndSavingsDay.getAllocId());
+        double contributionCurrentMonth = (contributionCurrentMonthTemp != null) ? contributionCurrentMonthTemp : 0.0;
+        Double contributionCurrentYearTemp = investmentsAndSavingsDayRepo.sumValueAddedByYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        double contributionCurrentYear = (contributionCurrentYearTemp != null) ? contributionCurrentYearTemp : 0.0;
+        Double contributionPreviousYearTemp = investmentsAndSavingsDayRepo.sumValueAddedByPreviousYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        double contributionPreviousYear = (contributionPreviousYearTemp != null) ? contributionPreviousYearTemp : 0.0;
+        Double currentMarketValueTemp = investmentsAndSavingsDayRepo.getCurrentMarketValue(month, year, (long) investmentsAndSavingsDay.getAllocId());
+        double currentMarketValue = (currentMarketValueTemp != null) ? currentMarketValueTemp : 0.0;
         double growthRate = new Global().computeGrowthRate(currentMarketValue, contributionCurrentYear + contributionPreviousYear);
-        monthlyGrowth.setId(existingId.getId() != 0 ? existingId.getId() : null);
-        monthlyGrowth.setAllocId(existingId.getAllocId());
+
+        if (existingId == null) {
+            monthlyGrowth.setAllocId(investmentsAndSavingsDay.getAllocId());
+            monthlyGrowth.setDateAdded(String.valueOf(LocalDateTime.now()));
+            monthlyGrowth.setAddedBy(investmentsAndSavingsDay.getAddedBy());
+        } else {
+            monthlyGrowth.setId(existingId.getId());
+            monthlyGrowth.setAllocId(existingId.getAllocId());
+            monthlyGrowth.setDateAdded(existingId.getDateAdded());
+            monthlyGrowth.setAddedBy(existingId.getAddedBy());
+            monthlyGrowth.setUpdateDate(String.valueOf(LocalDateTime.now()));
+            monthlyGrowth.setUpdateBy(investmentsAndSavingsDay.getAddedBy());
+        }
+
         monthlyGrowth.setMonth(month);
         monthlyGrowth.setYear(Math.toIntExact(year));
-//        monthlyGrowth.setContribution(contributionCurrentMonth);
-//        monthlyGrowth.setTotalContribution(contributionCurrentYear);
-//        monthlyGrowth.setCurrentValue(currentMarketValue);
-//        monthlyGrowth.setGrowthRate(growthRate);
-//        monthlyGrowth.setPreviousContrib(contributionPreviousYear);
-        monthlyGrowth.setDateAdded(existingId.getDateAdded() != null ? existingId.getDateAdded() : String.valueOf(LocalDateTime.now()));
-        monthlyGrowth.setAddedBy(existingId.getAddedBy() != null ? existingId.getAddedBy() : investmentsAndSavingsDay.getAddedBy());
-        monthlyGrowth.setUpdateDate(existingId.getUpdateDate() != null ? existingId.getUpdateDate() : String.valueOf(LocalDateTime.now()));
-        monthlyGrowth.setUpdateBy(existingId.getUpdateBy() != null ? existingId.getUpdateBy() : investmentsAndSavingsDay.getAddedBy());
+        monthlyGrowth.setContribution(contributionCurrentMonth);
+        monthlyGrowth.setTotalContribution(contributionCurrentYear);
+        monthlyGrowth.setCurrentValue(currentMarketValue);
+        monthlyGrowth.setGrowthRate(growthRate);
+        monthlyGrowth.setPreviousContrib(contributionPreviousYear);
+        monthlyGrowthRepo.save(monthlyGrowth);
     }
 }

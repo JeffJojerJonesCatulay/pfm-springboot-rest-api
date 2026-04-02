@@ -1,5 +1,6 @@
 package com.pfm.restapi.service;
 
+import com.pfm.restapi.entity.InvestmentsAndSavingsDay;
 import com.pfm.restapi.entity.YearlyGrowth;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,5 +18,6 @@ public interface YearlyGrowthService {
     YearlyGrowth updateYearlyGrowth(YearlyGrowth yearlyGrowth, Long id);
     Optional<YearlyGrowth> findById(Long id);
     void deleteYearlyGrowth(Long id);
+    void updateYearlyGrowthFromInvestmentsDay(Long id, Long year, InvestmentsAndSavingsDay investmentsAndSavingsDay);
 }
 

@@ -24,33 +24,39 @@ public interface InvestmentsAndSavingsDayRepo extends JpaRepository<InvestmentsA
     @Query(value = "SELECT SUM(valueAdded) " +
             "FROM investmentsandsavingsday " +
             "WHERE (:month IS NULL OR MONTHNAME(date) = :month) " +
-            "AND (:year IS NULL OR YEAR(date) = :year)",
+            "AND (:year IS NULL OR YEAR(date) = :year) " +
+            "AND (allocId = :allocId)",
             nativeQuery = true)
-    double sumValueAddedByMonthAndYear(
+    Double sumValueAddedByMonthAndYear(
             @Param("month") String month,
-            @Param("year") Long year);
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
 
     @Query(value = "SELECT SUM(valueAdded) " +
             "FROM investmentsandsavingsday " +
-            "WHERE (:year IS NULL OR YEAR(date) = :year)",
+            "WHERE (:year IS NULL OR YEAR(date) = :year) " +
+            "AND (allocId = :allocId)",
             nativeQuery = true)
-    double sumValueAddedByYear(
-            @Param("year") Long year);
+    Double sumValueAddedByYear(
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
 
     @Query(value = "SELECT SUM(valueAdded) " +
             "FROM investmentsandsavingsday " +
-            "WHERE (:year IS NULL OR YEAR(date) != :year)",
+            "WHERE (:year IS NULL OR YEAR(date) != :year) " +
+            "AND (allocId = :allocId)",
             nativeQuery = true)
-    double sumValueAddedByPreviousYear(
-            @Param("year") Long year);
+    Double sumValueAddedByPreviousYear(
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
 
     @Query(value = "SELECT marketValue " +
             "FROM investmentsandsavingsday " +
             "WHERE (:month IS NULL OR MONTHNAME(date) = :month) " +
             "AND (:year IS NULL OR YEAR(date) = :year)" +
-            "AND (allocId = :allocId) AND ROWNUM = 1 ORDER BY DATE ASC",
+            "AND (allocId = :allocId) ORDER BY DATE ASC, ID DESC LIMIT 1 ",
             nativeQuery = true)
-    double getCurrentMarketValue(
+    Double getCurrentMarketValue(
             @Param("month") String month,
             @Param("year") Long year,
             @Param("allocId") Long allocId)

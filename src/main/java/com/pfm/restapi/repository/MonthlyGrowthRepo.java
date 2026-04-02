@@ -19,6 +19,33 @@ public interface MonthlyGrowthRepo extends JpaRepository<MonthlyGrowth, Long> {
     List<MonthlyGrowth> getMonthlyGrowthById(@Param("id") Long id);
     @Query(value = "SELECT * FROM monthlygrowth WHERE allocId = :id", nativeQuery = true)
     List<MonthlyGrowth> getMonthlyGrowthByAllocId(@Param("id") Long id);
-    @Query(value = "SELECT * FROM monthlygrowth WHERE id = :id, month = :month, year = :year", nativeQuery = true)
+    @Query(value = "SELECT * FROM monthlygrowth WHERE allocId = :id and month = :month and year = :year", nativeQuery = true)
     MonthlyGrowth getExistingId(@Param("id") Long id, @Param("month") String month, @Param("year") Long year);
+
+    @Query(value = "SELECT AVG(growthRate) " +
+            "FROM monthlygrowth " +
+            "WHERE (year = :year) " +
+            "AND (allocId = :allocId)",
+            nativeQuery = true)
+    Double aveGrowthByYear(
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
+
+    @Query(value = "SELECT AVG(currentValue) " +
+            "FROM monthlygrowth " +
+            "WHERE (year = :year) " +
+            "AND (allocId = :allocId)",
+            nativeQuery = true)
+    Double aveCurrentValueByYear(
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
+
+    @Query(value = "SELECT AVG(contribution) " +
+            "FROM monthlygrowth " +
+            "WHERE (year = :year) " +
+            "AND (allocId = :allocId)",
+            nativeQuery = true)
+    Double aveValueAddedByYear(
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
 }
