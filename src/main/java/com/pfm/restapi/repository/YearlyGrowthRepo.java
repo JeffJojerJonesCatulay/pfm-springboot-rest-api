@@ -18,4 +18,6 @@ public interface YearlyGrowthRepo extends JpaRepository<YearlyGrowth, Long> {
     List<YearlyGrowth> getYearlyGrowthId(@Param("id") Long id);
     @Query(value = "SELECT * FROM yearlygrowth WHERE allocId = :id", nativeQuery = true)
     List<YearlyGrowth> getYearlyGrowthAllocId(@Param("id") Long id);
+    @Query(value = "SELECT * FROM yearlygrowth WHERE allocId = :id and year = :year", nativeQuery = true)
+    YearlyGrowth getExistingId(@Param("id") Long id, @Param("year") Long year);
 }

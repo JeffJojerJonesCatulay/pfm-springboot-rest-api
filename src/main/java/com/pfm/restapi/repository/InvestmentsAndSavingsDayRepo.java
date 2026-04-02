@@ -1,5 +1,6 @@
 package com.pfm.restapi.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -19,4 +20,45 @@ public interface InvestmentsAndSavingsDayRepo extends JpaRepository<InvestmentsA
     List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayById(@Param("id") Long id);
     @Query(value = "SELECT * FROM investmentsandsavingsday WHERE allocId = :id", nativeQuery = true)
     List<InvestmentsAndSavingsDay> getInvestmentsAndSavingsDayByAllocId(@Param("id") Long id);
+
+    @Query(value = "SELECT SUM(valueAdded) " +
+            "FROM investmentsandsavingsday " +
+            "WHERE (:month IS NULL OR MONTHNAME(date) = :month) " +
+            "AND (:year IS NULL OR YEAR(date) = :year) " +
+            "AND (allocId = :allocId)",
+            nativeQuery = true)
+    Double sumValueAddedByMonthAndYear(
+            @Param("month") String month,
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
+
+    @Query(value = "SELECT SUM(valueAdded) " +
+            "FROM investmentsandsavingsday " +
+            "WHERE (:year IS NULL OR YEAR(date) = :year) " +
+            "AND (allocId = :allocId)",
+            nativeQuery = true)
+    Double sumValueAddedByYear(
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
+
+    @Query(value = "SELECT SUM(valueAdded) " +
+            "FROM investmentsandsavingsday " +
+            "WHERE (:year IS NULL OR YEAR(date) != :year) " +
+            "AND (allocId = :allocId)",
+            nativeQuery = true)
+    Double sumValueAddedByPreviousYear(
+            @Param("year") Long year,
+            @Param("allocId") Long allocId);
+
+    @Query(value = "SELECT marketValue " +
+            "FROM investmentsandsavingsday " +
+            "WHERE (:month IS NULL OR MONTHNAME(date) = :month) " +
+            "AND (:year IS NULL OR YEAR(date) = :year)" +
+            "AND (allocId = :allocId) ORDER BY DATE ASC, ID DESC LIMIT 1 ",
+            nativeQuery = true)
+    Double getCurrentMarketValue(
+            @Param("month") String month,
+            @Param("year") Long year,
+            @Param("allocId") Long allocId)
+            ;
 }

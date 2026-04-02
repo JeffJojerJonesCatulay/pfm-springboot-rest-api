@@ -14,13 +14,13 @@ public class YearlyGrowth {
     @Column(name = "year")
     private long year;
     @Column(name = "totalContribution")
-    private long totalContribution;
+    private double totalContribution;
     @Column(name = "averageContribution")
-    private long averageContribution;
+    private double averageContribution;
     @Column(name = "averageCurrentValue")
-    private long averageCurrentValue;
+    private double averageCurrentValue;
     @Column(name = "averageGrowthRate")
-    private long averageGrowthRate;
+    private double averageGrowthRate;
     @Column(name = "dateAdded")
     private String dateAdded;
     @Column(name = "addedBy")
@@ -54,35 +54,35 @@ public class YearlyGrowth {
         this.year = year;
     }
 
-    public long getTotalContribution() {
+    public double getTotalContribution() {
         return totalContribution;
     }
 
-    public void setTotalContribution(long totalContribution) {
+    public void setTotalContribution(double totalContribution) {
         this.totalContribution = totalContribution;
     }
 
-    public long getAverageContribution() {
+    public double getAverageContribution() {
         return averageContribution;
     }
 
-    public void setAverageContribution(long averageContribution) {
+    public void setAverageContribution(double averageContribution) {
         this.averageContribution = averageContribution;
     }
 
-    public long getAverageCurrentValue() {
+    public double getAverageCurrentValue() {
         return averageCurrentValue;
     }
 
-    public void setAverageCurrentValue(long averageCurrentValue) {
+    public void setAverageCurrentValue(double averageCurrentValue) {
         this.averageCurrentValue = averageCurrentValue;
     }
 
-    public long getAverageGrowthRate() {
+    public double getAverageGrowthRate() {
         return averageGrowthRate;
     }
 
-    public void setAverageGrowthRate(long averageGrowthRate) {
+    public void setAverageGrowthRate(double averageGrowthRate) {
         this.averageGrowthRate = averageGrowthRate;
     }
 

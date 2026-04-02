@@ -1,6 +1,9 @@
 package com.pfm.restapi.service.impl;
 
+import com.pfm.restapi.entity.InvestmentsAndSavingsDay;
 import com.pfm.restapi.entity.YearlyGrowth;
+import com.pfm.restapi.repository.InvestmentsAndSavingsDayRepo;
+import com.pfm.restapi.repository.MonthlyGrowthRepo;
 import com.pfm.restapi.repository.YearlyGrowthRepo;
 import com.pfm.restapi.service.YearlyGrowthService;
 import org.slf4j.Logger;
@@ -21,6 +24,12 @@ public class YearlyGrowthServiceImpl implements YearlyGrowthService {
 
     @Autowired
     private YearlyGrowthRepo repo;
+
+    @Autowired
+    private InvestmentsAndSavingsDayRepo investmentsAndSavingsDayRepo;
+
+    @Autowired
+    private MonthlyGrowthRepo monthlyGrowthRepo;
 
     @Override
     public Page<YearlyGrowth> getYearlyGrowth(Pageable pageable) {
@@ -79,5 +88,43 @@ public class YearlyGrowthServiceImpl implements YearlyGrowthService {
     public void deleteYearlyGrowth(Long id) {
         log.debug("Inside deleteYearlyGrowth");
         repo.deleteById(id);
+    }
+
+    @Override
+    public void updateYearlyGrowthFromInvestmentsDay(Long id, Long year, InvestmentsAndSavingsDay investmentsAndSavingsDay) {
+        log.debug("Inside updateYearlyGrowthFromInvestmentsDay");
+        log.debug("id: {} year: {}", id, year);
+        YearlyGrowth existingId = repo.getExistingId(id, year);
+        YearlyGrowth data = new YearlyGrowth();
+
+        Double totalContributionTemp = investmentsAndSavingsDayRepo.sumValueAddedByYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        double totalContribution = (totalContributionTemp != null) ? totalContributionTemp : 0.0;
+        Double averageContributionTemp = monthlyGrowthRepo.aveValueAddedByYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        double averageContribution = (averageContributionTemp != null) ? averageContributionTemp : 0.0;
+        Double averageCurrentValueTemp = monthlyGrowthRepo.aveCurrentValueByYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        double averageCurrentValue = (averageCurrentValueTemp != null) ? averageCurrentValueTemp : 0.0;
+        Double averageGrowthRateTemp = monthlyGrowthRepo.aveCurrentValueByYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        double averageGrowthRate = (averageGrowthRateTemp != null) ? averageGrowthRateTemp : 0.0;
+
+        if (existingId == null) {
+            data.setAllocId(investmentsAndSavingsDay.getAllocId());
+            data.setDateAdded(String.valueOf(LocalDateTime.now()));
+            data.setAddedBy(investmentsAndSavingsDay.getAddedBy());
+        } else {
+            data.setId(existingId.getId());
+            data.setAllocId(existingId.getAllocId());
+            data.setDateAdded(existingId.getDateAdded());
+            data.setAddedBy(existingId.getAddedBy());
+            data.setUpdateDate(String.valueOf(LocalDateTime.now()));
+            data.setUpdateBy(investmentsAndSavingsDay.getAddedBy());
+        }
+
+        data.setTotalContribution(totalContribution);
+        data.setAverageContribution(averageContribution);
+        data.setAverageCurrentValue(averageCurrentValue);
+        data.setAverageGrowthRate(averageGrowthRate);
+        data.setYear(year);
+
+        repo.save(data);
     }
 }

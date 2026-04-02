@@ -335,7 +335,6 @@ public class CCConnectedAppController {
             @RequestParam(required = false) String connectedApp,
             @RequestParam(required = false) String subscription,
             @RequestParam(required = false) String autoDebit,
-            @RequestParam(required = false) Long amount,
             @RequestParam(required = false) String date,
             @RequestParam(required = false) String remarks,
             HttpServletRequest httpServletRequest){
@@ -359,7 +358,6 @@ public class CCConnectedAppController {
             ccConnectedApp.setConnectedApp(connectedApp);
             ccConnectedApp.setSubscription(subscription);
             ccConnectedApp.setAutoDebit(autoDebit);
-            ccConnectedApp.setAmount(amount);
             ccConnectedApp.setDate(date);
             ccConnectedApp.setRemarks(remarks);
 
@@ -412,7 +410,6 @@ public class CCConnectedAppController {
             @RequestParam(required = false) String connectedApp,
             @RequestParam(required = false) String subscription,
             @RequestParam(required = false) String autoDebit,
-            @RequestParam(required = false) String amount,
             @RequestParam(required = false) String date,
             @RequestParam(required = false) String remarks,
             HttpServletRequest httpServletRequest){
@@ -430,7 +427,6 @@ public class CCConnectedAppController {
             inputSanitation.sanitizeInput(connectedApp);
             inputSanitation.sanitizeInput(subscription);
             inputSanitation.sanitizeInput(autoDebit);
-            inputSanitation.sanitizeInput(amount);
             inputSanitation.sanitizeInput(date);
             inputSanitation.sanitizeInput(remarks);
 

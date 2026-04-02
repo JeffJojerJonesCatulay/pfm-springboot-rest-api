@@ -16,7 +16,7 @@ public class SalaryExpenseTracker {
     @Column(name = "expenseDescription")
     private String expenseDescription;
     @Column(name = "expenseValue")
-    private int expenseValue;
+    private double expenseValue;
     @Column(name = "expenseType")
     private String expenseType;
     @Column(name = "dateAdded")
@@ -60,11 +60,11 @@ public class SalaryExpenseTracker {
         this.expenseDescription = expenseDescription;
     }
 
-    public int getExpenseValue() {
+    public double getExpenseValue() {
         return expenseValue;
     }
 
-    public void setExpenseValue(int expenseValue) {
+    public void setExpenseValue(double expenseValue) {
         this.expenseValue = expenseValue;
     }
 

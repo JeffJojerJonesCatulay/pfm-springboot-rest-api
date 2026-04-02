@@ -5,8 +5,11 @@ import com.pfm.restapi.entity.RequestLogs;
 import com.pfm.restapi.responseHandler.Response;
 import com.pfm.restapi.security.inputSanitation.InputSanitation;
 import com.pfm.restapi.service.InvestmentsAndSavingsDayService;
+import com.pfm.restapi.service.MonthlyGrowthService;
 import com.pfm.restapi.service.RequestLogsService;
+import com.pfm.restapi.service.YearlyGrowthService;
 import com.pfm.restapi.utility.Constant;
+import com.pfm.restapi.utility.Global;
 import com.pfm.restapi.utility.TpsMonitor;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -34,6 +38,12 @@ import java.util.Optional;
 public class InvestmentsAndSavingsDayController {
     @Autowired
     private InvestmentsAndSavingsDayService investmentsAndSavingsDayService;
+
+    @Autowired
+    private MonthlyGrowthService monthlyGrowthService;
+
+    @Autowired
+    private YearlyGrowthService yearlyGrowthService;
 
     @Value("${api.url.mapping}")
     private String URL;
@@ -238,6 +248,13 @@ public class InvestmentsAndSavingsDayController {
             inputSanitation.sanitizeInput(investmentsAndSavingsDay.getUpdateBy());
 
             InvestmentsAndSavingsDay responses = investmentsAndSavingsDayService.createInvestmentsAndSavingsDay(investmentsAndSavingsDay);
+            if (responses.getId() != 0){
+                String month = Global.getMonthName(responses.getDate());
+                int year = Global.getYear(responses.getDate());
+                monthlyGrowthService.updateMonthlyGrowthFromInvestmentsDay((long) responses.getAllocId(), month, (long) year, responses);
+                yearlyGrowthService.updateYearlyGrowthFromInvestmentsDay((long) responses.getAllocId(), (long) year, responses);
+            }
+
             httpStatusReturn = String.valueOf(HttpStatus.OK);
             httpStatusMsgReturn = Constant.SUCCESS;
             response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, responses);
