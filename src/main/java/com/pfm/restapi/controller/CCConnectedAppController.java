@@ -168,7 +168,6 @@ public class CCConnectedAppController {
             inputSanitation.sanitizeInput(ccConnectedApp.getConnectedApp());
             inputSanitation.sanitizeInput(ccConnectedApp.getSubscription());
             inputSanitation.sanitizeInput(ccConnectedApp.getAutoDebit());
-            inputSanitation.sanitizeInput(ccConnectedApp.getAmount());
             inputSanitation.sanitizeInput(ccConnectedApp.getRemarks());
             inputSanitation.sanitizeInput(ccConnectedApp.getAddedBy());
             inputSanitation.sanitizeInput(ccConnectedApp.getUpdateBy());
@@ -223,7 +222,6 @@ public class CCConnectedAppController {
             inputSanitation.sanitizeInput(ccConnectedApp.getConnectedApp());
             inputSanitation.sanitizeInput(ccConnectedApp.getSubscription());
             inputSanitation.sanitizeInput(ccConnectedApp.getAutoDebit());
-            inputSanitation.sanitizeInput(ccConnectedApp.getAmount());
             inputSanitation.sanitizeInput(ccConnectedApp.getRemarks());
             inputSanitation.sanitizeInput(ccConnectedApp.getAddedBy());
             inputSanitation.sanitizeInput(ccConnectedApp.getUpdateBy());
@@ -337,7 +335,6 @@ public class CCConnectedAppController {
             @RequestParam(required = false) String connectedApp,
             @RequestParam(required = false) String subscription,
             @RequestParam(required = false) String autoDebit,
-            @RequestParam(required = false) String amount,
             @RequestParam(required = false) String date,
             @RequestParam(required = false) String remarks,
             HttpServletRequest httpServletRequest){
@@ -354,7 +351,6 @@ public class CCConnectedAppController {
             inputSanitation.sanitizeInput(connectedApp);
             inputSanitation.sanitizeInput(subscription);
             inputSanitation.sanitizeInput(autoDebit);
-            inputSanitation.sanitizeInput(amount);
             inputSanitation.sanitizeInput(date);
             inputSanitation.sanitizeInput(remarks);
 
@@ -362,7 +358,6 @@ public class CCConnectedAppController {
             ccConnectedApp.setConnectedApp(connectedApp);
             ccConnectedApp.setSubscription(subscription);
             ccConnectedApp.setAutoDebit(autoDebit);
-            ccConnectedApp.setAmount(amount);
             ccConnectedApp.setDate(date);
             ccConnectedApp.setRemarks(remarks);
 
@@ -415,7 +410,6 @@ public class CCConnectedAppController {
             @RequestParam(required = false) String connectedApp,
             @RequestParam(required = false) String subscription,
             @RequestParam(required = false) String autoDebit,
-            @RequestParam(required = false) String amount,
             @RequestParam(required = false) String date,
             @RequestParam(required = false) String remarks,
             HttpServletRequest httpServletRequest){
@@ -433,7 +427,6 @@ public class CCConnectedAppController {
             inputSanitation.sanitizeInput(connectedApp);
             inputSanitation.sanitizeInput(subscription);
             inputSanitation.sanitizeInput(autoDebit);
-            inputSanitation.sanitizeInput(amount);
             inputSanitation.sanitizeInput(date);
             inputSanitation.sanitizeInput(remarks);
 
@@ -447,7 +440,6 @@ public class CCConnectedAppController {
                     .filter(record -> connectedApp == null || record.getConnectedApp() != null && record.getConnectedApp().toLowerCase().contains(connectedApp.toLowerCase()))
                     .filter(record -> subscription == null || record.getSubscription() != null && record.getSubscription().toLowerCase().contains(subscription.toLowerCase()))
                     .filter(record -> autoDebit == null || record.getAutoDebit() != null && record.getAutoDebit().toLowerCase().contains(autoDebit.toLowerCase()))
-                    .filter(record -> amount == null || record.getAmount() != null && record.getAmount().toLowerCase().contains(amount.toLowerCase()))
                     .filter(record -> date == null || record.getDate() != null && record.getDate().toLowerCase().contains(date.toLowerCase()))
                     .filter(record -> remarks == null || record.getRemarks() != null && record.getRemarks().toLowerCase().contains(remarks.toLowerCase()))
                     .collect(Collectors.toList());

@@ -16,7 +16,7 @@ public class NetWorth {
     @Column(name = "year")
     private int year;
     @Column(name = "value")
-    private int value;
+    private double value;
     @Column(name = "dateAdded")
     private String dateAdded;
     @Column(name = "addedBy")
@@ -58,11 +58,11 @@ public class NetWorth {
         this.year = year;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

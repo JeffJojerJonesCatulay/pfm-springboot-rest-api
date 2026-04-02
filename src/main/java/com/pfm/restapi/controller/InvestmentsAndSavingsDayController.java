@@ -247,7 +247,7 @@ public class InvestmentsAndSavingsDayController {
             if (responses.getId() != 0){
                 String month = Global.getMonthName(responses.getDate());
                 int year = Global.getYear(responses.getDate());
-                monthlyGrowthService.updateMonthlyGrowthFromInvestmentsDay((long) responses.getAllocId(), month, (long) year);
+                //monthlyGrowthService.updateMonthlyGrowthFromInvestmentsDay((long) responses.getAllocId(), month, (long) year, responses);
             }
 
             httpStatusReturn = String.valueOf(HttpStatus.OK);

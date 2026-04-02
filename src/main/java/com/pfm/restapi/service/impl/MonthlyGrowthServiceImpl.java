@@ -1,10 +1,12 @@
 package com.pfm.restapi.service.impl;
 
+import com.pfm.restapi.entity.InvestmentsAndSavingsDay;
 import com.pfm.restapi.entity.MonthlyGrowth;
 import com.pfm.restapi.repository.InvestmentsAndSavingsDayRepo;
 import com.pfm.restapi.repository.MonthlyGrowthRepo;
 import com.pfm.restapi.service.InvestmentsAndSavingsDayService;
 import com.pfm.restapi.service.MonthlyGrowthService;
+import com.pfm.restapi.utility.Global;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,16 +92,28 @@ public class MonthlyGrowthServiceImpl implements MonthlyGrowthService {
     }
 
     @Override
-    public void updateMonthlyGrowthFromInvestmentsDay(Long id, String month, Long year) {
+    public void updateMonthlyGrowthFromInvestmentsDay(Long id, String month, Long year, InvestmentsAndSavingsDay investmentsAndSavingsDay) {
         log.debug("Inside updateMonthlyGrowthFromInvestmentsDay");
         log.debug("id: {} month: {} year: {}", id, month, year);
         MonthlyGrowth existingId = monthlyGrowthRepo.getExistingId(id, month, year);
-        if (existingId.getId() != 0){
-            // Existing
-            Double contributionCurrentMonth = investmentsAndSavingsDayRepo.sumValueAddedByMonthAndYear(month, year);
-
-        } else {
-
-        }
+        MonthlyGrowth monthlyGrowth = new MonthlyGrowth();
+        double contributionCurrentMonth = investmentsAndSavingsDayRepo.sumValueAddedByMonthAndYear(month, year);
+        double contributionCurrentYear = investmentsAndSavingsDayRepo.sumValueAddedByYear(year);
+        double contributionPreviousYear = investmentsAndSavingsDayRepo.sumValueAddedByPreviousYear(year);
+        double currentMarketValue = investmentsAndSavingsDayRepo.getCurrentMarketValue(month, year, (long) investmentsAndSavingsDay.getAllocId());
+        double growthRate = new Global().computeGrowthRate(currentMarketValue, contributionCurrentYear + contributionPreviousYear);
+        monthlyGrowth.setId(existingId.getId() != 0 ? existingId.getId() : null);
+        monthlyGrowth.setAllocId(existingId.getAllocId());
+        monthlyGrowth.setMonth(month);
+        monthlyGrowth.setYear(Math.toIntExact(year));
+//        monthlyGrowth.setContribution(contributionCurrentMonth);
+//        monthlyGrowth.setTotalContribution(contributionCurrentYear);
+//        monthlyGrowth.setCurrentValue(currentMarketValue);
+//        monthlyGrowth.setGrowthRate(growthRate);
+//        monthlyGrowth.setPreviousContrib(contributionPreviousYear);
+        monthlyGrowth.setDateAdded(existingId.getDateAdded() != null ? existingId.getDateAdded() : String.valueOf(LocalDateTime.now()));
+        monthlyGrowth.setAddedBy(existingId.getAddedBy() != null ? existingId.getAddedBy() : investmentsAndSavingsDay.getAddedBy());
+        monthlyGrowth.setUpdateDate(existingId.getUpdateDate() != null ? existingId.getUpdateDate() : String.valueOf(LocalDateTime.now()));
+        monthlyGrowth.setUpdateBy(existingId.getUpdateBy() != null ? existingId.getUpdateBy() : investmentsAndSavingsDay.getAddedBy());
     }
 }

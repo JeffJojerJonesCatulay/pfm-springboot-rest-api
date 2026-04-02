@@ -26,7 +26,33 @@ public interface InvestmentsAndSavingsDayRepo extends JpaRepository<InvestmentsA
             "WHERE (:month IS NULL OR MONTHNAME(date) = :month) " +
             "AND (:year IS NULL OR YEAR(date) = :year)",
             nativeQuery = true)
-    Double sumValueAddedByMonthAndYear(
+    double sumValueAddedByMonthAndYear(
             @Param("month") String month,
             @Param("year") Long year);
+
+    @Query(value = "SELECT SUM(valueAdded) " +
+            "FROM investmentsandsavingsday " +
+            "WHERE (:year IS NULL OR YEAR(date) = :year)",
+            nativeQuery = true)
+    double sumValueAddedByYear(
+            @Param("year") Long year);
+
+    @Query(value = "SELECT SUM(valueAdded) " +
+            "FROM investmentsandsavingsday " +
+            "WHERE (:year IS NULL OR YEAR(date) != :year)",
+            nativeQuery = true)
+    double sumValueAddedByPreviousYear(
+            @Param("year") Long year);
+
+    @Query(value = "SELECT marketValue " +
+            "FROM investmentsandsavingsday " +
+            "WHERE (:month IS NULL OR MONTHNAME(date) = :month) " +
+            "AND (:year IS NULL OR YEAR(date) = :year)" +
+            "AND (allocId = :allocId) AND ROWNUM = 1 ORDER BY DATE ASC",
+            nativeQuery = true)
+    double getCurrentMarketValue(
+            @Param("month") String month,
+            @Param("year") Long year,
+            @Param("allocId") Long allocId)
+            ;
 }

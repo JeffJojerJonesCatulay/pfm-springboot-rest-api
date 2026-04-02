@@ -14,9 +14,9 @@ public class InvestmentsAndSavingsDay {
     @Column(name = "date")
     private String date;
     @Column(name = "valueAdded")
-    private int valueAdded;
+    private double valueAdded;
     @Column(name = "marketValue")
-    private int marketValue;
+    private double marketValue;
     @Column(name = "dateAdded")
     private String dateAdded;
     @Column(name = "addedBy")
@@ -50,19 +50,19 @@ public class InvestmentsAndSavingsDay {
         this.date = date;
     }
 
-    public int getValueAdded() {
+    public double getValueAdded() {
         return valueAdded;
     }
 
-    public void setValueAdded(int valueAdded) {
+    public void setValueAdded(double valueAdded) {
         this.valueAdded = valueAdded;
     }
 
-    public int getMarketValue() {
+    public double getMarketValue() {
         return marketValue;
     }
 
-    public void setMarketValue(int marketValue) {
+    public void setMarketValue(double marketValue) {
         this.marketValue = marketValue;
     }
 

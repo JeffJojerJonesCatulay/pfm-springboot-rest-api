@@ -16,4 +16,11 @@ public class Global {
         LocalDate date = LocalDate.parse(dateStr);
         return date.getYear();
     }
+
+    public double computeGrowthRate(double present, double past){
+        double step1 = present - past;
+        double step2 = step1 / past;
+        double step3 = step2 * 100;
+        return (step3);
+    }
 }
