@@ -16,15 +16,15 @@ public class MonthlyGrowth {
     @Column(name = "year")
     private int year;
     @Column(name = "contribution")
-    private int contribution;
+    private double contribution;
     @Column(name = "totalContribution")
-    private int totalContribution;
+    private double totalContribution;
     @Column(name = "currentValue")
-    private int currentValue;
+    private double currentValue;
     @Column(name = "growthRate")
-    private int growthRate;
+    private double growthRate;
     @Column(name = "previousContrib")
-    private int previousContrib;
+    private double previousContrib;
     @Column(name = "dateAdded")
     private String dateAdded;
     @Column(name = "addedBy")
@@ -66,43 +66,43 @@ public class MonthlyGrowth {
         this.year = year;
     }
 
-    public int getContribution() {
+    public double getContribution() {
         return contribution;
     }
 
-    public void setContribution(int contribution) {
+    public void setContribution(double contribution) {
         this.contribution = contribution;
     }
 
-    public int getTotalContribution() {
+    public double getTotalContribution() {
         return totalContribution;
     }
 
-    public void setTotalContribution(int totalContribution) {
+    public void setTotalContribution(double totalContribution) {
         this.totalContribution = totalContribution;
     }
 
-    public int getCurrentValue() {
+    public double getCurrentValue() {
         return currentValue;
     }
 
-    public void setCurrentValue(int currentValue) {
+    public void setCurrentValue(double currentValue) {
         this.currentValue = currentValue;
     }
 
-    public int getGrowthRate() {
+    public double getGrowthRate() {
         return growthRate;
     }
 
-    public void setGrowthRate(int growthRate) {
+    public void setGrowthRate(double growthRate) {
         this.growthRate = growthRate;
     }
 
-    public int getPreviousContrib() {
+    public double getPreviousContrib() {
         return previousContrib;
     }
 
-    public void setPreviousContrib(int previousContrib) {
+    public void setPreviousContrib(double previousContrib) {
         this.previousContrib = previousContrib;
     }
 

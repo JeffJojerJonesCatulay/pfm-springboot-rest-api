@@ -1,6 +1,5 @@
 package com.pfm.restapi.service.impl;
 
-import com.pfm.restapi.entity.AllocationMapping;
 import com.pfm.restapi.entity.CCConnectedApp;
 import com.pfm.restapi.repository.CCConnectedAppRepo;
 import com.pfm.restapi.service.CCConnectedAppService;
@@ -56,7 +55,7 @@ public class CCConnectedAppServiceImpl implements CCConnectedAppService {
         data.setConnectedApp(ccConnectedApp.getConnectedApp() != null ? ccConnectedApp.getConnectedApp() : connectAppById.getFirst().getConnectedApp());
         data.setSubscription(ccConnectedApp.getSubscription() != null ? ccConnectedApp.getSubscription() : connectAppById.getFirst().getSubscription());
         data.setAutoDebit(ccConnectedApp.getAutoDebit() != null ? ccConnectedApp.getAutoDebit() : connectAppById.getFirst().getAutoDebit());
-        data.setAmount(ccConnectedApp.getAmount() != null ? ccConnectedApp.getAmount() : connectAppById.getFirst().getAmount());
+        data.setAmount(ccConnectedApp.getAmount() != 0 ? ccConnectedApp.getAmount() : connectAppById.getFirst().getAmount());
         data.setDate(ccConnectedApp.getDate() != null ? ccConnectedApp.getDate() : connectAppById.getFirst().getDate());
         data.setRemarks(ccConnectedApp.getRemarks() != null ? ccConnectedApp.getRemarks() : connectAppById.getFirst().getRemarks());
         data.setAddedBy(connectAppById.getFirst().getAddedBy());

@@ -14,7 +14,7 @@ public class WantList {
     @Column(name = "item")
     private String item;
     @Column(name = "estimatedPrice")
-    private int estimatedPrice;
+    private double estimatedPrice;
     @Column(name = "afford")
     private String afford;
     @Column(name = "remarks")
@@ -54,11 +54,11 @@ public class WantList {
         this.item = item;
     }
 
-    public int getEstimatedPrice() {
+    public double getEstimatedPrice() {
         return estimatedPrice;
     }
 
-    public void setEstimatedPrice(int estimatedPrice) {
+    public void setEstimatedPrice(double estimatedPrice) {
         this.estimatedPrice = estimatedPrice;
     }
 

@@ -1,8 +1,12 @@
 package com.pfm.restapi.service.impl;
 
+import com.pfm.restapi.entity.InvestmentsAndSavingsDay;
 import com.pfm.restapi.entity.MonthlyGrowth;
+import com.pfm.restapi.repository.InvestmentsAndSavingsDayRepo;
 import com.pfm.restapi.repository.MonthlyGrowthRepo;
+import com.pfm.restapi.service.InvestmentsAndSavingsDayService;
 import com.pfm.restapi.service.MonthlyGrowthService;
+import com.pfm.restapi.utility.Global;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +26,9 @@ public class MonthlyGrowthServiceImpl implements MonthlyGrowthService {
 
     @Autowired
     private MonthlyGrowthRepo monthlyGrowthRepo;
+
+    @Autowired
+    private InvestmentsAndSavingsDayRepo investmentsAndSavingsDayRepo;
 
     @Override
     public Page<MonthlyGrowth> getMonthlyGrowth(Pageable pageable) {
@@ -81,5 +89,44 @@ public class MonthlyGrowthServiceImpl implements MonthlyGrowthService {
     public Optional<MonthlyGrowth> findById(Long id) {
         log.debug("Inside findById {}", id);
         return monthlyGrowthRepo.findById(id);
+    }
+
+    @Override
+    public void updateMonthlyGrowthFromInvestmentsDay(Long id, String month, Long year, InvestmentsAndSavingsDay investmentsAndSavingsDay) {
+        log.debug("Inside updateMonthlyGrowthFromInvestmentsDay");
+        log.debug("id: {} month: {} year: {}", id, month, year);
+        MonthlyGrowth existingId = monthlyGrowthRepo.getExistingId(id, month, year);
+        MonthlyGrowth monthlyGrowth = new MonthlyGrowth();
+        Double contributionCurrentMonthTemp = investmentsAndSavingsDayRepo.sumValueAddedByMonthAndYear(month, year, (long) investmentsAndSavingsDay.getAllocId());
+        double contributionCurrentMonth = (contributionCurrentMonthTemp != null) ? contributionCurrentMonthTemp : 0.0;
+        Double contributionCurrentYearTemp = investmentsAndSavingsDayRepo.sumValueAddedByYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        double contributionCurrentYear = (contributionCurrentYearTemp != null) ? contributionCurrentYearTemp : 0.0;
+        Double contributionPreviousYearTemp = investmentsAndSavingsDayRepo.sumValueAddedByPreviousYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        double contributionPreviousYear = (contributionPreviousYearTemp != null) ? contributionPreviousYearTemp : 0.0;
+        Double currentMarketValueTemp = investmentsAndSavingsDayRepo.getCurrentMarketValue(month, year, (long) investmentsAndSavingsDay.getAllocId());
+        double currentMarketValue = (currentMarketValueTemp != null) ? currentMarketValueTemp : 0.0;
+        double growthRate = new Global().computeGrowthRate(currentMarketValue, contributionCurrentYear + contributionPreviousYear);
+
+        if (existingId == null) {
+            monthlyGrowth.setAllocId(investmentsAndSavingsDay.getAllocId());
+            monthlyGrowth.setDateAdded(String.valueOf(LocalDateTime.now()));
+            monthlyGrowth.setAddedBy(investmentsAndSavingsDay.getAddedBy());
+        } else {
+            monthlyGrowth.setId(existingId.getId());
+            monthlyGrowth.setAllocId(existingId.getAllocId());
+            monthlyGrowth.setDateAdded(existingId.getDateAdded());
+            monthlyGrowth.setAddedBy(existingId.getAddedBy());
+            monthlyGrowth.setUpdateDate(String.valueOf(LocalDateTime.now()));
+            monthlyGrowth.setUpdateBy(investmentsAndSavingsDay.getAddedBy());
+        }
+
+        monthlyGrowth.setMonth(month);
+        monthlyGrowth.setYear(Math.toIntExact(year));
+        monthlyGrowth.setContribution(contributionCurrentMonth);
+        monthlyGrowth.setTotalContribution(contributionCurrentYear);
+        monthlyGrowth.setCurrentValue(currentMarketValue);
+        monthlyGrowth.setGrowthRate(growthRate);
+        monthlyGrowth.setPreviousContrib(contributionPreviousYear);
+        monthlyGrowthRepo.save(monthlyGrowth);
     }
 }
