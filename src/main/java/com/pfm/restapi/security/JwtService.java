@@ -32,7 +32,7 @@ public class JwtService {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(Constant.EXPIRES_IN_DATE) // 1 hour
+                .setExpiration(new Date(System.currentTimeMillis() + Constant.TOKEN_DURATION))
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -44,6 +44,10 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public Date extractExpiration(String token) {
+        return extractAllClaims(token).getExpiration();
     }
 
     public boolean isTokenValid(String token, String username) {
