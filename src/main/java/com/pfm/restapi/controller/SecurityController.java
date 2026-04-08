@@ -76,7 +76,7 @@ public class SecurityController {
             );
             String token = jwtService.generateToken(request.getUsername());
             if (authentication.isAuthenticated()) {
-                AuthResponse authResponse = new AuthResponse(token, Constant.EXPIRES_IN, Constant.AUTH_TYPE);
+                AuthResponse authResponse = new AuthResponse(token, String.valueOf(jwtService.extractExpiration(token)), Constant.AUTH_TYPE);
                 httpStatusReturn = String.valueOf(HttpStatus.OK);
                 httpStatusMsgReturn = Constant.SUCCESS;
                 response = Response.generateResponse(Constant.SUCCESS, HttpStatus.OK, authResponse);
