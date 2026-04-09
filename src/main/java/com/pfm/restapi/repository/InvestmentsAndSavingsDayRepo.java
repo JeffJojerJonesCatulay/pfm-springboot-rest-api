@@ -54,7 +54,7 @@ public interface InvestmentsAndSavingsDayRepo extends JpaRepository<InvestmentsA
             "FROM investmentsandsavingsday " +
             "WHERE (:month IS NULL OR MONTHNAME(date) = :month) " +
             "AND (:year IS NULL OR YEAR(date) = :year)" +
-            "AND (allocId = :allocId) ORDER BY DATE ASC, ID DESC LIMIT 1 ",
+            "AND (allocId = :allocId) ORDER BY DATE DESC, ID DESC LIMIT 1 ",
             nativeQuery = true)
     Double getCurrentMarketValue(
             @Param("month") String month,
