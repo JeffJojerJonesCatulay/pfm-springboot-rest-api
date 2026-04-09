@@ -9,8 +9,6 @@ public class NetWorth {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "allocId")
-    private int allocId;
     @Column(name = "month")
     private String month;
     @Column(name = "year")
@@ -32,14 +30,6 @@ public class NetWorth {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getAllocId() {
-        return allocId;
-    }
-
-    public void setAllocId(int allocId) {
-        this.allocId = allocId;
     }
 
     public String getMonth() {
@@ -101,8 +91,7 @@ public class NetWorth {
     @Override
     public String toString() {
         return "{"
-                + "\"id\":" + id
-                + ", \"allocId\":" + allocId
+                + ", \"id\":" + id
                 + ", \"month\":\"" + month + "\""
                 + ", \"year\":" + year
                 + ", \"value\":" + value

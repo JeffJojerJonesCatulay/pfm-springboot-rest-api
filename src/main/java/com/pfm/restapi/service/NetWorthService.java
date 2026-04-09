@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface NetWorthService {
     Page<NetWorth> getNetWorth(Pageable pageable);
     List<NetWorth> getNetWorthById(Long id);
-    List<NetWorth> getNetWorthByAllocId(Long id);
     NetWorth createNetWorth(NetWorth netWorth);
     NetWorth updateNetWorth(NetWorth netWorth, Long id);
     Optional<NetWorth> findById(Long id);
