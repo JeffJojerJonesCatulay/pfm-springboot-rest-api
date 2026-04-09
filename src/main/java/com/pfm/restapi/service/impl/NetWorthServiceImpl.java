@@ -30,14 +30,8 @@ public class NetWorthServiceImpl implements NetWorthService {
 
     @Override
     public List<NetWorth> getNetWorthById(Long id) {
-        log.debug("Inside getNetWorthByAllocId");
+        log.debug("Inside getNetWorthById");
         return netWorthRepo.getNetWorthById(id);
-    }
-
-    @Override
-    public List<NetWorth> getNetWorthByAllocId(Long id) {
-        log.debug("Inside getNetWorthByAllocId");
-        return netWorthRepo.getNetWorthByAllocId(id);
     }
 
     @Override
@@ -55,7 +49,6 @@ public class NetWorthServiceImpl implements NetWorthService {
         log.debug("Existing netWorth: {}", netWorthExisting.toString());
         NetWorth data = new NetWorth();
         data.setId(id);
-        data.setAllocId(netWorth.getAllocId() != 0 ? netWorth.getAllocId() : netWorthExisting.getFirst().getAllocId());
         data.setMonth(netWorth.getMonth() != null ? netWorth.getMonth() : netWorthExisting.getFirst().getMonth());
         data.setYear(netWorth.getYear() != 0 ? netWorth.getYear() : netWorthExisting.getFirst().getYear());
         data.setValue(netWorth.getValue() != 0 ? netWorth.getValue() : netWorthExisting.getFirst().getValue());
