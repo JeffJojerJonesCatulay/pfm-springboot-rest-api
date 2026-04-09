@@ -103,7 +103,7 @@ public class YearlyGrowthServiceImpl implements YearlyGrowthService {
         double averageContribution = (averageContributionTemp != null) ? averageContributionTemp : 0.0;
         Double averageCurrentValueTemp = monthlyGrowthRepo.aveCurrentValueByYear(year, (long) investmentsAndSavingsDay.getAllocId());
         double averageCurrentValue = (averageCurrentValueTemp != null) ? averageCurrentValueTemp : 0.0;
-        Double averageGrowthRateTemp = monthlyGrowthRepo.aveCurrentValueByYear(year, (long) investmentsAndSavingsDay.getAllocId());
+        Double averageGrowthRateTemp = monthlyGrowthRepo.aveGrowthByYear(year, (long) investmentsAndSavingsDay.getAllocId());
         double averageGrowthRate = (averageGrowthRateTemp != null) ? averageGrowthRateTemp : 0.0;
 
         if (existingId == null) {
