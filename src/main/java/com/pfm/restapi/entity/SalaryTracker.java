@@ -12,7 +12,7 @@ public class SalaryTracker {
     @Column(name = "date")
     private String date;
     @Column(name = "salary")
-    private int salary;
+    private double salary;
     @Column(name = "status")
     private String status;
     @Column(name = "dateAdded")
@@ -40,11 +40,11 @@ public class SalaryTracker {
         this.date = date;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
