@@ -16,7 +16,7 @@ public class CCRecordExpenseTracker {
     @Column (name = "expenseDescription")
     private String expenseDescription;
     @Column (name = "expenseValue")
-    private long expenseValue;
+    private double expenseValue;
     @Column (name = "dateAdded")
     private String dateAdded;
     @Column (name = "addedBy")
@@ -58,11 +58,11 @@ public class CCRecordExpenseTracker {
         this.expenseDescription = expenseDescription;
     }
 
-    public long getExpenseValue() {
+    public double getExpenseValue() {
         return expenseValue;
     }
 
-    public void setExpenseValue(long expenseValue) {
+    public void setExpenseValue(double expenseValue) {
         this.expenseValue = expenseValue;
     }
 
