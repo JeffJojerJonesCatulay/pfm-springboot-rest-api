@@ -78,11 +78,10 @@ public class CCConnectedAppServiceImpl implements CCConnectedAppService {
         log.debug("Inside findByCustomSearch");
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnoreNullValues()
-                .withIgnorePaths("id", "ccId", "dateAdded", "addedBy", "updateDate", "updateBy")
+                .withIgnorePaths("id", "ccId", "dateAdded", "addedBy", "updateDate", "updateBy", "amount")
                 .withMatcher("connectedApp", match -> match.contains().ignoreCase())
                 .withMatcher("subscription", match -> match.contains().ignoreCase())
                 .withMatcher("autoDebit", match -> match.contains().ignoreCase())
-                .withMatcher("amount", match -> match.contains().ignoreCase())
                 .withMatcher("date", match -> match.contains().ignoreCase())
                 .withMatcher("remarks", match -> match.contains().ignoreCase());
 
